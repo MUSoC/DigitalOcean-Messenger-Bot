@@ -7,8 +7,6 @@ const app = express()
 var https = require('https');
 var fs = require('fs');
 
-
-// app.set('port', (process.env.PORT||3000))
 var ssl = {
   key: fs.readFileSync('/etc/letsencrypt/live/www.diuda.me/privkey.pem'),
   cert: fs.readFileSync('/etc/letsencrypt/live/www.diuda.me/cert.pem'),
@@ -37,6 +35,8 @@ app.post('/', function(req, res){
 		let sender = event.sender.id;
 		if (event.message && event.message.text){
 			let text = event.message.text;
+			// let statusCode = JSON.stringify(sendReq());
+			// console.log(JSON.stringify(sendReq()));
 			sendTextMessage(sender, "response of the request "+sendReq()+" Ram Ram chacha : "+ sender)
 		}
 	}
@@ -63,17 +63,15 @@ function sendTextMessage(sender, text){
 		}
 	})
 }
-
-// app.listen(app.get('port'), function() {
-// 	console.log('running on port', app.get('port'))
-// })
+var code;
 
 function sendReq() {
 	request({
 		method: "GET",
 		uri: "https://httpbin.org/get"
 	}, function(err, response, body){
-	 	console.log(JSON.stringify(response.Host));
-	 	return JSON.stringify(body);
+		code = body;
 	})
+	console.log(code);
+	return code;
 }
