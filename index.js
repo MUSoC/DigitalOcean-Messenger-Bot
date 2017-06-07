@@ -35,9 +35,16 @@ app.post('/', function(req, res){
 		let sender = event.sender.id;
 		if (event.message && event.message.text){
 			let text = event.message.text;
-			// let statusCode = JSON.stringify(sendReq());
-			// console.log(JSON.stringify(sendReq()));
-			sendTextMessage(sender, "response of the request "+sendReq()+" Ram Ram chacha : "+ sender)
+
+			sendReq(function(body){
+				var v = JSON.parse(body);
+				console.log(v.droplets[0].name);
+				sendTextMessage(sender, "Server Name "+v.droplets[0].name+" Ram Ram chacha : "+ sender)
+				// return JSON.stringify(body);
+
+			})
+			// console.log(r);
+			
 		}
 	}
 	res.sendStatus(200);
@@ -63,15 +70,20 @@ function sendTextMessage(sender, text){
 		}
 	})
 }
-var code;
+// var code;
 
-function sendReq() {
+function sendReq(callback) {
 	request({
 		method: "GET",
-		uri: "https://httpbin.org/get"
+		uri: "https://api.digitalocean.com/v2/droplets?page=1&per_page=1",
+		auth: {
+			'bearer': '94b7fc61374a34389d53a95444a7798d272a71a9cd8822196d98f66f4b897885'
+		}
 	}, function(err, response, body){
-		code = body;
+		// code = body;
+		// console.log(code);
+		callback(body);
 	})
-	console.log(code);
-	return code;
+	// console.log(code);
+	// return code;
 }
