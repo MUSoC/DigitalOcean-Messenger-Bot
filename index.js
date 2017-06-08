@@ -28,6 +28,8 @@ app.get('/', function(req, res){
 	res.send(req.query['hub.challenge']);
 })
 
+const user_token = fs.readFileSync('./token.txt').toString();
+
 app.post('/', function(req, res){
 	let msg_event = req.body.entry[0].messaging;
 	for (let i = 0; i< msg_event.length; i++){
@@ -70,14 +72,14 @@ function sendTextMessage(sender, text){
 		}
 	})
 }
-// var code;
+
 
 function sendReq(callback) {
 	request({
 		method: "GET",
 		uri: "https://api.digitalocean.com/v2/droplets?page=1&per_page=1",
 		auth: {
-			'bearer': '94b7fc61374a34389d53a95444a7798d272a71a9cd8822196d98f66f4b897885'
+			'bearer': user_token
 		}
 	}, function(err, response, body){
 		// code = body;
