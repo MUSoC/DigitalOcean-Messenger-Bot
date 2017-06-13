@@ -1,0 +1,240 @@
+var request = require('request');
+
+module.exports = {
+
+// To view last actions
+lastActions: function(callback) {
+	request({
+		method: "GET",
+		uri: "https://api.digitalocean.com/v2/actions?page=1&per_page=1",
+		auth: {
+			'bearer': user_token
+		}
+	}, function(err, response, body){
+		callback(body);
+	})
+},
+
+listDroplets: function(dotoken, callback) {
+	//5 droplets at a time
+	
+	request ({
+		method: "GET",
+		uri: "https://api.digitalocean.com/v2/droplets?page=1&per_page=5",
+		auth: {
+			'bearer': dotoken
+		}
+	}, function(err, response, body){
+		callback(JSON.parse(body))
+	})
+},
+
+
+// To create droplet 
+createDroplet: function(callback, data) {
+
+	request ({
+		method: "POST",
+		uri: "https://api.digitalocean.com/v2/droplets",
+		// form: //enter form data
+		auth: {
+			'bearer': user_token
+		}
+	}, function(err, response, body){
+
+	})
+
+},
+
+
+listDomains: function(callback) {
+	//5 droplets at a time
+	
+	request ({
+		method: "GET",
+		uri: "https://api.digitalocean.com/v2/domains",
+		auth: {
+			'bearer': user_token
+		}
+	}, function(err, response, body){
+		callback(body)
+	})
+},
+
+//create domain
+
+
+
+//delete a domain
+
+deleteDomains: function(callback, domain) {
+
+	
+	request ({
+		method: "DELETE",
+		uri: "https://api.digitalocean.com/v2/domains/"+domain,
+		auth: {
+			'bearer': user_token
+		}
+	}, function(err, response, body){
+		callback(body)
+	})
+},
+
+
+//To list all domain records
+listDomainRecords: function(callback, domain) {
+	
+	request ({
+		method: "GET",
+		uri: "https://api.digitalocean.com/v2/domains/"+domain+"/records",
+		auth: {
+			'bearer': user_token
+		}
+	}, function(err, response, body){
+		callback(body)
+	})
+},
+
+//create domain records
+
+
+//update domain record
+updateDomainRecords: function(callback, domain, record, data) {
+		request ({
+		method: "PUT",
+		form: data,
+		uri: "https://api.digitalocean.com/v2/domains/"+domain+"/records/"+record,
+		auth: {
+			'bearer': user_token
+		}
+	}, function(err, response, body){
+		callback(body)
+	})
+},
+
+
+
+
+
+//To delete domain records
+
+deleteDomainRecords: function(callback, domain, record) {
+
+	
+	request ({
+		method: "DELETE",
+		uri: "https://api.digitalocean.com/v2/domains/"+domain+"/records/"+record,
+		auth: {
+			'bearer': user_token
+		}
+	}, function(err, response, body){
+		callback(body)
+	})
+},
+
+//To perform different droplet action
+dropletActions: function(callback, id, data) {
+
+	 request({
+	 	method: "POST",
+	 	uri: "https://api.digitalocean.com/v2/droplets/"+id+"/actions",
+	 	form: data,
+	 	auth: {
+	 		'bearer': user_token
+	 	}
+	 }, function(err, response, body){
+	 	callback(body)
+	 })
+},
+
+
+
+// list all load balancer
+
+listLoadBalancer: function(callback) {
+
+	
+	request ({
+		method: "GET",
+		uri: "https://api.digitalocean.com/v2/load_balancers",
+		auth: {
+			'bearer': user_token
+		}
+	}, function(err, response, body){
+		callback(body)
+	})
+},
+
+//TODO Load balancer
+
+
+
+
+//to list all the snapshots
+listSnapshots: function(callback) {
+	//5 snapshots at a time
+	
+	request ({
+		method: "GET",
+		uri: "https://api.digitalocean.com/v2/snapshots?page=1&per_page=5",
+		auth: {
+			'bearer': user_token
+		}
+	}, function(err, response, body){
+		callback(body)
+	})
+},
+
+//To delete a particular snapshot
+deleteSnapshot: function(callback, id) {
+
+	
+	request ({
+		method: "DELETE",
+		uri: "https://api.digitalocean.com/v2/snapshots/"+id,
+		auth: {
+			'bearer': user_token
+		}
+	}, function(err, response, body){
+		callback(body)
+	})
+},
+
+
+//to list all the available Regions
+listRegions: function(callback) {
+	
+	
+	request ({
+		method: "GET",
+		uri: "https://api.digitalocean.com/v2/regions",
+		auth: {
+			'bearer': user_token
+		}
+	}, function(err, response, body){
+		callback(body)
+	})
+},
+
+
+//to list all the available sizes
+listSizes: function(callback) {
+	
+	
+	request ({
+		method: "GET",
+		uri: "https://api.digitalocean.com/v2/sizes",
+		auth: {
+			'bearer': user_token
+		}
+	}, function(err, response, body){
+		callback(body)
+	})
+}
+
+
+
+
+
+};
