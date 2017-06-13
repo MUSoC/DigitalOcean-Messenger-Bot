@@ -11,7 +11,10 @@ var userSchema = new Schema({
 var dropletSchema = new Schema({
 	dropletId: {type: String, required: true, unique: true},
 	dropletName: {type: String, required: true},
-	id: {type: String}
+	memory: {type: String, required: true},
+	disk: {type:String, required: true},
+	region:{type:String, required: true},
+	id: {type: String, required: true}
 })
 
 var User = mongoose.model('User', userSchema);

@@ -2,13 +2,13 @@ var request = require('request');
 
 module.exports = {
 
-// To view last actions
-lastActions: function(callback) {
+// To view last 5 actions
+lastActions: function(dotoken, callback) {
 	request({
 		method: "GET",
-		uri: "https://api.digitalocean.com/v2/actions?page=1&per_page=1",
+		uri: "https://api.digitalocean.com/v2/actions?page=1&per_page=5",
 		auth: {
-			'bearer': user_token
+			'bearer': dotoken
 		}
 	}, function(err, response, body){
 		callback(body);
@@ -38,7 +38,7 @@ createDroplet: function(callback, data) {
 		uri: "https://api.digitalocean.com/v2/droplets",
 		// form: //enter form data
 		auth: {
-			'bearer': user_token
+			'bearer': dotoken
 		}
 	}, function(err, response, body){
 
@@ -54,7 +54,7 @@ listDomains: function(callback) {
 		method: "GET",
 		uri: "https://api.digitalocean.com/v2/domains",
 		auth: {
-			'bearer': user_token
+			'bearer': dotoken
 		}
 	}, function(err, response, body){
 		callback(body)
@@ -74,7 +74,7 @@ deleteDomains: function(callback, domain) {
 		method: "DELETE",
 		uri: "https://api.digitalocean.com/v2/domains/"+domain,
 		auth: {
-			'bearer': user_token
+			'bearer': dotoken
 		}
 	}, function(err, response, body){
 		callback(body)
@@ -89,7 +89,7 @@ listDomainRecords: function(callback, domain) {
 		method: "GET",
 		uri: "https://api.digitalocean.com/v2/domains/"+domain+"/records",
 		auth: {
-			'bearer': user_token
+			'bearer': dotoken
 		}
 	}, function(err, response, body){
 		callback(body)
@@ -106,7 +106,7 @@ updateDomainRecords: function(callback, domain, record, data) {
 		form: data,
 		uri: "https://api.digitalocean.com/v2/domains/"+domain+"/records/"+record,
 		auth: {
-			'bearer': user_token
+			'bearer': dotoken
 		}
 	}, function(err, response, body){
 		callback(body)
@@ -126,7 +126,7 @@ deleteDomainRecords: function(callback, domain, record) {
 		method: "DELETE",
 		uri: "https://api.digitalocean.com/v2/domains/"+domain+"/records/"+record,
 		auth: {
-			'bearer': user_token
+			'bearer': dotoken
 		}
 	}, function(err, response, body){
 		callback(body)
@@ -141,7 +141,7 @@ dropletActions: function(callback, id, data) {
 	 	uri: "https://api.digitalocean.com/v2/droplets/"+id+"/actions",
 	 	form: data,
 	 	auth: {
-	 		'bearer': user_token
+	 		'bearer': dotoken
 	 	}
 	 }, function(err, response, body){
 	 	callback(body)
@@ -159,7 +159,7 @@ listLoadBalancer: function(callback) {
 		method: "GET",
 		uri: "https://api.digitalocean.com/v2/load_balancers",
 		auth: {
-			'bearer': user_token
+			'bearer': dotoken
 		}
 	}, function(err, response, body){
 		callback(body)
@@ -179,7 +179,7 @@ listSnapshots: function(callback) {
 		method: "GET",
 		uri: "https://api.digitalocean.com/v2/snapshots?page=1&per_page=5",
 		auth: {
-			'bearer': user_token
+			'bearer': dotoken
 		}
 	}, function(err, response, body){
 		callback(body)
@@ -194,7 +194,7 @@ deleteSnapshot: function(callback, id) {
 		method: "DELETE",
 		uri: "https://api.digitalocean.com/v2/snapshots/"+id,
 		auth: {
-			'bearer': user_token
+			'bearer': dotoken
 		}
 	}, function(err, response, body){
 		callback(body)
@@ -210,7 +210,7 @@ listRegions: function(callback) {
 		method: "GET",
 		uri: "https://api.digitalocean.com/v2/regions",
 		auth: {
-			'bearer': user_token
+			'bearer': dotoken
 		}
 	}, function(err, response, body){
 		callback(body)
@@ -226,7 +226,7 @@ listSizes: function(callback) {
 		method: "GET",
 		uri: "https://api.digitalocean.com/v2/sizes",
 		auth: {
-			'bearer': user_token
+			'bearer': dotoken
 		}
 	}, function(err, response, body){
 		callback(body)
