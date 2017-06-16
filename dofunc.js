@@ -11,7 +11,7 @@ lastActions: function(dotoken, callback) {
 			'bearer': dotoken
 		}
 	}, function(err, response, body){
-		callback(body);
+		callback(JSON.parse(body));
 	})
 },
 
@@ -47,8 +47,8 @@ createDroplet: function(callback, data) {
 },
 
 
-listDomains: function(callback) {
-	//5 droplets at a time
+listDomains: function(dotoken, callback) {
+
 	
 	request ({
 		method: "GET",
@@ -57,7 +57,7 @@ listDomains: function(callback) {
 			'bearer': dotoken
 		}
 	}, function(err, response, body){
-		callback(body)
+		callback(JSON.parse(body))
 	})
 },
 
@@ -83,7 +83,7 @@ deleteDomains: function(callback, domain) {
 
 
 //To list all domain records
-listDomainRecords: function(callback, domain) {
+listDomainRecords: function(dotoken, domain, callback) {
 	
 	request ({
 		method: "GET",
@@ -92,7 +92,7 @@ listDomainRecords: function(callback, domain) {
 			'bearer': dotoken
 		}
 	}, function(err, response, body){
-		callback(body)
+		callback(JSON.parse(body))
 	})
 },
 
@@ -172,7 +172,7 @@ listLoadBalancer: function(callback) {
 
 
 //to list all the snapshots
-listSnapshots: function(callback) {
+listSnapshots: function(dotoken, callback) {
 	//5 snapshots at a time
 	
 	request ({
@@ -203,7 +203,7 @@ deleteSnapshot: function(callback, id) {
 
 
 //to list all the available Regions
-listRegions: function(callback) {
+listRegions: function(dotoken, callback) {
 	
 	
 	request ({
@@ -213,13 +213,13 @@ listRegions: function(callback) {
 			'bearer': dotoken
 		}
 	}, function(err, response, body){
-		callback(body)
+		callback(JSON.parse(body))
 	})
 },
 
 
 //to list all the available sizes
-listSizes: function(callback) {
+listSizes: function(dotoken, callback) {
 	
 	
 	request ({
@@ -229,7 +229,7 @@ listSizes: function(callback) {
 			'bearer': dotoken
 		}
 	}, function(err, response, body){
-		callback(body)
+		callback(JSON.parse(body))
 	})
 }
 
