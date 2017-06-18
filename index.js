@@ -40,7 +40,7 @@ const user_token = c['do'].auth_token;
 
 var status = 0;
 app.post('/', function(req, res) {
-	console.log("hello");
+
 
     let msg_event = req.body.entry[0].messaging;
 
@@ -50,9 +50,10 @@ app.post('/', function(req, res) {
 
 
         if ((event.message!=undefined)&&(!event.message.is_echo)) {
+        	// console.log("hello");
         mess.findToken(sender).then(function(body){
 
-        	console.log("hello");
+        	// console.log("hello");
 	        if (event.message && event.message.text) {
 	            let text = event.message.text;
 
@@ -60,7 +61,7 @@ app.post('/', function(req, res) {
 
 	            
 
-	                mess.mess.checkStatus(body, status, sender, text);
+	                mess.checkStatus(body, status, sender, text);
 
 	            
 	            if (status == 0) {
@@ -82,7 +83,7 @@ app.post('/', function(req, res) {
 	                }
 	                else if(text=="Last actions"){
 	                	status = 5;
-	                	// console.log(token);
+	                	console.log("hello");
 	                	mess.checkStatus(body, status, sender, text)
                 	}
                 	else if(text=="List domains"){

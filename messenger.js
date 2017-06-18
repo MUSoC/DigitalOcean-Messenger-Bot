@@ -1,6 +1,10 @@
 'use strict'
 var request = require('request');
 var dof = require('./dofunc.js');
+var database = require('./schema.js');
+var c = require('./config.js');
+
+const token = c['fb'].page_token;
 
 
 module.exports = {
@@ -41,7 +45,7 @@ checkStatus: function(digitoken, status, sender, text) {
             if (err) throw err;
             console.log(user.length);
             for (var i = 0; i < user.length; i++) {
-                sendTextMessage(sender, "Droplet Name: "+user[i].dropletName+"\nDroplet memory: "+user[i].memory+"mb\nDroplet Disk: "+user[i].disk+"gb\nRegion: "+user[i].region )
+                module.exports.sendTextMessage(sender, "Droplet Name: "+user[i].dropletName+"\nDroplet memory: "+user[i].memory+"mb\nDroplet Disk: "+user[i].disk+"gb\nRegion: "+user[i].region )
             }
         })
         
@@ -68,17 +72,17 @@ checkStatus: function(digitoken, status, sender, text) {
 
                 }
                 
-                sendTextMessage(sender, "List saved");
+                module.exports.sendTextMessage(sender, "List saved");
             })
         })
         
     }
     else if(status==5){
-        // console.log(digitoken)
+        console.log("hello")
         dof.lastActions(digitoken, function(body){
             // console.log(body.actions.length)
             for(var i=0;i<body.actions.length;i++){
-                sendTextMessage(sender, "Action: "+body.actions[i].type+"\nStatus: "+body.actions[i].status+"\nStarted At: "+body.actions[i].started_at+"\nCompleted At: "+body.actions[i].completed_at+"\nResource Type: "+body.actions[i].resource_type )
+                module.exports.sendTextMessage(sender, "Action: "+body.actions[i].type+"\nStatus: "+body.actions[i].status+"\nStarted At: "+body.actions[i].started_at+"\nCompleted At: "+body.actions[i].completed_at+"\nResource Type: "+body.actions[i].resource_type )
             }
         });
         status=0;
@@ -89,14 +93,14 @@ checkStatus: function(digitoken, status, sender, text) {
             if (err) throw err;
             // console.log(domain.length);
             for(var i=0;i<domain.length;i++){
-                sendTextMessage(sender, "Domain Name: "+domain[i].domainName+"\nttl: "+domain[i].ttl);
+                module.exports.sendTextMessage(sender, "Domain Name: "+domain[i].domainName+"\nttl: "+domain[i].ttl);
             }
         })
     }
     else if(status==7){
         dof.listDomains(digitoken, function(body){
             console.log(typeof(body.domains[0].ttl));
-            saveDomain(sender, body);
+            module.exports.saveDomain(sender, body);
             
         })
     }
@@ -108,7 +112,7 @@ checkStatus: function(digitoken, status, sender, text) {
             console.log(body);
             if(text=="Refresh domain records")
                 return;
-            saveDomainRecords(sender, body);
+            module.exports.saveDomainRecords(sender, body);
 
 
         })
@@ -122,7 +126,7 @@ checkStatus: function(digitoken, status, sender, text) {
             console.log(body);
 
             for(var i=0; i<body.regions.length; i++){
-                sendTextMessage(sender, "Name: "+body.regions[i].name+"\nSlug: "+body.regions[i].slug+"\nSizes: "+body.regions[i].sizes+"\nFeatures: "+body.regions[i].features+"\nAvailability: "+body.regions[i].available);
+                module.exports.sendTextMessage(sender, "Name: "+body.regions[i].name+"\nSlug: "+body.regions[i].slug+"\nSizes: "+body.regions[i].sizes+"\nFeatures: "+body.regions[i].features+"\nAvailability: "+body.regions[i].available);
             }
         })
     }
@@ -130,7 +134,7 @@ checkStatus: function(digitoken, status, sender, text) {
         dof.listSizes(digitoken, function(body){
             console.log(body);
             for(var i=0; i<body.sizes.length; i++){
-                sendTextMessage(sender, "Memory: "+body.sizes[i].slug+"\nVirtual CPU: "+body.sizes[i].vcpus+"\nDisk: "+body.sizes[i].disk+"gb\nMonthly Price: "+body.sizes[i].price_monthly+"$\nHourly Price: "+body.sizes[i].price_hourly+"$\nRegions Available: "+body.sizes[i].regions+"\nAvailability: "+body.sizes[i].available)
+                module.exports.sendTextMessage(sender, "Memory: "+body.sizes[i].slug+"\nVirtual CPU: "+body.sizes[i].vcpus+"\nDisk: "+body.sizes[i].disk+"gb\nMonthly Price: "+body.sizes[i].price_monthly+"$\nHourly Price: "+body.sizes[i].price_hourly+"$\nRegions Available: "+body.sizes[i].regions+"\nAvailability: "+body.sizes[i].available)
             }
         })
     }
@@ -145,7 +149,7 @@ updateToken: function (sender, text) {
         user.token = text;
         user.save(function(err) {
             if (err) throw err;
-            sendTextMessage(sender, "New Token saved");
+            module.exports.sendTextMessage(sender, "New Token saved");
         })
     })
 },
@@ -159,7 +163,7 @@ saveToken: function (sender, text) {
 
     newUser.save(function(err) {
         if (err) throw err;
-        sendTextMessage(sender, "Token saved");
+        module.exports.sendTextMessage(sender, "Token saved");
     })
 
 },
@@ -175,7 +179,7 @@ saveDomain: function (sender, body){
         })
         newDomain.save(function(err) {
             if (err) throw err;
-            sendTextMessage(sender, "Domain Saved");
+            module.exports.sendTextMessage(sender, "Domain Saved");
         })
     }
 },
@@ -191,7 +195,7 @@ saveDomainRecords: function (sender, body){
                 })
             newRecord.save(function(err){
                 if (err) throw err;
-                sendTextMessage(sender, "Domain Records Saved");
+                module.exports.sendTextMessage(sender, "Domain Records Saved");
             })
         }
 },
@@ -209,4 +213,4 @@ findToken: function (sender){
       
 }
 
-}
+};
