@@ -44,7 +44,7 @@ app.post('/', function(req, res) {
 
     let msg_event = req.body.entry[0].messaging;
 
-    for (let i = 0; i < msg_event.length; i++) {
+    for (var i = 0; i < msg_event.length; i++) {
         let event = req.body.entry[0].messaging[i];
         let sender = event.sender.id.toString();
 
@@ -68,7 +68,7 @@ app.post('/', function(req, res) {
 	                if (text == 'Token') {
 	                    status = 1;
 	                    // console.log(status);
-	                    mess.mess.sendTextMessage(sender, "Enter Token");
+	                    mess.sendTextMessage(sender, "Enter Token");
 	                } else if (text == "Update token") {
 	                    status = 2;
 	                    mess.sendTextMessage(sender, "Enter new Token");
@@ -118,13 +118,18 @@ app.post('/', function(req, res) {
                 		status=12;
                 		mess.checkStatus(body, status, sender,text)
                 	}
+                	else if(text=="Delete droplet"){
+                		status=13;
+                		mess.checkStatus(body, status, sender, text)
+                		// continue;
+                	}
             	}
 
         	}
     	}, function(err){
     		// console.log(err);
     	});
-    }
+      }
     }
     res.sendStatus(200);
 })

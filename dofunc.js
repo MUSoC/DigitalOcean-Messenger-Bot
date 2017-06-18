@@ -46,6 +46,19 @@ createDroplet: function(callback, data) {
 
 },
 
+deleteDroplet: function(dotoken, id, callback){
+
+	request ({
+		method: "DELETE",
+		uri: "https://api.digitalocean.com/v2/domains/"+id,
+		auth: {
+			'bearer': dotoken
+		}
+	}, function(err, response, body){
+		callback(body)
+	})
+},
+
 
 listDomains: function(dotoken, callback) {
 
