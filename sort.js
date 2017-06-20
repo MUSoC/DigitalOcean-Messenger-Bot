@@ -1,0 +1,3 @@
+exports.states = {};
+
+exports.MessageQueue = {};

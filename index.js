@@ -8,10 +8,12 @@ var https = require('https');
 var fs = require('fs');
 var database = require('./schema.js');
 var Q = require('q');
+var leve = require('levenshtein');
 
 var c = require('./config.js');
 var dof = require('./dofunc.js');
 var mess = require('./messenger.js');
+var sort = require('./sort.js');
 
 var ssl = {
     key: fs.readFileSync('/etc/letsencrypt/live/www.diuda.me/privkey.pem'),
@@ -54,6 +56,13 @@ app.post('/', function(req, res) {
         mess.findToken(sender).then(function(body){
 
         	// console.log("hello");
+
+        	var distance = function(str1, str2){
+        		var l = new leve(str1, str2);
+        		return (1 - (l.distance / Math.max(str1.length, str2.length))) * 100;
+
+        	}
+        	console.log(distance("hello", "hel"));
 	        if (event.message && event.message.text) {
 	            let text = event.message.text;
 
