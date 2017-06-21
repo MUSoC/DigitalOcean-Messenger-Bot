@@ -68,16 +68,16 @@ app.post('/', function(req, res) {
 
 
 
-	            
+	            if(sort.states.UserState[sender].module!=undefined){
 
 	                mess.checkStatus(body, status, sender, text);
+	            }
 
-	            
-	            if (status == 0) {
+	            else{
 	                if (text == 'Token') {
 	                    status = 1;
-	                    // console.log(status);
-	                    mess.sendTextMessage(sender, "Enter Token");
+	                    sort.states.UserState[sender]=={module: "eToken", stage: 1}
+	                    // mess.sendTextMessage(sender, "Enter Token");
 	                } else if (text == "Update token") {
 	                    status = 2;
 	                    mess.sendTextMessage(sender, "Enter new Token");
@@ -132,7 +132,8 @@ app.post('/', function(req, res) {
                 		mess.checkStatus(body, status, sender, text)
                 		// continue;
                 	}
-            	}
+            	
+            }
 
         	}
     	}, function(err){
