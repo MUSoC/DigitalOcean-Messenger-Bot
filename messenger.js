@@ -28,13 +28,21 @@ sendTextMessage: function(sender, text) {
             }
         })
     },
+empty: function(sender){
+delete sort.states.UserState[sender];
+// delete sort.MessageQueue[sender];
+},
 
 
 checkStatus: function(digitoken, status, sender, text, callback) {
     // console.log("working");
    var mod = sort.states.UserState[sender].module;
    var stage = sort.states.UserState[sender].stage;
-    if (mod == 'eToken'&&text!='exit') {
+    
+    if(text=='exit'){
+        module.exports.empty(sender);
+    }
+    else if (mod == 'eToken'&&text!='exit') {
        
         if(stage == 1){
             console.log("working");
@@ -47,20 +55,27 @@ checkStatus: function(digitoken, status, sender, text, callback) {
     }
     else if(stage==2){
         saveToken(sender, text);
-        sort.states.UserState[sender].stage=null;
-        delete sort.states.UserState[sender];
+        // sort.states.UserState[sender].stage=null;
+        // delete sort.states.UserState[sender];
+        module.exports.empty(sender);
         }
 
         
     }
-    else if(text=='exit'){
-
-        delete sort.states.UserState[sender];
-        sort.states.UserState[sender].stage=null;        
-    }
-     else if (status == 2) {
+     else if (mod == 'uToken') {
+        if(stage==1){
+           sort.MessageQueue[sender].push("You are about to enter token. Type exit to cancel this event");
+           sort.states.UserState[sender].stage++;
+           callback(sort.MessageQueue[sender]) 
+        }
+        else if(stage==2){
         updateToken(sender, text);
-        status = 0;
+        sort.MessageQueue[sender].push("Token updated");
+        module.exports.empty(sender);
+        callback(sort.MessageQueue[sender])
+        }
+        
+        // status = 0;
     } else if (status == 3) {
         // console.log("working")
         status=0;
