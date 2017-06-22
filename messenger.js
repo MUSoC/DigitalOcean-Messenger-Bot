@@ -3,6 +3,7 @@ var request = require('request');
 var dof = require('./dofunc.js');
 var database = require('./schema.js');
 var c = require('./config.js');
+var sort = require('./sort.js');
 
 const token = c['fb'].page_token;
 
@@ -29,13 +30,35 @@ sendTextMessage: function(sender, text) {
     },
 
 
-checkStatus: function(digitoken, status, sender, text) {
-
-    if (status == 1) {
-        console.log("token save");
+checkStatus: function(digitoken, status, sender, text, callback) {
+    // console.log("working");
+   var mod = sort.states.UserState[sender].module;
+   var stage = sort.states.UserState[sender].stage;
+    if (mod == 'eToken'&&text!='exit') {
+       
+        if(stage == 1){
+            console.log("working");
+            // var a = "sup";
+        sort.MessageQueue[sender].push("You are about to enter token. Type exit to cancel this event");
+        // sort.MessageQueue[sender].push("Enter Token");
+        sort.states.UserState[sender].stage++;
+        console.log("chal rha hai");
+        callback(sort.MessageQueue[sender])
+    }
+    else if(stage==2){
         saveToken(sender, text);
-        status = 0;
-    } else if (status == 2) {
+        sort.states.UserState[sender].stage=null;
+        delete sort.states.UserState[sender];
+        }
+
+        
+    }
+    else if(text=='exit'){
+
+        delete sort.states.UserState[sender];
+        sort.states.UserState[sender].stage=null;        
+    }
+     else if (status == 2) {
         updateToken(sender, text);
         status = 0;
     } else if (status == 3) {
