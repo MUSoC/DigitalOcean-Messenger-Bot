@@ -185,14 +185,16 @@ checkStatus: function(digitoken, status, sender, text, callback) {
             module.exports.empty(sender);
         }
     }
-    else if(status==12){
-        dof.listSizes(digitoken, function(body){
-            console.log(body);
-            for(var i=0; i<body.sizes.length; i++){
-                module.exports.sendTextMessage(sender, "Memory: "+body.sizes[i].slug+"\nVirtual CPU: "+body.sizes[i].vcpus+"\nDisk: "+body.sizes[i].disk+"gb\nMonthly Price: "+body.sizes[i].price_monthly+"$\nHourly Price: "+body.sizes[i].price_hourly+"$\nRegions Available: "+body.sizes[i].regions+"\nAvailability: "+body.sizes[i].available)
-            }
-        })
-        module.exports.empty(sender);
+    else if(mod == 'lSizes'){
+        if(stage == 1){
+            dof.listSizes(digitoken, function(body){
+                console.log(body);
+                for(var i=0; i<body.sizes.length; i++){
+                    module.exports.sendTextMessage(sender, "Memory: "+body.sizes[i].slug+"\nVirtual CPU: "+body.sizes[i].vcpus+"\nDisk: "+body.sizes[i].disk+"gb\nMonthly Price: "+body.sizes[i].price_monthly+"$\nHourly Price: "+body.sizes[i].price_hourly+"$\nRegions Available: "+body.sizes[i].regions+"\nAvailability: "+body.sizes[i].available)
+                }
+            })
+            module.exports.empty(sender);
+        }
     }
     else if(status==13){
         dof.listDroplets(digitoken, function(body){
