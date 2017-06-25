@@ -145,13 +145,15 @@ checkStatus: function(digitoken, status, sender, text, callback) {
         module.exports.empty(sender);
     }
     }
-    else if(status==7){
-        dof.listDomains(digitoken, function(body){
-            console.log(typeof(body.domains[0].ttl));
-            module.exports.saveDomain(sender, body);
-            
-        })
-        module.exports.empty(sender);
+    else if(mod == 'rDomains'){
+        if(stage == 1){
+            dof.listDomains(digitoken, function(body){
+                console.log(typeof(body.domains[0].ttl));
+                module.exports.saveDomain(sender, body);
+                
+            })
+            module.exports.empty(sender);
+        }
     }
     else if(status==8){
 
