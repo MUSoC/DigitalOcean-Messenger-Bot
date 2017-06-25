@@ -133,8 +133,8 @@ checkStatus: function(digitoken, status, sender, text, callback) {
     }
     
     }
-    else if(status==6){
-        status=0;
+    else if(mod == 'lDomains'){
+        if(stage == 1){
         database.Domains.find({id:sender}, function(err, domain){
             if (err) throw err;
             // console.log(domain.length);
@@ -143,6 +143,7 @@ checkStatus: function(digitoken, status, sender, text, callback) {
             }
         })
         module.exports.empty(sender);
+    }
     }
     else if(status==7){
         dof.listDomains(digitoken, function(body){
