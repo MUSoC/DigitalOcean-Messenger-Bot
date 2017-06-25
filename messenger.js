@@ -196,13 +196,15 @@ checkStatus: function(digitoken, status, sender, text, callback) {
             module.exports.empty(sender);
         }
     }
-    else if(status==13){
-        dof.listDroplets(digitoken, function(body){
-            for(var i=0;i<body.droplets.length;i++){
-                module.exports.sendTextMessage(sender, ""+(i+1)+". Id: "+body.droplets[i].id+" name: "+body.droplets[i].name+"\n");
-            }
-        })
-        module.exports.empty(sender);
+    else if(mod == 'dDroplet'){
+        if(stage == 1){
+            dof.listDroplets(digitoken, function(body){
+                for(var i=0;i<body.droplets.length;i++){
+                    module.exports.sendTextMessage(sender, ""+(i+1)+". Id: "+body.droplets[i].id+" name: "+body.droplets[i].name+"\n");
+                }
+            })
+            module.exports.empty(sender);
+        }
     }
 },
 
