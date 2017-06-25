@@ -87,10 +87,11 @@ checkStatus: function(digitoken, status, sender, text, callback) {
                 module.exports.sendTextMessage(sender, "Droplet Name: "+user[i].dropletName+"\nDroplet memory: "+user[i].memory+"mb\nDroplet Disk: "+user[i].disk+"gb\nRegion: "+user[i].region )
             }
         })
+        module.exports.empty(sender);
     }
         
-    } else if (status == 4) {
-        status=0;
+    } else if (mod == 'rDroplets') {
+        if(stage==1){
         database.User.findOne({ id: sender }, function(err, user) {
             if (err) throw err;
             dof.listDroplets(digitoken, function(body) {
@@ -115,9 +116,12 @@ checkStatus: function(digitoken, status, sender, text, callback) {
                 module.exports.sendTextMessage(sender, "List saved");
             })
         })
+        module.exports.empty(sender);
+    }
         
     }
-    else if(status==5){
+    else if(mod == 'lActions'){
+        if(stage == 1){
         console.log("hello")
         dof.lastActions(digitoken, function(body){
             // console.log(body.actions.length)
@@ -125,7 +129,9 @@ checkStatus: function(digitoken, status, sender, text, callback) {
                 module.exports.sendTextMessage(sender, "Action: "+body.actions[i].type+"\nStatus: "+body.actions[i].status+"\nStarted At: "+body.actions[i].started_at+"\nCompleted At: "+body.actions[i].completed_at+"\nResource Type: "+body.actions[i].resource_type )
             }
         });
-        status=0;
+        module.exports.empty(sender);
+    }
+    
     }
     else if(status==6){
         status=0;
