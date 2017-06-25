@@ -3,4 +3,4 @@
 exports.states = require('./states');
 
 
-exports.MessageQueue = {};
+exports.MessageQueue = require('./message');
