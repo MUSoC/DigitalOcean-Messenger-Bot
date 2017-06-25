@@ -158,16 +158,16 @@ checkStatus: function(digitoken, status, sender, text, callback) {
     else if(status==8){
 
     }
-    else if(status==9){
-        dof.listDomainRecords(digitoken, text, function(body){
-            console.log(body);
-            if(text=="Refresh domain records")
-                return;
-            module.exports.saveDomainRecords(sender, body);
-
-
-        })
-        module.exports.empty(sender);
+    else if(mod == 'rDomainsRecords'){
+        if(stage == 1){
+            dof.listDomainRecords(digitoken, text, function(body){
+                console.log(body);
+                if(text=="Refresh domain records")
+                    return;
+                module.exports.saveDomainRecords(sender, body);
+            })
+            module.exports.empty(sender);
+        }
     }
     else if(status==10){
     //TODO
