@@ -173,15 +173,17 @@ checkStatus: function(digitoken, status, sender, text, callback) {
     //TODO
   
     }
-    else if(status==11){
-        dof.listRegions(digitoken, function(body){
-            console.log(body);
+    else if(mod == 'lRegions'){
+        if(stage == 1){
+            dof.listRegions(digitoken, function(body){
+                console.log(body);
 
-            for(var i=0; i<body.regions.length; i++){
-                module.exports.sendTextMessage(sender, "Name: "+body.regions[i].name+"\nSlug: "+body.regions[i].slug+"\nSizes: "+body.regions[i].sizes+"\nFeatures: "+body.regions[i].features+"\nAvailability: "+body.regions[i].available);
-            }
-        })
-        module.exports.empty(sender);
+                for(var i=0; i<body.regions.length; i++){
+                    module.exports.sendTextMessage(sender, "Name: "+body.regions[i].name+"\nSlug: "+body.regions[i].slug+"\nSizes: "+body.regions[i].sizes+"\nFeatures: "+body.regions[i].features+"\nAvailability: "+body.regions[i].available);
+                }
+            })
+            module.exports.empty(sender);
+        }
     }
     else if(status==12){
         dof.listSizes(digitoken, function(body){
