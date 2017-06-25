@@ -42,7 +42,7 @@ checkStatus: function(digitoken, status, sender, text, callback) {
     if(text=='exit'){
         module.exports.empty(sender);
     }
-    else if (mod == 'eToken'&&text!='exit') {
+    else if (mod == 'eToken') {
        
         if(stage == 1){
             console.log("working");
@@ -76,9 +76,10 @@ checkStatus: function(digitoken, status, sender, text, callback) {
         }
         
         // status = 0;
-    } else if (status == 3) {
+    } else if (mod == 'lDroplet') {
         // console.log("working")
-        status=0;
+        // status=0;
+        if(stage==1){
         database.Droplets.find({ id: sender }, function(err, user) {
             if (err) throw err;
             console.log(user.length);
@@ -86,6 +87,7 @@ checkStatus: function(digitoken, status, sender, text, callback) {
                 module.exports.sendTextMessage(sender, "Droplet Name: "+user[i].dropletName+"\nDroplet memory: "+user[i].memory+"mb\nDroplet Disk: "+user[i].disk+"gb\nRegion: "+user[i].region )
             }
         })
+    }
         
     } else if (status == 4) {
         status=0;
