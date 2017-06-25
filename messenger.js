@@ -142,6 +142,7 @@ checkStatus: function(digitoken, status, sender, text, callback) {
                 module.exports.sendTextMessage(sender, "Domain Name: "+domain[i].domainName+"\nttl: "+domain[i].ttl);
             }
         })
+        module.exports.empty(sender);
     }
     else if(status==7){
         dof.listDomains(digitoken, function(body){
@@ -149,6 +150,7 @@ checkStatus: function(digitoken, status, sender, text, callback) {
             module.exports.saveDomain(sender, body);
             
         })
+        module.exports.empty(sender);
     }
     else if(status==8){
 
@@ -162,6 +164,7 @@ checkStatus: function(digitoken, status, sender, text, callback) {
 
 
         })
+        module.exports.empty(sender);
     }
     else if(status==10){
     //TODO
@@ -175,6 +178,7 @@ checkStatus: function(digitoken, status, sender, text, callback) {
                 module.exports.sendTextMessage(sender, "Name: "+body.regions[i].name+"\nSlug: "+body.regions[i].slug+"\nSizes: "+body.regions[i].sizes+"\nFeatures: "+body.regions[i].features+"\nAvailability: "+body.regions[i].available);
             }
         })
+        module.exports.empty(sender);
     }
     else if(status==12){
         dof.listSizes(digitoken, function(body){
@@ -183,6 +187,7 @@ checkStatus: function(digitoken, status, sender, text, callback) {
                 module.exports.sendTextMessage(sender, "Memory: "+body.sizes[i].slug+"\nVirtual CPU: "+body.sizes[i].vcpus+"\nDisk: "+body.sizes[i].disk+"gb\nMonthly Price: "+body.sizes[i].price_monthly+"$\nHourly Price: "+body.sizes[i].price_hourly+"$\nRegions Available: "+body.sizes[i].regions+"\nAvailability: "+body.sizes[i].available)
             }
         })
+        module.exports.empty(sender);
     }
     else if(status==13){
         dof.listDroplets(digitoken, function(body){
@@ -190,6 +195,7 @@ checkStatus: function(digitoken, status, sender, text, callback) {
                 module.exports.sendTextMessage(sender, ""+(i+1)+". Id: "+body.droplets[i].id+" name: "+body.droplets[i].name+"\n");
             }
         })
+        module.exports.empty(sender);
     }
 },
 
