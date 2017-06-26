@@ -39,19 +39,20 @@ checkStatus: function(digitoken, status, sender, text, callback) {
    var mod = sort.states.UserState[sender].module;
    var stage = sort.states.UserState[sender].stage;
     
-    if(text=='exit'){
+    if(text.toLowerCase()=='exit'){
         module.exports.empty(sender);
     }
     else if (mod == 'eToken') {
        
         if(stage == 1){
             console.log("working");
-            // var a = "sup";
-        sort.MessageQueue.UserMessage[sender].push("You are about to enter token. Type exit to cancel this event");
+            // var a = {message:"Hello"};
+        // sort.MessageQueue[sender].message.push("hello");
         // sort.MessageQueue.UserMessage[sender].push("Enter Token");
         sort.states.UserState[sender].stage++;
         console.log("chal rha hai");
-        callback(sort.MessageQueue.UserMessage[sender])
+        callback("Enter Token and press exit to abort operation");
+        // module.exports.mess(sender, );
     }
     else if(stage==2){
         saveToken(sender, text);

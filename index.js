@@ -81,6 +81,7 @@ app.post('/', function(req, res) {
 	                	// console.log("hello");
 	                    // status = 1;
 	                    sort.states.UserState[sender]={module: "eToken", stage: 1};
+	                    sort.MessageQueue.UserMessage[sender] = {mesasge:''};
 	                    // console.log("hello");
 	                    // mess.sendTextMessage(sender, "Enter Token");
 	                } else if (text == "Update token") {
@@ -154,12 +155,12 @@ app.post('/', function(req, res) {
                 	// console.log("hell");
 
             	if(sort.states.UserState[sender]!=undefined){
-	                   	console.log("hello");
+	                   	// console.log("hello");
   					    mess.checkStatus(body, status, sender, text, function(messbody){
-  					    // mess.sendTextMessage(sender, body)	
-  					    console.log("sup")
+  					    mess.sendTextMessage(sender, messbody)	
+  					    // console.log("sup")
   					    });
-  					    console.log("xyz");
+  					    // console.log("xyz");
   					    
   					}
                 	
