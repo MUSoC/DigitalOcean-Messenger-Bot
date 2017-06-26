@@ -236,7 +236,27 @@ module.exports = {
             }
             else if(stage == 4){
                 sort.data[sender].size = text;
-                console.log(sort.data);
+                var image = [];
+                sort.states.UserState[sender].stage++;
+                dof.listImage(digitoken, function(body){
+                    // console.log(body);
+                    for(var i = 0; i < body.images.length; i++){
+                        if(body.images[i].slug!=null){
+                            console.log(body.images[i].slug);
+                            image.push(body.images[i].slug);
+                        }
+                    }
+                    console.log(image);
+                callback("Choose a image");
+                });
+                
+            }
+            else if(stage == 5){
+                sort.data[sender].image = text;
+                sort.states.UserState[sender].stage++;
+                dof.createDroplet(digitoken, sort.data[sender],  function(body){
+                    console.log(body);
+                })
             }
 
         }

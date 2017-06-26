@@ -46,16 +46,17 @@ listImage: function(dotoken, callback) {
 
 
 // To create droplet 
-createDroplet: function(callback, data) {
-
+createDroplet: function(dotoken, data, callback) {
+	// JSON.parse
 	request ({
 		method: "POST",
 		uri: "https://api.digitalocean.com/v2/droplets",
-		// form: //enter form data
+		form: data,
 		auth: {
 			'bearer': dotoken
 		}
 	}, function(err, response, body){
+		callback(JSON.parse(body));
 
 	})
 
