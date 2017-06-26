@@ -149,6 +149,9 @@ app.post('/', function(req, res) {
                 		// mess.checkStatus(body, status, sender, text)
                 		// continue;
                 	}
+                    else if(text=="Create droplet"){
+                        sort.states.UserState[sender]={module: "cDroplet", stage: 1};
+                    }
                 	else{
 
                 	}
