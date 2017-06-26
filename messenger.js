@@ -40,6 +40,7 @@ module.exports = {
         var stage = sort.states.UserState[sender].stage;
 
         if (text.toLowerCase() == 'exit') {
+            console.log("exit pressed");
             module.exports.empty(sender);
         } else if (mod == 'eToken') {
 
@@ -195,12 +196,22 @@ module.exports = {
                 })
                 module.exports.empty(sender);
             }
-        } else if (mod == 'cDroplet') {
+        } 
+//Create Droplet
+        else if (mod == 'cDroplet') {
+            // var data;
+            // console.log("phela")
+            // sort.data[sender] = JSON.parse(sort.data[sender]);
+            // console.log("chal")
             if (stage == 1) {
                 sort.states.UserState[sender].stage++;
                 callback("Enter Name of the Droplet");
 
+
             } else if (stage == 2) {
+                sort.data[sender] = { name: text };
+                // console.log("chal rha")
+                //TODO slug along with region name after fixing json array error
                 var regions = [];
                 sort.states.UserState[sender].stage++;
                 dof.listRegions(digitoken, function(body) {
@@ -210,6 +221,22 @@ module.exports = {
                     console.log(regions);
                     callback("Enter region from following regions: \n"+regions);
                 });
+            }
+            else if(stage == 3){
+                sort.data[sender].region = text;
+                var size = [];
+                sort.states.UserState[sender].stage++;
+                dof.listSizes(digitoken, function(body){
+                    for(var i = 0; i < body.sizes.length; i++){
+                        size.push(body.sizes[i].slug);
+                    }
+                    console.log(size);
+                    callback("Enter the size from following sizes: \n"+size);
+                });
+            }
+            else if(stage == 4){
+                sort.data[sender].size = text;
+                console.log(sort.data);
             }
 
         }
