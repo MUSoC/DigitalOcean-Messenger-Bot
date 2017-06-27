@@ -71,8 +71,8 @@ deleteDroplet: function(dotoken, id, callback){
 			'bearer': dotoken
 		}
 	}, function(err, response, body){
-		// console.log()
-		callback(JSON.parse(body))
+		console.log(response);
+		callback("nothing");
 	})
 },
 
