@@ -76,15 +76,28 @@ module.exports = {
             }
 
             // status = 0;
-        } else if (mod == 'lDroplet') {
+        }
+
+
+
+
+         else if (mod == 'lDroplet') {
             // console.log("working")
             // status=0;
             if (stage == 1) {
-                module.exports.listDrop(sender,text);
+                module.exports.listDrop(sender,text, function(user){
+             for (var i = 0; i < user.length; i++) {
+                module.exports.sendTextMessage(sender, (i+1)+". Droplet Name: " + user[i].dropletName + "\nDroplet memory: " + user[i].memory + "mb\nDroplet Disk: " + user[i].disk + "gb\nRegion: " + user[i].region)  
+                     }
+                 });
+
                 module.exports.empty(sender);
             }
 
-        } else if (mod == 'rDroplets') {
+        }
+
+
+         else if (mod == 'rDroplets') {
             if (stage == 1) {
                 database.User.findOne({ id: sender }, function(err, user) {
                     if (err) throw err;
@@ -113,7 +126,14 @@ module.exports = {
                 module.exports.empty(sender);
             }
 
-        } else if (mod == 'lActions') {
+        }
+
+
+
+
+
+
+         else if (mod == 'lActions') {
             if (stage == 1) {
                 console.log("hello")
                 dof.lastActions(digitoken, function(body) {
@@ -125,7 +145,13 @@ module.exports = {
                 module.exports.empty(sender);
             }
 
-        } else if (mod == 'lDomains') {
+        }
+
+
+
+
+
+         else if (mod == 'lDomains') {
             if (stage == 1) {
                 database.Domains.find({ id: sender }, function(err, domain) {
                     if (err) throw err;
@@ -136,7 +162,11 @@ module.exports = {
                 })
                 module.exports.empty(sender);
             }
-        } else if (mod == 'rDomains') {
+        } 
+
+
+
+        else if (mod == 'rDomains') {
             if (stage == 1) {
                 dof.listDomains(digitoken, function(body) {
                     console.log(typeof(body.domains[0].ttl));
@@ -147,7 +177,11 @@ module.exports = {
             }
         } else if (status == 8) {
 
-        } else if (mod == 'rDomainsRecords') {
+        }
+
+
+
+         else if (mod == 'rDomainsRecords') {
             if (stage == 1) {
                 dof.listDomainRecords(digitoken, text, function(body) {
                     console.log(body);
@@ -160,7 +194,11 @@ module.exports = {
         } else if (status == 10) {
             //TODO
 
-        } else if (mod == 'lRegions') {
+        }
+
+
+
+         else if (mod == 'lRegions') {
             if (stage == 1) {
                 dof.listRegions(digitoken, function(body) {
                     console.log(body);
@@ -171,7 +209,10 @@ module.exports = {
                 })
                 module.exports.empty(sender);
             }
-        } else if (mod == 'lSizes') {
+        } 
+
+
+        else if (mod == 'lSizes') {
             if (stage == 1) {
                 dof.listSizes(digitoken, function(body) {
                     console.log(body);
@@ -181,22 +222,28 @@ module.exports = {
                 })
                 module.exports.empty(sender);
             }
-        } else if (mod == 'dDroplet') {
+        } 
+
+
+        else if (mod == 'dDroplet') {
             if (stage == 1) {
-                dof.listDroplets(digitoken, function(body) {
-                    for (var i = 0; i < body.droplets.length; i++) {
-                        module.exports.sendTextMessage(sender, "" + (i + 1) + ". Id: " + body.droplets[i].id + " name: " + body.droplets[i].name + "\n");
-                    }
-                })
-                module.exports.empty(sender);
+                module.exports.sendTextMessage(sender, "Type \"current droplet\" from the following to delete a droplet");
+                sort.states.UserState[sender].stage++;
+
+
+            }
+            if(stage == 2){
+                //TODO if user types other than current droplet
+        module.exports.listDrop(sender,text, function(user){
+             for (var i = 0; i < user.length; i++) {
+                module.exports.sendTextMessage(sender, (i+1)+". Droplet Id: "+user[i].dropletId+ "\nDroplet Name: " + user[i].dropletName + "\nDroplet memory: " + user[i].memory + "mb\nDroplet Disk: " + user[i].disk + "gb\nRegion: " + user[i].region)  
+                     }
+                 });
+        sort.states.UserState[sender].stage++;
             }
         } 
 //Create Droplet
         else if (mod == 'cDroplet') {
-            // var data;
-            // console.log("phela")
-            // sort.data[sender] = JSON.parse(sort.data[sender]);
-            // console.log("chal")
             if (stage == 1) {
                 sort.states.UserState[sender].stage++;
                 callback("Enter Name of the Droplet");
@@ -255,23 +302,17 @@ module.exports = {
             }
 
         }
-//Delete droplet
-        else if(mod == 'dDroplet'){
-            if(stage == 1){
-                sort.states.UserState[sender].stage++;
 
-            }
-            
-        }
     },
 
-    listDrop: function(sender, text){
+    listDrop: function(sender, text, callback){
         database.Droplets.find({ id: sender }, function(err, user) {
             if (err) throw err;
             console.log(user.length);
-            for (var i = 0; i < user.length; i++) {
-                module.exports.sendTextMessage(sender, "Droplet Name: " + user[i].dropletName + "\nDroplet memory: " + user[i].memory + "mb\nDroplet Disk: " + user[i].disk + "gb\nRegion: " + user[i].region)
-            }
+            callback(user);
+            // for (var i = 0; i < user.length; i++) {
+            //     module.exports.sendTextMessage(sender, "1. Droplet Name: " + user[i].dropletName + "\nDroplet memory: " + user[i].memory + "mb\nDroplet Disk: " + user[i].disk + "gb\nRegion: " + user[i].region)
+            
         })
     },
 
