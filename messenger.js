@@ -51,7 +51,8 @@ module.exports = {
                 // sort.MessageQueue.UserMessage[sender].push("Enter Token");
                 sort.states.UserState[sender].stage++;
                 console.log("chal rha hai");
-                callback("Enter Token and press exit to abort operation");
+                // callback("Enter Token and press exit to abort operation");
+                module.exports.sendTextMessage(sender, "Enter token or press exir to abort the operation");
                 // module.exports.mess(sender, );
             } else if (stage == 2) {
                 saveToken(sender, text);
@@ -59,7 +60,8 @@ module.exports = {
                 // sort.states.UserState[sender].stage=null;
                 // delete sort.states.UserState[sender];
                 module.exports.empty(sender);
-                callback("Token Saved");
+                module.exports.sendTextMessage(sender, "Token Saved");
+                // callback("Token Saved");
             }
 
 

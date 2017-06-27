@@ -81,7 +81,7 @@ app.post('/', function(req, res) {
 	                	// console.log("hello");
 	                    // status = 1;
 	                    sort.states.UserState[sender]={module: "eToken", stage: 1};
-	                    sort.MessageQueue.UserMessage[sender] = {mesasge:''};
+	                    // sort.MessageQueue.UserMessage[sender] = {mesasge:''};
 	                    // console.log("hello");
 	                    // mess.sendTextMessage(sender, "Enter Token");
 	                } else if (text == "Update token") {
