@@ -66,12 +66,13 @@ deleteDroplet: function(dotoken, id, callback){
 
 	request ({
 		method: "DELETE",
-		uri: "https://api.digitalocean.com/v2/domains/"+id,
+		uri: "https://api.digitalocean.com/v2/droplets/"+id,
 		auth: {
 			'bearer': dotoken
 		}
 	}, function(err, response, body){
-		callback(body)
+		// console.log()
+		callback(JSON.parse(body))
 	})
 },
 
