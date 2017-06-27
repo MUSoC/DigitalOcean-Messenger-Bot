@@ -80,13 +80,7 @@ module.exports = {
             // console.log("working")
             // status=0;
             if (stage == 1) {
-                database.Droplets.find({ id: sender }, function(err, user) {
-                    if (err) throw err;
-                    console.log(user.length);
-                    for (var i = 0; i < user.length; i++) {
-                        module.exports.sendTextMessage(sender, "Droplet Name: " + user[i].dropletName + "\nDroplet memory: " + user[i].memory + "mb\nDroplet Disk: " + user[i].disk + "gb\nRegion: " + user[i].region)
-                    }
-                })
+                module.exports.listDrop(sender,text);
                 module.exports.empty(sender);
             }
 
@@ -253,6 +247,7 @@ module.exports = {
             }
             else if(stage == 5){
                 sort.data[sender].image = text;
+                // console.log(sort.data[sender])
                 sort.states.UserState[sender].stage++;
                 dof.createDroplet(digitoken, sort.data[sender],  function(body){
                     console.log(body);
@@ -260,9 +255,25 @@ module.exports = {
             }
 
         }
+//Delete droplet
+        else if(mod == 'dDroplet'){
+            if(stage == 1){
+                sort.states.UserState[sender].stage++;
+
+            }
+            
+        }
     },
 
-
+    listDrop: function(sender, text){
+        database.Droplets.find({ id: sender }, function(err, user) {
+            if (err) throw err;
+            console.log(user.length);
+            for (var i = 0; i < user.length; i++) {
+                module.exports.sendTextMessage(sender, "Droplet Name: " + user[i].dropletName + "\nDroplet memory: " + user[i].memory + "mb\nDroplet Disk: " + user[i].disk + "gb\nRegion: " + user[i].region)
+            }
+        })
+    },
 
     updateToken: function(sender, text) {
         console.log(sender);
