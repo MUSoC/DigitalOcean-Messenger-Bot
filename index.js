@@ -49,6 +49,7 @@ app.post('/', function(req, res) {
     for (var i = 0; i < msg_event.length; i++) {
         let event = req.body.entry[0].messaging[i];
         let sender = event.sender.id.toString();
+        
 
 
         if ((event.message!=undefined)&&(!event.message.is_echo)) {

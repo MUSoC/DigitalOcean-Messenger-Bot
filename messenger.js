@@ -46,6 +46,7 @@ module.exports = {
 
             if (stage == 1) {
                 console.log("working");
+                console.log(sort.states.UserState[sender]);
                 // var a = {message:"Hello"};
                 // sort.MessageQueue[sender].message.push("hello");
                 // sort.MessageQueue.UserMessage[sender].push("Enter Token");
@@ -55,11 +56,12 @@ module.exports = {
                 module.exports.sendTextMessage(sender, "Enter token or press exir to abort the operation");
                 // module.exports.mess(sender, );
             } else if (stage == 2) {
+                module.exports.empty(sender);
                 saveToken(sender, text);
 
                 // sort.states.UserState[sender].stage=null;
                 // delete sort.states.UserState[sender];
-                module.exports.empty(sender);
+                
                 module.exports.sendTextMessage(sender, "Token Saved");
                 // callback("Token Saved");
             }
@@ -347,15 +349,16 @@ module.exports = {
 
     //write Test case of saved token
     saveToken: function(sender, text) {
-        var newUser = new database.User({
-            token: text,
-            id: sender
-        })
-
-        newUser.save(function(err) {
+        database.User.findOne({id:sender}, function(err, user){
+            if (err) throw err;
+            user.token = text;
+        user.save(function(err) {
             if (err) throw err;
             module.exports.sendTextMessage(sender, "Token saved");
+            })
         })
+
+
 
     },
 
@@ -394,10 +397,23 @@ module.exports = {
 
 
 
+//TODO need to fix the promise for new User
     findToken: function(sender) {
         return new Promise(function(resolve, reject) {
             database.User.findOne({ id: sender }, function(err, user) {
+                if(user.token!=undefined){
                 resolve(user.token);
+            }
+                else{
+                    var newUser = new database.User({
+                        id: sender
+                    });
+                    newUser.save(function(err){
+                        if(err) throw err;
+                        resolve("nothing");
+                        // mmodule.exports.sendTextMessage(sender, "New User");
+                    })
+                }
 
             });
         });
