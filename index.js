@@ -49,7 +49,6 @@ app.post('/', function(req, res) {
     for (var i = 0; i < msg_event.length; i++) {
         let event = req.body.entry[0].messaging[i];
         let sender = event.sender.id.toString();
-        
 
 
         if ((event.message!=undefined)&&(!event.message.is_echo)) {
@@ -153,7 +152,8 @@ app.post('/', function(req, res) {
                     else if(text=="Create droplet"){
                         sort.states.UserState[sender]={module: "cDroplet", stage: 1};
                     }
-                	else{
+                	else if(text=="Droplet Action"){
+                        sort.states.UserState[sender] = {module: "aDroplet", stage: 1};
 
                 	}
                 	// console.log("hell");
