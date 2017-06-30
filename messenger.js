@@ -339,7 +339,13 @@ module.exports = {
                 if(text == 1){
                     sort.data[sender] = {type: "enable_backups"};
                     dof.dropletActions(digitoken, sort.info[sender].id, sort.data[sender], function(body){
-
+                        if(body.actions==undefined){
+                            console.log(body);
+                            module.exports.sendTextMessage(sender, body.message);
+                        }
+                        else{
+                            module.exports.sendTextMessage(sender, body.action[0].status);
+                        }
                         // console.log(sort.info[sender].id);
                         // console.log(body);
                         // console.log(body.action[0].status);
