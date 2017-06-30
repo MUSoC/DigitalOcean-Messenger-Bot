@@ -174,7 +174,7 @@ dropletActions: function(dotoken, id, data, callback) {
 	 		'bearer': dotoken
 	 	}
 	 }, function(err, response, body){
-	 	callback(body)
+	 	callback(JSON.parse(body))
 	 })
 },
 
