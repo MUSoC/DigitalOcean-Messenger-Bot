@@ -340,17 +340,29 @@ module.exports = {
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = {type: "enable_backups"};
                     dof.dropletActions(digitoken, sort.info[sender].id, sort.data[sender], function(body){
-                        if(body.actions==undefined){
+                        if(body.action==undefined){
                             console.log(body);
                             module.exports.sendTextMessage(sender, body.message);
                         }
                         else{
+                            // console.log(body.action)
                             module.exports.sendTextMessage(sender, body.action[0].status);
                         }
                     })
                 }
                 else if(text == 2){
-                 
+                    sort.states.UserState[sender].stage++;
+                    sort.data[sender] = {type: "disable_backups"};
+                    dof.dropletActions(digitoken, sort.info[sender].id, sort.data[sender], function(body){
+                         console.log(body);
+                        if(body.action==undefined){
+                           
+                            module.exports.sendTextMessage(sender, body.message);
+                        }
+                        else{
+                            module.exports.sendTextMessage(sender, body.action.status);
+                        }
+                    })                   
                 }
             }
         }
