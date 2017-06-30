@@ -333,10 +333,11 @@ module.exports = {
                 sort.info[sender] = {id: text};
                 sort.states.UserState[sender].stage++;
                 // console.log(droplet);
-                module.exports.sendTextMessage(sender, "Select an Action \n1.Enable Backup \n2.Disable Backups \n3.Reboot \n4.Power Cycle Droplet \n5.Shutdown Droplet \n6.Power Off Droplet \n7.Power On Droplet \n8.Restore Droplet \n9.Password Reset \n10.Resize Droplet \n11.Rebuild Droplet \n12.Rename Droplet \n13.Enable IPv6 \n14.Enable Private \n15.SnapShot Droplet \n16.Retrieve a Droplet Action");
+                module.exports.sendTextMessage(sender, "Select an Action \n1. Enable Backup \n2. Disable Backups \n3. Reboot \n4. Power Cycle Droplet \n5. Shutdown Droplet \n6. Power Off Droplet \n7. Power On Droplet \n8. Restore Droplet \n9. Password Reset \n10. Resize Droplet \n11. Rebuild Droplet \n12. Rename Droplet \n13. Enable IPv6 \n14. Enable Private \n15. SnapShot Droplet \n16. Retrieve a Droplet Action");
             }
             else if(stage == 3){
                 if(text == 1){
+                    sort.states.UserState[sender].stage++;
                     sort.data[sender] = {type: "enable_backups"};
                     dof.dropletActions(digitoken, sort.info[sender].id, sort.data[sender], function(body){
                         if(body.actions==undefined){
@@ -346,10 +347,10 @@ module.exports = {
                         else{
                             module.exports.sendTextMessage(sender, body.action[0].status);
                         }
-                        // console.log(sort.info[sender].id);
-                        // console.log(body);
-                        // console.log(body.action[0].status);
                     })
+                }
+                else if(text == 2){
+                 
                 }
             }
         }
