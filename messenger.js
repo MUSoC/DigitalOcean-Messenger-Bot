@@ -346,7 +346,7 @@ module.exports = {
                         }
                         else{
                             // console.log(body.action)
-                            module.exports.sendTextMessage(sender, body.action[0].status);
+                            module.exports.sendTextMessage(sender, body.action.status);
                         }
                     })
                 }
