@@ -320,6 +320,18 @@ module.exports = {
             }
 
         }
+        else if(mod == 'aDroplet'){
+            var droplet;
+            if(stage == 1){
+                sort.states.UserState[sender].stage++;
+                module.exports.sendTextMessage(sender, "Enter the droplet id for performing Action:");
+            }
+            else if(stage == 2){
+                droplet = text;
+                sort.states.UserState[sender].stage++;
+                module.exports.sendTextMessage(sender, "Select an Action \n1.Enable Backup \n2.Disable Backups \n3.Reboot \n4.Power Cycle Droplet \n5.Shutdown Droplet \n6.Power Off Droplet \n7.Power On Droplet \n8.Restore Droplet \n9.Password Reset \n10.Resize Droplet \n11.Rebuild Droplet \n12.Rename Droplet \n13.Enable IPv6 \n14.Enable Private \n15.SnapShot Droplet \n16.Retrieve a Droplet Action");
+            }
+        }
 
     },
 
