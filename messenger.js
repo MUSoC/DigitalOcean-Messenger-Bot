@@ -92,7 +92,7 @@ module.exports = {
             if (stage == 1) {
                 module.exports.listDrop(sender,text, function(user){
              for (var i = 0; i < user.length; i++) {
-                module.exports.sendTextMessage(sender, (i+1)+". Droplet Name: " + user[i].dropletName + "\nDroplet memory: " + user[i].memory + "mb\nDroplet Disk: " + user[i].disk + "gb\nRegion: " + user[i].region)  
+                module.exports.sendTextMessage(sender, (i+1)+". Droplet Name: " + user[i].dropletName + "\nDroplet memory: " + user[i].memory + "mb\nDroplet Disk: " + user[i].disk + "gb\nRegion: " + user[i].region +"Droplet Id: "+user[i].dropletId)  
                      }
                  });
 
@@ -336,7 +336,10 @@ module.exports = {
             }
             else if(stage == 3){
                 if(text == 1){
-
+                    sort.data[sender] = {type: "enable_backups"};
+                    dof.dropletActions(digitoken, droplet, sort.data[sender], function(body){
+                        console.log(body);
+                    })
                 }
             }
         }

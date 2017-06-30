@@ -164,7 +164,7 @@ deleteDomainRecords: function(callback, domain, record) {
 },
 
 //To perform different droplet action
-dropletActions: function(id, data, callback) {
+dropletActions: function(dotoken, id, data, callback) {
 
 	 request({
 	 	method: "POST",
