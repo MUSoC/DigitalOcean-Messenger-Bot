@@ -7,3 +7,4 @@ exports.MessageQueue = require('./message');
 // exports.MessageQueue = {};
 
 exports.data = {};
+exports.info = {};
