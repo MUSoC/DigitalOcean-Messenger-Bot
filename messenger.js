@@ -421,6 +421,20 @@ module.exports = {
                         }
                     }) 
                 }
+                else if(text == 7){
+                    sort.states.UserState[sender].stage++;
+                    sort.data[sender] = {type: "power_on"};
+                    dof.dropletActions(digitoken, sort.info[sender].id, sort.data[sender], function(body){
+                         console.log(body);
+                        if(body.action==undefined){
+                           
+                            module.exports.sendTextMessage(sender, body.message);
+                        }
+                        else{
+                            module.exports.sendTextMessage(sender, body.action.status);
+                        }
+                    }) 
+                }
             }
         }
 
