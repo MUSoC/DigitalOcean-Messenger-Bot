@@ -336,6 +336,57 @@ module.exports = {
                 module.exports.sendTextMessage(sender, "Select an Action \n1. Enable Backup \n2. Disable Backups \n3. Reboot \n4. Power Cycle Droplet \n5. Shutdown Droplet \n6. Power Off Droplet \n7. Power On Droplet \n8. Restore Droplet \n9. Password Reset \n10. Resize Droplet \n11. Rebuild Droplet \n12. Rename Droplet \n13. Enable IPv6 \n14. Enable Private \n15. SnapShot Droplet \n16. Retrieve a Droplet Action");
             }
             else if(stage == 3){
+                sort.stage.UserState[sender].stage++;
+                if(text == 1){
+                    sort.info[sender] = {actionType: 'eb', actionStage: 1};
+                }
+                else if(text == 2){
+                 sort.info[sender] = {actionType: 'db', actionStage: 1};   
+                }
+                else if(text == 3){
+                 sort.info[sender] = {actionType: 'reb', actionStage: 1};   
+                }
+                else if(text == 4){
+                 sort.info[sender] = {actionType: 'pcd', actionStage: 1};   
+                }
+                else if(text == 5){
+                 sort.info[sender] = {actionType: 'shutdd', actionStage: 1};   
+                }
+                else if(text == 6){
+                 sort.info[sender] = {actionType: 'poff', actionStage: 1};   
+                }
+                else if(text == 7){
+                 sort.info[sender] = {actionType: 'pon', actionStage: 1};   
+                }
+                else if(text == 8){
+                 sort.info[sender] = {actionType: 'resd', actionStage: 1};   
+                }
+                else if(text == 9){
+                 sort.info[sender] = {actionType: 'pr', actionStage: 1};   
+                }
+                else if(text == 10){
+                 sort.info[sender] = {actionType: 'red', actionStage: 1};   
+                }
+                else if(text == 11){
+                 sort.info[sender] = {actionType: 'rbd', actionStage: 1};   
+                }
+                else if(text == 12){
+                 sort.info[sender] = {actionType: 'rd', actionStage: 1};   
+                }
+                else if(text == 13){
+                 sort.info[sender] = {actionType: 'eip6', actionStage: 1};   
+                }
+                else if(text == 14){
+                 sort.info[sender] = {actionType: 'epn', actionStage: 1};   
+                }
+                else if(text == 15){
+                 sort.info[sender] = {actionType: 'sd', actionStage: 1};   
+                }
+                else if(text == 16){
+                 sort.info[sender] = {actionType: 'da', actionStage: 1};   
+                }
+            }
+            else if(stage == 4){
                 if(text == 1){
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = {type: "enable_backups"};
@@ -468,10 +519,13 @@ module.exports = {
                 }
                 else if(text == 10){
                     sort.states.UserState[sender].stage++;
+                    sort.info[sender] = {actionStage: 1};
                     sort.data[sender] = {type: "resize"};
                     sort.data[sender].disk = true;
                     //TODO SIZE
-                    // sort.data.size = size;
+                    if(sort.info[sender].actionStage == 1){
+                        module.exports
+                    }
                     dof.dropletActions(digitoken, sort.info[sender].id, sort.data[sender], function(body){
                          console.log(body);
                         if(body.action==undefined){
@@ -511,6 +565,7 @@ module.exports = {
                         }
                     }) 
                 }
+                //TODO Droplet Action 
 
             }
         }
