@@ -388,6 +388,7 @@ module.exports = {
             }
             else if(stage == 4){
                 action = sort.info[sender].actionType;
+                aStage = sort.info[sender].actionStage;
                 if(action == 'eb'){
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = {type: "enable_backups"};
@@ -517,25 +518,36 @@ module.exports = {
                         }
                     })     
                 }
+                //RESIZE
                 else if(action == 'red'){
-                    sort.states.UserState[sender].stage++;
-                    sort.info[sender] = {actionStage: 1};
-                    sort.data[sender] = {type: "resize"};
-                    sort.data[sender].disk = true;
-                    //TODO SIZE
-                    if(sort.info[sender].actionStage == 1){
-                        module.exports
-                    }
-                    dof.dropletActions(digitoken, sort.info[sender].id, sort.data[sender], function(body){
-                         console.log(body);
-                        if(body.action==undefined){
-                           
-                            module.exports.sendTextMessage(sender, body.message);
-                        }
+                    // sort.states.UserState[sender].stage++;
+                    var size = [];
+                    if(aStage == 1){
+                        sort.data[sender] = {type: "resize"};
+                        sort.data[sender].actionStage++;
+                        module.exports.sendTextMessage(sender, "Do you also want to resize droplet?");
+                }
+                    else if(aStage == 2){
+                        if(text.toLowerCase() == 'yes')
+                            sort.data[sender].disk = true;
                         else{
-                            module.exports.sendTextMessage(sender, body.action.status);
+                            sort.data[sender].disk = false;
                         }
-                    }) 
+                    dof.listSizes(digitoken, function(body){
+                        for(var i = 0; i < body.sizes.length; i++){
+                            size.push(body.sizes[i].slug);
+                        }
+                    });
+                        sort.data[sender].actionStage++;
+                        module.exports.sendTextMessage(sender, "Select a size from following sizes: \n"+size);        
+                    }
+
+                    else if(aStage == 3){
+                        sort.data[sender].size = text;
+                        module.exports.sendTextMessage(sender, "Press any key to continue\n"+sort.data[sender]);
+                        sort.states.UserState[sender].stage++;
+                    }
+
                 }
                 else if(action == 'eip6'){
                     sort.states.UserState[sender].stage++;
@@ -566,7 +578,19 @@ module.exports = {
                     }) 
                 }
                 //TODO Droplet Action 
-
+            }
+            else if(stage == 5){
+                    dof.dropletActions(digitoken, sort.info[sender].id, sort.data[sender], function(body){
+                         console.log(body);
+                        if(body.action==undefined){
+                           
+                            module.exports.sendTextMessage(sender, body.message);
+                        }
+                        else{
+                            module.exports.sendTextMessage(sender, body.action.status);
+                        }
+                    }) 
+                    module.exports.empty(sender);
             }
         }
 
