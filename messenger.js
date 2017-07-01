@@ -387,7 +387,8 @@ module.exports = {
                 }
             }
             else if(stage == 4){
-                if(text == 1){
+                action = sort.info[sender].actionType;
+                if(action == 'eb'){
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = {type: "enable_backups"};
                     dof.dropletActions(digitoken, sort.info[sender].id, sort.data[sender], function(body){
@@ -401,7 +402,7 @@ module.exports = {
                         }
                     })
                 }
-                else if(text == 2){
+                else if(action == 'db'){
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = {type: "disable_backups"};
                     dof.dropletActions(digitoken, sort.info[sender].id, sort.data[sender], function(body){
@@ -412,10 +413,9 @@ module.exports = {
                         }
                         else{
                             module.exports.sendTextMessage(sender, body.action.status);
-                        }
-                    })                   
+                        }action                 })                   
                 }
-                else if(text == 3){
+                else if(action == 'reb'){
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = {type: "reboot"};
                     dof.dropletActions(digitoken, sort.info[sender].id, sort.data[sender], function(body){
@@ -430,7 +430,7 @@ module.exports = {
                     }) 
 
                 }
-                else if(text == 4){
+                else if(action == 'pcd'){
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = {type: "power_cycle"};
                     dof.dropletActions(digitoken, sort.info[sender].id, sort.data[sender], function(body){
@@ -444,7 +444,7 @@ module.exports = {
                         }
                     }) 
                 }
-                else if(text == 5){
+                else if(action == 'shutdd'){
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = {type: "shutdown"};
                     dof.dropletActions(digitoken, sort.info[sender].id, sort.data[sender], function(body){
@@ -458,7 +458,7 @@ module.exports = {
                         }
                     }) 
                 }
-                else if(text == 6){
+                else if(action == 'poff'){
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = {type: "power_off"};
                     dof.dropletActions(digitoken, sort.info[sender].id, sort.data[sender], function(body){
@@ -472,7 +472,7 @@ module.exports = {
                         }
                     }) 
                 }
-                else if(text == 7){
+                else if(action == 'pon'){
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = {type: "power_on"};
                     dof.dropletActions(digitoken, sort.info[sender].id, sort.data[sender], function(body){
@@ -486,7 +486,7 @@ module.exports = {
                         }
                     }) 
                 }
-                else if(text == 8){
+                else if(action == 'resd'){
                     //TODO backup image retrieve for
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = {type: "restore"};
@@ -503,7 +503,7 @@ module.exports = {
                         }
                     }) 
                 }
-                else if(text == 9){
+                else if(action == 'pr'){
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = {type: "password_reset"};
                     dof.dropletActions(digitoken, sort.info[sender].id, sort.data[sender], function(body){
@@ -517,7 +517,7 @@ module.exports = {
                         }
                     })     
                 }
-                else if(text == 10){
+                else if(action == 'red'){
                     sort.states.UserState[sender].stage++;
                     sort.info[sender] = {actionStage: 1};
                     sort.data[sender] = {type: "resize"};
@@ -537,7 +537,7 @@ module.exports = {
                         }
                     }) 
                 }
-                else if(text == 13){
+                else if(action == 'eip6'){
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = {type: "enable_ipv6"};
                     dof.dropletActions(digitoken, sort.info[sender].id, sort.data[sender], function(body){
@@ -551,7 +551,7 @@ module.exports = {
                         }
                     }) 
                 }
-                else if(text == 14){
+                else if(action == 'epn'){
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = {type: "enable_private_networking"};
                     dof.dropletActions(digitoken, sort.info[sender].id, sort.data[sender], function(body){
