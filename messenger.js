@@ -477,22 +477,28 @@ module.exports = {
                         console.log(sort.data[sender])
                         if(text.toLowerCase() == 'yes'){
                             sort.data[sender].disk = true;
-                            console.log("working")
+                            dof.listSizes(digitoken, function(body){
+                                console.log(body)
+                                for(var i = 0; i < body.sizes.length; i++){
+                                    // console.log(body.sizes[0].slug)
+                                    size.push(body.sizes[i].slug);
+
+                                }
+                            sort.info[sender].actionStage++;
+                            module.exports.sendTextMessage(sender, "Select a size from following sizes: \n"+size);
+                            });
+
                         }
                         else{
-                            sort.data[sender].disk = 'false';
-                            console.log("working")
+                            sort.data[sender].disk = false;
+                            // console.log("working")
+                            sort.info[sender].actionStage++;
+                            module.exports.sendTextMessage(sender, "Press Y to continue");
                         }
-                        console.log("working")
-                    dof.listSizes(digitoken, function(body){
-                        for(var i = 0; i < body.sizes.length; i++){
-                            console.log("working: "+body)
-                            size.push(body.sizes[i].slug);
-                        }
-                    });
+                        // console.log("working")
+ 
                     
-                        sort.info[sender].actionStage++;
-                        module.exports.sendTextMessage(sender, "Select a size from following sizes: \n"+size);        
+                                
                     }
 
                     else if(aStage == 3){
