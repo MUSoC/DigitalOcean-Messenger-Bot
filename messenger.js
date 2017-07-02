@@ -507,13 +507,25 @@ module.exports = {
                         sort.info[sender].actionStage++;
                         module.exports.sendTextMessage(sender, "Enter Image name: ");
                 }
-                    else if(aStage == 2){
+                     else if(aStage == 2){
                         sort.data[sender].image = text;
                         sort.states.UserState[sender].stage++;
-                        module.exports.sendTextMessage(sender, "Press any key to conitnue or exit to abort\n"+JOSN.stringify(sort.data[sender]))
+                        module.exports.sendTextMessage(sender, "Press any key to conitnue or exit to abort\n"+JSON.stringify(sort.data[sender]))
                     }
 
 
+                }
+                else if(action == 'rd'){
+                    if(aStage == 1){
+                        sort.data[sender] = {type: 'rename'};
+                        sort.info[sender].actionStage++;
+                        module.exports.sendTextMessage(sender, "Enter new name");
+                    }
+                    else if(aStage == 2){
+                        sort.data[sender].name = text;
+                        sort.states.UserState[sender].stage++;
+                        module.exports.sendTextMessage(sender, "Press any key to conitnue or exit to abort\n"+JSON.stringify(sort.data[sender]))
+                    }
                 }
                 else if(action == 'eip6'){
                     sort.states.UserState[sender].stage++;
@@ -530,6 +542,7 @@ module.exports = {
             else if(stage == 5){
                 console.log("Stage 5: "+sort.info[sender].id+" data"+sort.data[sender])
                     dof.dropletActions(digitoken, sort.info[sender].id, sort.data[sender], function(body){
+                         console.log(sort.info[sender].id)
                          console.log(body);
                         if(body.action==undefined){
                            
