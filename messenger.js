@@ -537,6 +537,19 @@ module.exports = {
                     sort.data[sender] = {type: "enable_private_networking"};
                     module.exports.sendTextMessage(sender, "Press any Key to Continue \n"+JSON.stringify(sort.data[sender]))
                 }
+                else if(action == 'sd'){
+                      if(aStage == 1){  
+                        sort.data[sender] = {type: 'snapshot'};
+                        sort.info[sender].actionStage++;
+                        module.exports.sendTextMessage(sender, "Name of your snapshot");
+                    }
+                    else if(aStage == 2){
+                        sort.data[sender].name = text;
+                        sort.states.UserState[sender].stage++;
+                        module.exports.sendTextMessage(sender, "Press any key to conitnue or exit to abort\n"+JSON.stringify(sort.data[sender]))
+                    }
+
+                }
                 //TODO Droplet Action 
             }
             else if(stage == 5){
