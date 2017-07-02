@@ -57,13 +57,14 @@ module.exports = {
                 module.exports.sendTextMessage(sender, "Enter token or press exir to abort the operation");
                 // module.exports.mess(sender, );
             } else if (stage == 2) {
-                module.exports.empty(sender);
+                
                 saveToken(sender, text);
 
                 // sort.states.UserState[sender].stage=null;
                 // delete sort.states.UserState[sender];
                 
                 module.exports.sendTextMessage(sender, "Token Saved");
+                module.exports.empty(sender);
                 // callback("Token Saved");
             }
 
@@ -336,156 +337,118 @@ module.exports = {
                 module.exports.sendTextMessage(sender, "Select an Action \n1. Enable Backup \n2. Disable Backups \n3. Reboot \n4. Power Cycle Droplet \n5. Shutdown Droplet \n6. Power Off Droplet \n7. Power On Droplet \n8. Restore Droplet \n9. Password Reset \n10. Resize Droplet \n11. Rebuild Droplet \n12. Rename Droplet \n13. Enable IPv6 \n14. Enable Private \n15. SnapShot Droplet \n16. Retrieve a Droplet Action");
             }
             else if(stage == 3){
-                sort.stage.UserState[sender].stage++;
-                if(text == 1){
-                    sort.info[sender] = {actionType: 'eb', actionStage: 1};
+                
+                sort.states.UserState[sender].stage++;
+                if(text == '1'){
+                    console.log("Stage 3")
+                    sort.info[sender].actionType = 'eb';
+                    sort.info[sender].actionStage = 1;
                 }
                 else if(text == 2){
-                 sort.info[sender] = {actionType: 'db', actionStage: 1};   
+                 sort.info[sender].actionType = 'db';
+                 sort.info[sender].actionStage = 1;   
                 }
                 else if(text == 3){
-                 sort.info[sender] = {actionType: 'reb', actionStage: 1};   
+                 sort.info[sender].actionType = 'reb';
+                 sort.info[sender].actionStage = 1;   
                 }
                 else if(text == 4){
-                 sort.info[sender] = {actionType: 'pcd', actionStage: 1};   
+                 sort.info[sender].actionType = 'pcd';
+                 sort.info[sender].actionStage = 1;   
                 }
                 else if(text == 5){
-                 sort.info[sender] = {actionType: 'shutdd', actionStage: 1};   
+                 sort.info[sender].actionType = 'shutdd';
+                 sort.info[sender].actionStage = 1;   
                 }
                 else if(text == 6){
-                 sort.info[sender] = {actionType: 'poff', actionStage: 1};   
+                 sort.info[sender].actionType = 'poff';
+                 sort.info[sender].actionStage = 1;   
                 }
                 else if(text == 7){
-                 sort.info[sender] = {actionType: 'pon', actionStage: 1};   
+                 sort.info[sender].actionType = 'pon';
+                 sort.info[sender].actionStage = 1;   
                 }
                 else if(text == 8){
-                 sort.info[sender] = {actionType: 'resd', actionStage: 1};   
+                 sort.info[sender].actionType = 'resd';
+                 sort.info[sender].actionStage = 1;   
                 }
                 else if(text == 9){
-                 sort.info[sender] = {actionType: 'pr', actionStage: 1};   
+                 sort.info[sender].actionType = 'pr';
+                 sort.info[sender].actionStage = 1;   
                 }
                 else if(text == 10){
-                 sort.info[sender] = {actionType: 'red', actionStage: 1};   
+                 sort.info[sender].actionType = 'red';
+                 sort.info[sender].actionStage = 1;   
                 }
                 else if(text == 11){
-                 sort.info[sender] = {actionType: 'rbd', actionStage: 1};   
+                 sort.info[sender].actionType = 'rbd';
+                 sort.info[sender].actionStage = 1;   
                 }
                 else if(text == 12){
-                 sort.info[sender] = {actionType: 'rd', actionStage: 1};   
+                 sort.info[sender].actionType = 'rd';
+                 sort.info[sender].actionStage = 1;   
                 }
                 else if(text == 13){
-                 sort.info[sender] = {actionType: 'eip6', actionStage: 1};   
+                 sort.info[sender].actionType = 'eip6';
+                 sort.info[sender].actionStage = 1;   
                 }
                 else if(text == 14){
-                 sort.info[sender] = {actionType: 'epn', actionStage: 1};   
+                 sort.info[sender].actionType = 'epn';
+                 sort.info[sender].actionStage = 1;   
                 }
                 else if(text == 15){
-                 sort.info[sender] = {actionType: 'sd', actionStage: 1};   
+                 sort.info[sender].actionType = 'sd';
+                 sort.info[sender].actionStage = 1;   
                 }
                 else if(text == 16){
-                 sort.info[sender] = {actionType: 'da', actionStage: 1};   
+                 sort.info[sender].actionType = 'da';
+                 sort.info[sender].actionStage = 1;   
                 }
+                module.exports.sendTextMessage(sender, "Press Y for Confirm");
+                console.log(sort.info[sender].actionType);
             }
             else if(stage == 4){
-                action = sort.info[sender].actionType;
-                aStage = sort.info[sender].actionStage;
+                console.log("Stage 4")
+                var action = sort.info[sender].actionType;
+                var aStage = sort.info[sender].actionStage;
                 if(action == 'eb'){
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = {type: "enable_backups"};
-                    dof.dropletActions(digitoken, sort.info[sender].id, sort.data[sender], function(body){
-                        if(body.action==undefined){
-                            console.log(body);
-                            module.exports.sendTextMessage(sender, body.message);
-                        }
-                        else{
-                            // console.log(body.action)
-                            module.exports.sendTextMessage(sender, body.action.status);
-                        }
-                    })
+                    // sort.states.UserState[sender].stage++;
+                    module.exports.sendTextMessage(sender, "Press any key to continue\n"+JSON.stringify(sort.data[sender]));
+                    
+
                 }
                 else if(action == 'db'){
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = {type: "disable_backups"};
-                    dof.dropletActions(digitoken, sort.info[sender].id, sort.data[sender], function(body){
-                         console.log(body);
-                        if(body.action==undefined){
-                           
-                            module.exports.sendTextMessage(sender, body.message);
-                        }
-                        else{
-                            module.exports.sendTextMessage(sender, body.action.status);
-                        }action                 })                   
+                    module.exports.sendTextMessage(sender, "Press any Key to Continue \n"+JSON.stringify(sort.data[sender]))           
                 }
                 else if(action == 'reb'){
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = {type: "reboot"};
-                    dof.dropletActions(digitoken, sort.info[sender].id, sort.data[sender], function(body){
-                         console.log(body);
-                        if(body.action==undefined){
-                           
-                            module.exports.sendTextMessage(sender, body.message);
-                        }
-                        else{
-                            module.exports.sendTextMessage(sender, body.action.status);
-                        }
-                    }) 
+                    module.exports.sendTextMessage(sender, "Press any Key to Continue \n"+JSON.stringify(sort.data[sender]))
 
                 }
                 else if(action == 'pcd'){
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = {type: "power_cycle"};
-                    dof.dropletActions(digitoken, sort.info[sender].id, sort.data[sender], function(body){
-                         console.log(body);
-                        if(body.action==undefined){
-                           
-                            module.exports.sendTextMessage(sender, body.message);
-                        }
-                        else{
-                            module.exports.sendTextMessage(sender, body.action.status);
-                        }
-                    }) 
+                    module.exports.sendTextMessage(sender, "Press any Key to Continue \n"+JSON.stringify(sort.data[sender]))
                 }
                 else if(action == 'shutdd'){
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = {type: "shutdown"};
-                    dof.dropletActions(digitoken, sort.info[sender].id, sort.data[sender], function(body){
-                         console.log(body);
-                        if(body.action==undefined){
-                           
-                            module.exports.sendTextMessage(sender, body.message);
-                        }
-                        else{
-                            module.exports.sendTextMessage(sender, body.action.status);
-                        }
-                    }) 
+                    module.exports.sendTextMessage(sender, "Press any Key to Continue \n"+JSON.stringify(sort.data[sender]))
                 }
                 else if(action == 'poff'){
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = {type: "power_off"};
-                    dof.dropletActions(digitoken, sort.info[sender].id, sort.data[sender], function(body){
-                         console.log(body);
-                        if(body.action==undefined){
-                           
-                            module.exports.sendTextMessage(sender, body.message);
-                        }
-                        else{
-                            module.exports.sendTextMessage(sender, body.action.status);
-                        }
-                    }) 
+                    module.exports.sendTextMessage(sender, "Press any Key to Continue \n"+JSON.stringify(sort.data[sender]))
                 }
                 else if(action == 'pon'){
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = {type: "power_on"};
-                    dof.dropletActions(digitoken, sort.info[sender].id, sort.data[sender], function(body){
-                         console.log(body);
-                        if(body.action==undefined){
-                           
-                            module.exports.sendTextMessage(sender, body.message);
-                        }
-                        else{
-                            module.exports.sendTextMessage(sender, body.action.status);
-                        }
-                    }) 
+                    module.exports.sendTextMessage(sender, "Press any Key to Continue \n"+JSON.stringify(sort.data[sender]))
                 }
                 else if(action == 'resd'){
                     //TODO backup image retrieve for
@@ -493,30 +456,12 @@ module.exports = {
                     sort.data[sender] = {type: "restore"};
                     //TODO
                     // sort.data[sender].image = imageID;
-                    dof.dropletActions(digitoken, sort.info[sender].id, sort.data[sender], function(body){
-                         console.log(body);
-                        if(body.action==undefined){
-                           
-                            module.exports.sendTextMessage(sender, body.message);
-                        }
-                        else{
-                            module.exports.sendTextMessage(sender, body.action.status);
-                        }
-                    }) 
+                    module.exports.sendTextMessage(sender, "Press any Key to Continue \n"+JSON.stringify(sort.data[sender]))
                 }
                 else if(action == 'pr'){
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = {type: "password_reset"};
-                    dof.dropletActions(digitoken, sort.info[sender].id, sort.data[sender], function(body){
-                         console.log(body);
-                        if(body.action==undefined){
-                           
-                            module.exports.sendTextMessage(sender, body.message);
-                        }
-                        else{
-                            module.exports.sendTextMessage(sender, body.action.status);
-                        }
-                    })     
+                    module.exports.sendTextMessage(sender, "Press any Key to Continue \n"+JSON.stringify(sort.data[sender]))
                 }
                 //RESIZE
                 else if(action == 'red'){
@@ -552,34 +497,17 @@ module.exports = {
                 else if(action == 'eip6'){
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = {type: "enable_ipv6"};
-                    dof.dropletActions(digitoken, sort.info[sender].id, sort.data[sender], function(body){
-                         console.log(body);
-                        if(body.action==undefined){
-                           
-                            module.exports.sendTextMessage(sender, body.message);
-                        }
-                        else{
-                            module.exports.sendTextMessage(sender, body.action.status);
-                        }
-                    }) 
+                    module.exports.sendTextMessage(sender, "Press any Key to Continue \n"+JSON.stringify(sort.data[sender]))
                 }
                 else if(action == 'epn'){
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = {type: "enable_private_networking"};
-                    dof.dropletActions(digitoken, sort.info[sender].id, sort.data[sender], function(body){
-                         console.log(body);
-                        if(body.action==undefined){
-                           
-                            module.exports.sendTextMessage(sender, body.message);
-                        }
-                        else{
-                            module.exports.sendTextMessage(sender, body.action.status);
-                        }
-                    }) 
+                    module.exports.sendTextMessage(sender, "Press any Key to Continue \n"+JSON.stringify(sort.data[sender]))
                 }
                 //TODO Droplet Action 
             }
             else if(stage == 5){
+                console.log("Stage 5: "+sort.info[sender].id+" data"+sort.data[sender])
                     dof.dropletActions(digitoken, sort.info[sender].id, sort.data[sender], function(body){
                          console.log(body);
                         if(body.action==undefined){
@@ -673,8 +601,10 @@ module.exports = {
 //TODO need to fix the promise for new User
     findToken: function(sender) {
         return new Promise(function(resolve, reject) {
-            database.User.findOne({ id: sender }, function(err, user) {
-                if(user.token!=undefined){
+            database.Users.findOne({ id: sender }, function(err, user) {
+                
+                if(user!=undefined){
+                console.log("promise");
                 resolve(user.token);
             }
                 else{
@@ -683,10 +613,11 @@ module.exports = {
                     });
                     newUser.save(function(err){
                         if(err) throw err;
-                        resolve("nothing");
+                        
                         // mmodule.exports.sendTextMessage(sender, "New User");
                     })
-                }
+                    resolve("nothing");
+                }   
 
             });
         });

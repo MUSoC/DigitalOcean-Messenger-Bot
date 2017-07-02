@@ -77,6 +77,7 @@ app.post('/', function(req, res) {
 
 
 	            // else{
+                    // console.log("hello");
 	                if (text == 'Token') {
 	                	// console.log("hello");
 	                    // status = 1;

@@ -5,8 +5,8 @@ mongoose.connect('mongodb://localhost/bot');
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
-	token: {type: String, required: true, unique: true},
-	id: {type: String}
+	token: {type: String, unique: true},
+	id: {type: String, required:true, unique:true}
 })
 var dropletSchema = new Schema({
 	dropletId: {type: String, required: true, unique: true},
@@ -31,12 +31,12 @@ var domainRecordSchema = new Schema({
 	name: {type: String, required: true}
 })
 
-var User = mongoose.model('User', userSchema);
+var Users = mongoose.model('Users', userSchema);
 var Droplets = mongoose.model('Droplets', dropletSchema);
 var Domains = mongoose.model('Domains', domainSchema);
 var domainRecords = mongoose.model('domainRecords', domainRecordSchema);
 module.exports = {
-	User: User,
+	Users: Users,
 	Droplets: Droplets,
 	Domains: Domains,
 	domainRecords: domainRecords
