@@ -562,7 +562,7 @@ module.exports = {
                             module.exports.sendTextMessage(sender, body.message);
                         }
                         else{
-                            module.exports.sendTextMessage(sender, body.action.status);
+                            module.exports.sendTextMessage(sender, "Action id: "+body.action.id+"\nAction Status: "+body.action.status);
                         }
                     }) 
                     module.exports.empty(sender);
