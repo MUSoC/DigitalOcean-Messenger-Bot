@@ -451,7 +451,7 @@ module.exports = {
                     module.exports.sendTextMessage(sender, "Press any Key to Continue \n"+JSON.stringify(sort.data[sender]))
                 }
                 else if(action == 'resd'){
-                    //TODO backup image retrieve for
+                    //TODO backup image retrieve for restore
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = {type: "restore"};
                     //TODO
@@ -469,27 +469,35 @@ module.exports = {
                     var size = [];
                     if(aStage == 1){
                         sort.data[sender] = {type: "resize"};
-                        sort.data[sender].actionStage++;
+                        sort.info[sender].actionStage++;
+                        console.log(sort.info[sender].actionStage)
                         module.exports.sendTextMessage(sender, "Do you also want to resize droplet?");
                 }
                     else if(aStage == 2){
-                        if(text.toLowerCase() == 'yes')
+                        console.log(sort.data[sender])
+                        if(text.toLowerCase() == 'yes'){
                             sort.data[sender].disk = true;
-                        else{
-                            sort.data[sender].disk = false;
+                            console.log("working")
                         }
+                        else{
+                            sort.data[sender].disk = 'false';
+                            console.log("working")
+                        }
+                        console.log("working")
                     dof.listSizes(digitoken, function(body){
                         for(var i = 0; i < body.sizes.length; i++){
+                            console.log("working: "+body)
                             size.push(body.sizes[i].slug);
                         }
                     });
-                        sort.data[sender].actionStage++;
+                    
+                        sort.info[sender].actionStage++;
                         module.exports.sendTextMessage(sender, "Select a size from following sizes: \n"+size);        
                     }
 
                     else if(aStage == 3){
                         sort.data[sender].size = text;
-                        module.exports.sendTextMessage(sender, "Press any key to continue\n"+sort.data[sender]);
+                        module.exports.sendTextMessage(sender, "Press any key to continue or exit to abort\n"+JSON.stringify(sort.data[sender]));
                         sort.states.UserState[sender].stage++;
                     }
 
