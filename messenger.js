@@ -450,6 +450,7 @@ module.exports = {
                     sort.data[sender] = {type: "power_on"};
                     module.exports.sendTextMessage(sender, "Press any Key to Continue \n"+JSON.stringify(sort.data[sender]))
                 }
+                //TODO Restore a Droplet
                 else if(action == 'resd'){
                     //TODO backup image retrieve for restore
                     sort.states.UserState[sender].stage++;
@@ -562,7 +563,6 @@ module.exports = {
                         })
                     }
                 }
-                //TODO Droplet Action 
             }
             else if(stage == 5){
                 console.log("Stage 5: "+sort.info[sender].id+" data"+sort.data[sender])
