@@ -491,10 +491,7 @@ module.exports = {
                                 }
                             sort.info[sender].actionStage++;
                             module.exports.sendTextMessage(sender, "Select a size from following sizes: \n"+size);
-                            });
- 
-                    
-                                
+                            });          
                     }
 
                     else if(aStage == 3){
@@ -502,6 +499,20 @@ module.exports = {
                         module.exports.sendTextMessage(sender, "Press any key to continue or exit to abort\n"+JSON.stringify(sort.data[sender]));
                         sort.states.UserState[sender].stage++;
                     }
+
+                }
+                else if(action == 'rbd'){
+                    if(aStage == 1){
+                        sort.data[sender] = {type: 'rebuild'};
+                        sort.info[sender].actionStage++;
+                        module.exports.sendTextMessage(sender, "Enter Image name: ");
+                }
+                    else if(aStage == 2){
+                        sort.data[sender].image = text;
+                        sort.states.UserState[sender].stage++;
+                        module.exports.sendTextMessage(sender, "Press any key to conitnue or exit to abort\n"+JOSN.stringify(sort.data[sender]))
+                    }
+
 
                 }
                 else if(action == 'eip6'){
