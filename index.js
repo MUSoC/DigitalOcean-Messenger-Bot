@@ -53,7 +53,15 @@ app.post('/', function(req, res) {
 
         if ((event.message!=undefined)&&(!event.message.is_echo)) {
         	// console.log("hello");
-        mess.findToken(sender).then(function(body){
+        if(sort.info[sender] == undefined){
+            mess.findToken(sender).then(function(body){
+                console.log(body)
+                sort.info[sender] = {token: body};
+            }, function(err){
+                // console.log(err);
+            });
+    }
+    else{
 
         	// console.log("hello");
 
@@ -160,28 +168,17 @@ app.post('/', function(req, res) {
                 	// console.log("hell");
 
             	if(sort.states.UserState[sender]!=undefined){
-	                   	// console.log("hello");
-  					    mess.checkStatus(body, status, sender, text, function(messbody){
+
+  					    mess.checkStatus(sort.info[sender].token, status, sender, text, function(messbody){
   					    mess.sendTextMessage(sender, messbody)	
   					    // console.log("sup")
   					    });
   					    // console.log("xyz");
   					    
   					}
-                	
-            // }
-
         	}
-        	// console.log("helllo");
-    	}, function(err){
-    		// console.log(err);
-    	});
-    	// console.log("hello");
+        }
       }
-      // console.log(sort.states.UserState[sender]==undefined);
-  //     if(sort.states.UserState[sender]!=undefined){
-  //     mess.checkStatus(body, status, sender, text);
-  // }
     }
     res.sendStatus(200);
 })
