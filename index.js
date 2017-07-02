@@ -50,13 +50,13 @@ app.post('/', function(req, res) {
         let event = req.body.entry[0].messaging[i];
         let sender = event.sender.id.toString();
 
-
         if ((event.message!=undefined)&&(!event.message.is_echo)) {
         	// console.log("hello");
         if(sort.info[sender] == undefined){
             mess.findToken(sender).then(function(body){
                 console.log(body)
                 sort.info[sender] = {token: body};
+                mess.sendTextMessage(sender, "Welcome!!!")
             }, function(err){
                 // console.log(err);
             });
