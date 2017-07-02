@@ -178,6 +178,19 @@ dropletActions: function(dotoken, id, data, callback) {
 	 })
 },
 
+dropletActionR: function(dotoken, id, rid, callback) {
+
+		request({
+	 	method: "GET",
+	 	uri: "https://api.digitalocean.com/v2/droplets/"+id+"/actions/"+rid,
+	 	auth: {
+	 		'bearer': dotoken
+	 	}
+	 }, function(err, response, body){
+	 	callback(JSON.parse(body))
+	 })
+},
+
 
 
 // list all load balancer
