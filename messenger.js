@@ -550,6 +550,18 @@ module.exports = {
                     }
 
                 }
+                else if(action == 'da'){
+                    if(aStage == 1){
+                        sort.info[sender].actionStage++;
+                        module.exports.sendTextMessage(sender, "Enter Action Id");
+                    }
+                    else if(aStage == 2){
+                        dof.dropletActionR(digitoken, sort.info[sender].id, text, function(body){
+                            module.exports.sendTextMessage(sender, "Action id: "+body.action.id+"\nStatus: "+body.action.status+"\nType: "+body.action.type+"\nStarted At: "+body.action.started_at+"\nCompleted At: "+body.action.completed_at);
+                            module.exports.empty(sender)
+                        })
+                    }
+                }
                 //TODO Droplet Action 
             }
             else if(stage == 5){
