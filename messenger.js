@@ -36,7 +36,7 @@ module.exports = {
 
 
     checkStatus: function(digitoken, status, sender, text, callback) {
-        // console.log("working");
+        console.log(digitoken);
         var mod = sort.states.UserState[sender].module;
         var stage = sort.states.UserState[sender].stage;
 
@@ -190,7 +190,7 @@ module.exports = {
                 module.exports.sendTextMessage(sender, "Enter the domain")
             }
             else if(stage == 2){
-                sort.info[sender] = {domain: text}
+                sort.info[sender].domain = text;
                 sort.states.UserState[sender].stage++;
                 module.exports.sendTextMessage(sender, "Enter the type of Record");
             }
@@ -244,8 +244,11 @@ module.exports = {
                 module.exports.sendTextMessage(sender, "Press any key to continue or exit abort\n"+JSON.stringify(sort.data[sender]))
             }
             else if(stage == 9){
+                console.log(digitoken)
                 dof.addDomainRecord(digitoken, sort.info[sender].domain, sort.data[sender], function(body){
                     console.log(body);
+
+                    // module.exports.empty(sender);
                 })
             }
 
