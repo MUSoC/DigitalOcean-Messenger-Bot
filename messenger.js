@@ -258,7 +258,25 @@ module.exports = {
             }
 
         }
+        //List domain records
+        else if(mod == 'lDomainRecords'){
+            if(stage == 1){
+                sort.states.UserState[sender].stage++;
+                module.exports.sendTextMessage(sender, "Enter domain name")
+            }
+            else if(stage == 2){
+                sort.info[sender].domain = text;
+                dof.listDomainRecords(digitoken, sort.info[sender].domain, function(body){
+                    console.log(body)
+                    for(var i=0; i<body.domain_records.length; i++){
+                        module.exports.sendTextMessage(sender, "domain record id: "+body.domain_records[i].id+"\ntype: "+body.domain_records[i].type+"\nName: "+body.domain_records[i].name+"\nData: "+body.domain_records[i].data+"\nPriority: "+body.domain_records[i].priority+"\nPort: "+body.domain_records[i].port+"\nttl: "+body.domain_records[i].ttl+"\nWeight: "+body.domain_records[i].weight);
+                    }
+                    module.exports.empty(sender);
+                })
+            }
+        }
          else if (mod == 'rDomainsRecords') {
+            //On delete remove domain
             if (stage == 1) {
                 dof.listDomainRecords(digitoken, text, function(body) {
                     console.log(body);
