@@ -348,7 +348,7 @@ module.exports = {
                         module.exports.sendTextMessage(sender, "Domain Added\nName: "+body.domain.name+"\nTTL: "+body.domain.ttl+"\nZone File: "+body.domain.zone_file);    
                     }
                     console.log(body);
-
+                    module.exports.empty(sender);
                 })
             }
 
