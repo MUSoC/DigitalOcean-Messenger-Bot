@@ -92,7 +92,18 @@ listDomains: function(dotoken, callback) {
 },
 
 //create domain
-
+createDomain: function(dotoken, data, callback){
+	request({
+		 	method: "POST",
+		 	uri: "https://api.digitalocean.com/v2/domains",
+		 	form: data,
+		 	auth: {
+		 		'bearer': dotoken
+		 	}
+		 }, function(err, response, body){
+		 	callback(JSON.parse(body))
+		 })
+},
 
 
 //delete a domain
