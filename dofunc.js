@@ -138,10 +138,13 @@ listDomainRecords: function(dotoken, domain, callback) {
 },
 
 //create domain records
-addDomainRecord: function(dotoken, domain, data, callback){
+addDomainRecord: function(dotoken, Udomain, data, callback){
+	// console.log("https://api.digitalocean.com/v2/domains/"+Udomain+"/records");
+	// console.log(dotoken); 
+
 	request({
 		 	method: "POST",
-		 	uri: "https://api.digitalocean.com/v2/domains/"+domain+"/records",
+		 	uri: "https://api.digitalocean.com/v2/domains/"+Udomain+"/records",
 		 	form: data,
 		 	auth: {
 		 		'bearer': dotoken
