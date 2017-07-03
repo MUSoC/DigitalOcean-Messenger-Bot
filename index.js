@@ -83,70 +83,62 @@ app.post('/', function(req, res) {
                     // // }
 
 
-                    // else{
-                    // console.log("hello");
+              
                     if (text == 'Token') {
-                        // console.log("hello");
-                        // status = 1;
+               
                         sort.states.UserState[sender] = { module: "eToken", stage: 1 };
-                        // sort.MessageQueue.UserMessage[sender] = {mesasge:''};
-                        // console.log("hello");
-                        // mess.sendTextMessage(sender, "Enter Token");
+       
                     } else if (text == "Update token") {
-                        // status = 2;
+                       
                         sort.states.UserState[sender] = { module: "uToken", stage: 1 };
-                        // mess.sendTextMessage(sender, "Enter new Token");
+                        
                     } else if (text == "List droplet") {
-                        // status = 3;
+                 
                         sort.states.UserState[sender] = { module: "lDroplet", stage: 1 };
-                        // mess.checkStatus(body, status, sender, text)
+ 
 
                     } else if (text == "Refresh droplets") {
-                        // status = 4;
-                        // mess.checkStatus(body, status, sender, text)
+               
                         sort.states.UserState[sender] = { module: "rDroplets", stage: 1 };
                     } else if (text == "Last actions") {
-                        // status = 5;
-                        // console.log("hello");
+  
                         sort.states.UserState[sender] = { module: "lActions", stage: 1 };
-                        // mess.checkStatus(body, status, sender, text)
+                        
                     } else if (text == "List domains") {
-                        // status=6;
+                      
                         sort.states.UserState[sender] = { module: "lDomains", stage: 1 };
-                        // mess.checkStatus(body, status, sender, text);
+                        
+                    }
+                    else if(text == 'Add domain'){
+                        sort.states.UserState[sender] = {module: "aDomain", stage: 1};
+
                     } else if (text == "Refresh domains") {
-                        // status = 7;
-                        // mess.checkStatus(body, status, sender, text);
+    
                         sort.states.UserState[sender] = { module: "rDomains", stage: 1 };
                     } else if (text == "List domain records") {
-                        // status = 8;
-                        // mess.sendTextMessage(sender, "Select a domain");
-                        // listDomains()
+              
                         sort.states.UserState[sender] = { module: "lDomainRecords", stage: 1 };
-                        // mess.checkStatus(body, status, sender, text);
+                        
                     } else if (text == "Refresh domain records") {
-                        // status=9;
-                        // mess.sendTextMessage(sender, "Select a domain");
-                        // continue;
+               
                         sort.states.UserState[sender] = { module: "rDomainRecords", stage: 1 };
-                        // mess.checkStatus(body, status, sender, text);
+                       
                     } else if (text == "List Snapshots") {
-                        // status=10;
+                        
                         sort.states.UserState[sender] = { module: "lSnapshots", stage: 1 };
-                        // mess.checkStatus(body, status, sender, text);
+                        
                     } else if (text == "List regions") {
-                        // status=11;
+                       
                         sort.states.UserState[sender] = { module: "lRegions", stage: 1 };
-                        // mess.checkStatus(body, status, sender, text);
+                       
                     } else if (text == "List sizes") {
-                        // status=12;
+                        
                         sort.states.UserState[sender] = { module: "lSizes", stage: 1 };
-                        // mess.checkStatus(body, status, sender,text)
+                        
                     } else if (text == "Delete droplet") {
-                        // status=13;
+                       
                         sort.states.UserState[sender] = { module: "dDroplet", stage: 1 };
-                        // mess.checkStatus(body, status, sender, text)
-                        // continue;
+                      
                     } else if (text == "Create droplet") {
                         sort.states.UserState[sender] = { module: "cDroplet", stage: 1 };
                     } else if (text == "Droplet action") {
