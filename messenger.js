@@ -275,6 +275,24 @@ module.exports = {
                 })
             }
         }
+        //Delete domain records module
+        else if(mod == 'dDomainRecord'){
+            if(stage == 1){
+                sort.states.UserState[sender].stage++;
+                module.exports.sendTextMessage(sender, "Enter domain name")
+            }
+            else if(stage == 2){
+                sort.states.UserState[sender].stage++;
+                sort.info[sender].domain = text;
+                module.exports.sendTextMessage(sender, "Enter domain record id")
+            }
+            else if(stage == 3){
+                sort.info[sender].record = text;
+                dof.deleteDomainRecords(digitoken, sort.info[sender].domain, sort.info[sender].record, function(body){
+                    console.log(body)
+                })
+            }
+        }
          else if (mod == 'rDomainsRecords') {
             //On delete remove domain
             if (stage == 1) {
