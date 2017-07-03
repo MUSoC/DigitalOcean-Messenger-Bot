@@ -348,6 +348,26 @@ module.exports = {
                         module.exports.sendTextMessage(sender, "Domain Added\nName: "+body.domain.name+"\nTTL: "+body.domain.ttl+"\nZone File: "+body.domain.zone_file);    
                     }
                     console.log(body);
+
+                })
+            }
+
+        }
+        //Delete Domain Module
+        else if(mod == 'dDomain'){
+            if(stage == 1){
+                sort.states.UserState[sender].stage++;
+                module.exports.sendTextMessage(sender, "Enter the domain you want to delete");
+            }
+            else if(stage == 2){
+                sort.data[sender] = {domain: text};
+                sort.states.UserState[sender].stage++;
+                module.exports.sendTextMessage(sender, "Press any key to continue or exit to abort\n"+JSON.stringify(sort.data[sender]))
+            }
+            else if(stage == 3){
+                dof.deleteDomain(digitoken, sort.data[sender].domain, function(body){
+                    //TODO appropriate message for success and failure
+                    console.log(body);
                 })
             }
 
