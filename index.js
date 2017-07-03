@@ -112,7 +112,11 @@ app.post('/', function(req, res) {
                     else if(text == 'Add domain'){
                         sort.states.UserState[sender] = {module: "aDomain", stage: 1};
 
-                    } else if (text == "Refresh domains") {
+                    }
+                    else if(text == 'Delete doamin'){
+                        sort.states.UserState[sender] = {module: "dDomain", stage: 1};
+                    } 
+                    else if (text == "Refresh domains") {
     
                         sort.states.UserState[sender] = { module: "rDomains", stage: 1 };
                     } else if (text == "List domain records") {
