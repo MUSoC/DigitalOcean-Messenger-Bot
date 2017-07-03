@@ -368,6 +368,7 @@ module.exports = {
                 dof.deleteDomain(digitoken, sort.data[sender].domain, function(body){
                     //TODO appropriate message for success and failure
                     console.log(body);
+                    module.exports.empty(sender);
                 })
             }
 
