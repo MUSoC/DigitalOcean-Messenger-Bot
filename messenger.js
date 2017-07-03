@@ -337,7 +337,7 @@ module.exports = {
             else if(stage == 3){
                 sort.data[sender].ip_address = text;
                 sort.states.UserState[sender].stage++;
-                sort.states.sendTextMessage(sender, "Press any key to continue or exit to abort\n"+JSON.stringify(sort.data[sender]))
+                module.exports.sendTextMessage(sender, "Press any key to continue or exit to abort\n"+JSON.stringify(sort.data[sender]))
             }
             else if(stage == 4){
                 dof.createDomain(digitoken, sort.data[sender], function(body){
