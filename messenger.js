@@ -246,9 +246,14 @@ module.exports = {
             else if(stage == 9){
                 console.log(digitoken)
                 dof.addDomainRecord(digitoken, sort.info[sender].domain, sort.data[sender], function(body){
-                    console.log(body);
-
-                    // module.exports.empty(sender);
+                    // console.log(body);
+                    if(body.id){
+                        module.exports.sendTextMessage(sender, "Id: "+body.id+"\n Message: "+body.message)
+                    }
+                    else{
+                        module.exports.sendTextMessage(sender, "Record Added\nDomain record id: "+body.domain_record.id+"\nType: "+body.domain_record.type+"\nName: "+body.domain_record.name+"\nData: "+body.domain_record.data+"\nTTL: "+body.domain_record.ttl)
+                    }
+                    module.exports.empty(sender);
                 })
             }
 
