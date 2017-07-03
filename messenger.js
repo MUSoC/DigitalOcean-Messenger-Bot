@@ -323,9 +323,32 @@ module.exports = {
             }
 
         }
+        //Addig domain Module
+        else if(mod == 'aDomain'){
+            if(stage == 1){
+                sort.states.UserState[sender].stage++;
+                module.exports.sendTextMessage(sender, "Enter the name of the domain");
+            }
+            else if(stage == 2){
+                sort.data[sender] = {name: text};
+                sort.states.UserState[sender].stage++;
+                module.exports.sendTextMessage(sender, "Enter the IP address");
+            }
+            else if(stage == 3){
+                sort.data[sender].ip_address = text;
+                sort.states.UserState[sender].stage++;
+                sort.states.sendTextMessage(sender, "Press any key to continue or exit to abort\n"+JSON.stringify(sort.data[sender]))
+            }
+            else if(stage == 4){
+                dof.createDomain(digitoken, sort.data[sender], function(body){
+                    console.log(body);
+                })
+            }
+
+        }
+        //Action Droplet Module
         else if(mod == 'aDroplet'){
-            // var droplet;
-            // var data;
+
             if(stage == 1){
                 sort.states.UserState[sender].stage++;
                 module.exports.sendTextMessage(sender, "Enter the droplet id for performing Action:");
