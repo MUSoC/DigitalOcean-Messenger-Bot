@@ -119,7 +119,11 @@ app.post('/', function(req, res) {
                     else if (text == "Refresh domains") {
     
                         sort.states.UserState[sender] = { module: "rDomains", stage: 1 };
-                    } else if (text == "List domain records") {
+                    } 
+                    else if(text == "Add domain records"){
+                        sort.states.UserState[sender] = {module: "aDomainRecords", stage: 1};
+                    }
+                    else if (text == "List domain records") {
               
                         sort.states.UserState[sender] = { module: "lDomainRecords", stage: 1 };
                         
@@ -139,13 +143,17 @@ app.post('/', function(req, res) {
                         
                         sort.states.UserState[sender] = { module: "lSizes", stage: 1 };
                         
-                    } else if (text == "Delete droplet") {
+                    }
+                    else if (text == "Delete droplet") {
                        
                         sort.states.UserState[sender] = { module: "dDroplet", stage: 1 };
                       
-                    } else if (text == "Create droplet") {
+                    } 
+                    else if (text == "Create droplet") {
                         sort.states.UserState[sender] = { module: "cDroplet", stage: 1 };
-                    } else if (text == "Droplet action") {
+                    }
+                    //TODO list backups for droplet 
+                    else if (text == "Droplet action") {
                         sort.states.UserState[sender] = { module: "aDroplet", stage: 1 };
 
                     }
