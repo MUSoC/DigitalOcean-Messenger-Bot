@@ -121,7 +121,7 @@ app.post('/', function(req, res) {
                         sort.states.UserState[sender] = { module: "rDomains", stage: 1 };
                     } 
                     else if(text == "Add domain records"){
-                        sort.states.UserState[sender] = {module: "aDomainRecords", stage: 1};
+                        sort.states.UserState[sender] = {module: "aDomainRecord", stage: 1};
                     }
                     else if (text == "List domain records") {
               

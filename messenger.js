@@ -156,7 +156,7 @@ module.exports = {
 
 
 
-
+        //List domain Module
          else if (mod == 'lDomains') {
             if (stage == 1) {
                 database.Domains.find({ id: sender }, function(err, domain) {
@@ -171,7 +171,7 @@ module.exports = {
         } 
 
 
-
+        //Refresh domain
         else if (mod == 'rDomains') {
             if (stage == 1) {
                 dof.listDomains(digitoken, function(body) {
@@ -181,12 +181,75 @@ module.exports = {
                 })
                 module.exports.empty(sender);
             }
-        } else if (status == 8) {
-
         }
 
+        //Add domain records
+        else if(mod == 'aDomainRecord'){
+            if(stage == 1){
+                sort.states.UserState[sender].stage++;
+                module.exports.sendTextMessage(sender, "Enter the domain")
+            }
+            else if(stage == 2){
+                sort.info[sender] = {domain: text}
+                sort.states.UserState[sender].stage++;
+                module.exports.sendTextMessage(sender, "Enter the type of Record");
+            }
+            else if(stage == 3){
+                sort.states.UserState[sender].stage++;
+                sort.data[sender] = {type: text};
+                module.exports.sendTextMessage(sender, "Enter name if applicable or type null to leave this part");
+            }
+            else if(stage == 4){
+                sort.states.UserState[sender].stage++;
+                if(text.toLowerCase()!='null'){
+                    sort.data[sender].name = text;
+                }
+                module.exports.sendTextMessage(sender, "Enter data if applicable or type null to leave this part")
+            }
+            else if(stage == 5){
+                sort.states.UserState[sender].stage++;
+                if(text.toLowerCase()!='null'){
+                    sort.data[sender].data = text;
+                }
+                module.exports.sendTextMessage(sender, "Enter Priority if applicable or null");
+            }
+            else if(stage == 6){
+                sort.states.UserState[sender].stage++;
+                if(text.toLowerCase()!='null'){
+                    sort.data[sender].priority = text;
+                }
+                else{
+                    sort.data[sender].priority = null;
+                }
+                module.exports.sendTextMessage(sender, "Enter port if applicable or null");
+            }
+            else if(stage == 7){
+                sort.states.UserState[sender].stage++;
+                if(text.toLowerCase()!='null'){
+                    sort.data[sender].port = text;
+                }
+                else{
+                    sort.data[sender].port = null;
+                }
+                module.exports.sendTextMessage(sender, "Enter weight if applicable or null");
+            }
+            else if(stage == 8){
+                sort.states.UserState[sender].stage++;
+                if(text.toLowerCase()!='null'){
+                    sort.data[sender].weight = text;
+                }
+                else{
+                    sort.data[sender].weight = null;
+                }
+                module.exports.sendTextMessage(sender, "Press any key to continue or exit abort\n"+JSON.stringify(sort.data[sender]))
+            }
+            else if(stage == 9){
+                dof.addDomainRecord(digitoken, sort.info[sender].domain, sort.data[sender], function(body){
+                    console.log(body);
+                })
+            }
 
-
+        }
          else if (mod == 'rDomainsRecords') {
             if (stage == 1) {
                 dof.listDomainRecords(digitoken, text, function(body) {
@@ -197,12 +260,7 @@ module.exports = {
                 })
                 module.exports.empty(sender);
             }
-        } else if (status == 10) {
-            //TODO
-
-        }
-
-
+        } 
 
          else if (mod == 'lRegions') {
             if (stage == 1) {
