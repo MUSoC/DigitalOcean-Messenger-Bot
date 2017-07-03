@@ -341,6 +341,12 @@ module.exports = {
             }
             else if(stage == 4){
                 dof.createDomain(digitoken, sort.data[sender], function(body){
+                    if(body.id){
+                        module.exports.sendTextMessage(sender, body.message)
+                    }
+                    else{
+                        module.exports.sendTextMessage(sender, "Domain Added\nName: "+body.domain.name+"\nTTL: "+body.domain.ttl+"\nZone File: "+body.domain.zone_file);    
+                    }
                     console.log(body);
                 })
             }
