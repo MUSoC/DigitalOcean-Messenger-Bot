@@ -289,7 +289,17 @@ module.exports = {
             else if(stage == 3){
                 sort.info[sender].record = text;
                 dof.deleteDomainRecords(digitoken, sort.info[sender].domain, sort.info[sender].record, function(body){
-                    console.log(body)
+                    console.log(body.id)
+                    if(body.id){
+                        module.exports.sendTextMessage(sender, "id: "+body.id+"\nMessage: "+body.message)
+                        
+                    }
+                    else{
+                        //TODO check if this is working
+                        module.exports.sendTextMessage(sender, "Record Deleted Successfully")
+                    }
+
+                    module.exports.empty(sender)
                 })
             }
         }
