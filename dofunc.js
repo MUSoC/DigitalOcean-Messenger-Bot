@@ -174,12 +174,12 @@ updateDomainRecords: function(callback, domain, record, data) {
 
 //To delete domain records
 
-deleteDomainRecords: function(callback, domain, record) {
+deleteDomainRecords: function(dotoken, Udomain, record, callback) {
 
 	
 	request ({
 		method: "DELETE",
-		uri: "https://api.digitalocean.com/v2/domains/"+domain+"/records/"+record,
+		uri: "https://api.digitalocean.com/v2/domains/"+Udomain+"/records/"+record,
 		auth: {
 			'bearer': dotoken
 		}
