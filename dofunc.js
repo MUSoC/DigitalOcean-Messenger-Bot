@@ -138,7 +138,18 @@ listDomainRecords: function(dotoken, domain, callback) {
 },
 
 //create domain records
-
+addDomainRecord: function(digitoken, domain, data, callback){
+	request({
+		 	method: "POST",
+		 	uri: "https://api.digitalocean.com/v2/domains/"+domain+"/records",
+		 	form: data,
+		 	auth: {
+		 		'bearer': dotoken
+		 	}
+		 }, function(err, response, body){
+		 	callback(JSON.parse(body))
+		 })
+},
 
 //update domain record
 updateDomainRecords: function(callback, domain, record, data) {
