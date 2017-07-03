@@ -184,7 +184,9 @@ deleteDomainRecords: function(dotoken, Udomain, record, callback) {
 			'bearer': dotoken
 		}
 	}, function(err, response, body){
-		callback(body)
+		if(body){
+		callback(JSON.parse(body))
+		}
 	})
 },
 
