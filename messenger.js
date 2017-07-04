@@ -31,6 +31,7 @@ module.exports = {
     empty: function(sender) {
         delete sort.states.UserState[sender];
         delete sort.data[sender];
+        module.exports.sendTextMessage(sender, "OPeration aborted")
         // delete sort.MessageQueue.UserMessage[sender];
     },
 
