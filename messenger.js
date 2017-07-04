@@ -36,7 +36,7 @@ module.exports = {
 
 
     checkStatus: function(digitoken, status, sender, text, callback) {
-        console.log(digitoken);
+        // console.log(digitoken);
         var mod = sort.states.UserState[sender].module;
         var stage = sort.states.UserState[sender].stage;
 
@@ -481,6 +481,15 @@ module.exports = {
                     //TODO appropriate message for success and failure
                     console.log(body);
                     module.exports.empty(sender);
+                    if(body.id){
+                        module.exports.sendTextMessage(sender, "id: "+body.id+"\nMessage: "+body.message)
+                        
+                    }
+                    else{
+                        //TODO check if this is working
+                        module.exports.sendTextMessage(sender, "Record Deleted Successfully")
+                    }
+
                 })
             }
 
