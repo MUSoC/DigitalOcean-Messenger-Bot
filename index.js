@@ -135,7 +135,7 @@ app.post('/', function(req, res) {
                
                         sort.states.UserState[sender] = { module: "rDomainRecords", stage: 1 };
                        
-                    } else if (text == "List Snapshots") {
+                    } else if (text == "List snapshots") {
                         
                         sort.states.UserState[sender] = { module: "lSnapshots", stage: 1 };
                         
@@ -161,7 +161,7 @@ app.post('/', function(req, res) {
                         sort.states.UserState[sender] = { module: "aDroplet", stage: 1 };
 
                     }
-                
+
                     // console.log("hell");
 
                     if (sort.states.UserState[sender] != undefined) {
