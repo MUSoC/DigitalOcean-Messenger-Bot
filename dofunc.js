@@ -257,7 +257,7 @@ listSnapshots: function(dotoken, callback) {
 },
 
 //To delete a particular snapshot
-deleteSnapshot: function(callback, id) {
+deleteSnapshot: function(dotoken, id, callback) {
 
 	
 	request ({
