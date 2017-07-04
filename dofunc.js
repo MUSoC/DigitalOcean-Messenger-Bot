@@ -108,7 +108,7 @@ createDomain: function(dotoken, data, callback){
 
 //delete a domain
 
-deleteDomains: function(dotoken, domain, callback) {
+deleteDomain: function(dotoken, domain, callback) {
 
 	
 	request ({
