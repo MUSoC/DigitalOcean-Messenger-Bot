@@ -161,6 +161,7 @@ app.post('/', function(req, res) {
                         sort.states.UserState[sender] = { module: "aDroplet", stage: 1 };
 
                     }
+                
                     // console.log("hell");
 
                     if (sort.states.UserState[sender] != undefined) {

@@ -752,6 +752,14 @@ module.exports = {
                     module.exports.empty(sender);
             }
         }
+        else if(mod == 'lSnapshots'){
+            if(stage == 1){
+                dof.listSnapshots(digitoken, function(body){
+                    console.log(body)
+                    module.exports.empty(sender)
+                })
+            }
+        }
 
     },
 
