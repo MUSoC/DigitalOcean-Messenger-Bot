@@ -252,7 +252,7 @@ listSnapshots: function(dotoken, callback) {
 			'bearer': dotoken
 		}
 	}, function(err, response, body){
-		callback(body)
+		callback(JSON.parse(body))
 	})
 },
 
