@@ -757,9 +757,9 @@ module.exports = {
         else if(mod == 'lSnapshots'){
             if(stage == 1){
                 dof.listSnapshots(digitoken, function(body){
-                    console.log(body)
-                    for(var i = 0;i <= body.snapshots.length; i++){
-                        module.exports.sendTextMessage(sender, "Id: "+body.snapshots[i].id+"\nName: "+body.snapshots[i].name+"\nReigions: "+body.snapshots[i].regions+"\nResource Type: "+body.snapshots[i].resource_type+"\nSize: "+body.snapshots[i].size_gigabytes+"gb")
+                    console.log(body.snapshots.length)
+                    for(var i = 0;i < body.snapshots.length; i++){
+                        module.exports.sendTextMessage(sender, "Id: "+body.snapshots[i].id+"\nName: "+body.snapshots[i].name+"\nReigions: "+body.snapshots[i].regions[0]+"\nResource Type: "+body.snapshots[i].resource_type+"\nSize: "+body.snapshots[i].size_gigabytes+"gb")
                     }
                     module.exports.empty(sender)
                 })
