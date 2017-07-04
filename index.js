@@ -139,7 +139,11 @@ app.post('/', function(req, res) {
                         
                         sort.states.UserState[sender] = { module: "lSnapshots", stage: 1 };
                         
-                    } else if (text == "List regions") {
+                    } 
+                    else if(text == "Delete snapshot"){
+                        sort.states.UserState[sender] = { module: "dSnapshot", stage: 1};
+                    }
+                    else if (text == "List regions") {
                        
                         sort.states.UserState[sender] = { module: "lRegions", stage: 1 };
                        
