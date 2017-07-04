@@ -31,7 +31,7 @@ module.exports = {
     empty: function(sender) {
         delete sort.states.UserState[sender];
         delete sort.data[sender];
-        module.exports.sendTextMessage(sender, "OPeration aborted")
+        
         // delete sort.MessageQueue.UserMessage[sender];
     },
 
@@ -44,6 +44,7 @@ module.exports = {
         if (text.toLowerCase() == 'exit') {
             console.log("exit pressed");
             module.exports.empty(sender);
+            module.exports.sendTextMessage(sender, "OPeration aborted")
         } else if (mod == 'eToken') {
 
             if (stage == 1) {
