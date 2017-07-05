@@ -87,6 +87,22 @@ listUserImage: function(dotoken, callback) {
 	})
 },
 
+actionImage: function(dotoken, id, data, callback){
+
+	 request({
+	 	method: "POST",
+	 	uri: "https://api.digitalocean.com/v2/images/"+id+"/actions",
+	 	form: data,
+	 	auth: {
+	 		'bearer': dotoken
+	 	}
+	 }, function(err, response, body){
+	 	callback(JSON.parse(body))
+	 })
+},
+
+//TODO update image
+
 deleteImage: function(dotoken, id, callback) {
 
 	
