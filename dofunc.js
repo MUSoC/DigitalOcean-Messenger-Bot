@@ -45,12 +45,12 @@ listAllImage: function(dotoken, callback) {
 },
 
 
-listDropletImage: function(dotoken, callback) {
+listDistImage: function(dotoken, callback) {
 
 	
 	request ({
 		method: "GET",
-		uri: "https://api.digitalocean.com/v2/images?page=1&per_page=87",
+		uri: "https://api.digitalocean.com/v2/images?page=1&per_page=87&type=distribution",
 		auth: {
 			'bearer': dotoken
 		}
@@ -64,7 +64,7 @@ listAppImage: function(dotoken, callback) {
 	
 	request ({
 		method: "GET",
-		uri: "https://api.digitalocean.com/v2/images?page=1&per_page=87",
+		uri: "https://api.digitalocean.com/v2/images?page=1&per_page=87&type=distribution",
 		auth: {
 			'bearer': dotoken
 		}
@@ -78,7 +78,7 @@ listUserImage: function(dotoken, callback) {
 	
 	request ({
 		method: "GET",
-		uri: "https://api.digitalocean.com/v2/images?page=1&per_page=87",
+		uri: "https://api.digitalocean.com/v2/images?page=1&per_page=87&type=distribution",
 		auth: {
 			'bearer': dotoken
 		}
