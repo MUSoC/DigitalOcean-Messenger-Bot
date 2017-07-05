@@ -786,7 +786,7 @@ module.exports = {
                         module.exports.sendTextMessage(sender, "No user images");
                     } else {
                         for (var i = 0; i < body.images.length; i++) {
-                            module.exports.sendTextMessage(sender, "Id: " + body.images[i].id + "\nName: " + body.images[i].name + "\nDistribution: " + body.images[i].distribution + "\nSlug: " + body.images[i].slug + "\nType: " + body.images[i].type + "\nSize " + body.images[i].size_gigabytes + "gb")
+                            module.exports.sendTextMessage(sender, "Id: " + body.images[i].id + "\nName: " + body.images[i].name + "\nDistribution: " + body.images[i].distribution + "\nSlug: " + body.images[i].slug + "\nType: " + body.images[i].type + "\nSize " + body.images[i].size_gigabytes + "gb\nRegions: "+JSON.stringify(body.images[i].regions))
                         }
                     }
                 })
@@ -816,16 +816,16 @@ module.exports = {
             else if (stage == 2) {
                 sort.info[sender].imageID = text;
                 sort.states.UserState[sender].stage++;
-                module.exports.sendTextMessage(sender, "Select an Action for your image.\nTransfer an Image\nConvert image to a snapshot\nRetrieve an existing Image action")
+                module.exports.sendTextMessage(sender, "Select an Action for your image.\n1. Transfer an Image\n2. Convert image to a snapshot\n3. Retrieve an existing Image action")
             } else if (stage == 3) {
                 sort.states.UserState[sender].stage++;
-                if (text.toLowerCase() == 'transfer image') {
+                if (text == 1) {
                     sort.info[sender].actionType = 'tI'
                     sort.info[sender].actionStage = 1;
-                } else if (text.toLowerCase() == 'convert image to snapshot') {
+                } else if (text == 2) {
                     sort.info[sender].actionType = 'cI';
                     sort.info[sender].actionStage = 1;
-                } else if (text.toLowerCase() == 'retrieve image action') {
+                } else if (text == 3) {
                     sort.info[sender].actionType = 'rI';
                     sort.info[sender].actionStage = 1;
                 }
