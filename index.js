@@ -178,8 +178,7 @@ app.post('/', function(req, res) {
                         sort.info[sender].count = 10;   
                     }
                     else if(text == "List user images"){
-                     sort.states.UserState[sender] = {module: "lUImage", stage: 1};
-                     sort.info[sender].count = 10;   
+                     sort.states.UserState[sender] = {module: "lUImage", stage: 1};  
                     }
                     // console.log("hell");
 

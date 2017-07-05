@@ -882,6 +882,17 @@ module.exports = {
                     })
                 }
             }
+        else if(mod == 'lUImage'){
+            if(stage == 1){
+                sort.states.UserState[sender].stage++;
+                dof.listUserImage(digitoken, function(body){
+                    console.log(body)
+                    for(var i=0; i<body.images.length; i++){
+                        module.exports.sendTextMessage(sender, "Id: "+body.images[i].id+"\nName: "+body.images[i].name+"\nDistribution: "+body.images[i].distribution+"\nSlug: "+body.images[i].slug+"\nType: "+body.images[i].type+"\nSize "+body.images[i].size_gigabytes+"gb")
+                    }
+                })
+            }
+        }
 
     },
 
