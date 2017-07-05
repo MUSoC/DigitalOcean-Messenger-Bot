@@ -101,6 +101,19 @@ actionImage: function(dotoken, id, data, callback){
 	 })
 },
 
+imageActionR: function(dotoken, id, rid, callback) {
+
+		request({
+	 	method: "GET",
+	 	uri: "https://api.digitalocean.com/v2/images/"+id+"/actions/"+rid,
+	 	auth: {
+	 		'bearer': dotoken
+	 	}
+	 }, function(err, response, body){
+	 	callback(JSON.parse(body))
+	 })
+},
+
 //TODO update image
 
 deleteImage: function(dotoken, id, callback) {
