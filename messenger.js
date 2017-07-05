@@ -793,7 +793,7 @@ module.exports = {
             }
             if(stage == 1){
                 sort.states.UserState[sender].stage++;
-                dof.listImage(digitoken, function(body){
+                dof.listAllImage(digitoken, function(body){
                     console.log(body)
                     for(var i=0; i<sort.info[sender].count; i++){
                         module.exports.sendTextMessage(sender, "Id: "+body.images[i].id+"\nName: "+body.images[i].name+"\nDistribution: "+body.images[i].distribution+"\nSlug: "+body.images[i].slug+"\nType: "+body.images[i].type+"\nSize "+body.images[i].size_gigabytes+"gb")
@@ -801,7 +801,7 @@ module.exports = {
                 })
             }
                 else if(stage == 2){
-                    dof.listImage(digitoken, function(body){
+                    dof.listAllImage(digitoken, function(body){
                         if(body.images.length<sort.info[sender].count){
                             sort.info[sender].count = body.images.length
                         }
