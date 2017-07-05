@@ -805,9 +805,14 @@ module.exports = {
                         if(body.images.length<sort.info[sender].count){
                             sort.info[sender].count = body.images.length
                         }
-                        for(var i = (sort.info[sender].count-10); i<sort.info[sender].count; i++){
-                            console.log(i)
-                            module.exports.sendTextMessage(sender, "Id: "+body.images[i].id+"\nName: "+body.images[i].name+"\nDistribution: "+body.images[i].distribution+"\nSlug: "+body.images[i].slug+"\nType: "+body.images[i].type+"\nSize "+body.images[i].size_gigabytes+"gb")
+                        if(sort.info[sender].count == 86){
+                            module.exports.sendTextMessage(sender, "All images are finished")
+                        }
+                        else{
+                            for(var i = (sort.info[sender].count-10); i<sort.info[sender].count; i++){
+                                console.log(i)
+                                module.exports.sendTextMessage(sender, "Id: "+body.images[i].id+"\nName: "+body.images[i].name+"\nDistribution: "+body.images[i].distribution+"\nSlug: "+body.images[i].slug+"\nType: "+body.images[i].type+"\nSize "+body.images[i].size_gigabytes+"gb")
+                            }
                         }
                     })
                 }
