@@ -30,12 +30,12 @@ listDroplets: function(dotoken, callback) {
 },
 
 
-listImage: function(dotoken, callback) {
+listAllImage: function(dotoken, callback) {
 
 	
 	request ({
 		method: "GET",
-		uri: "https://api.digitalocean.com/v2/images?page=1&per_page=10",
+		uri: "https://api.digitalocean.com/v2/images?page=1&per_page=87",
 		auth: {
 			'bearer': dotoken
 		}
