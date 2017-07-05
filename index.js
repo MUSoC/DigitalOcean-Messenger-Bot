@@ -169,7 +169,10 @@ app.post('/', function(req, res) {
                         sort.states.UserState[sender] = {module: "lImage", stage: 1};
                         sort.info[sender].count = 10;
                     }
-
+                    else if(text == "List distribution images"){
+                        sort.states.UserState[sender] = {module: "lDImage", stage: 1};
+                        sort.info[sender].count = 10;
+                    }
                     // console.log("hell");
 
                     if (sort.states.UserState[sender] != undefined) {
