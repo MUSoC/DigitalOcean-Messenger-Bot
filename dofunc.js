@@ -31,11 +31,11 @@ listDroplets: function(dotoken, callback) {
 
 
 listImage: function(dotoken, callback) {
-	//5 droplets at a time
+
 	
 	request ({
 		method: "GET",
-		uri: "https://api.digitalocean.com/v2/images?page=1&per_page=87",
+		uri: "https://api.digitalocean.com/v2/images?page=1&per_page=10",
 		auth: {
 			'bearer': dotoken
 		}
@@ -267,7 +267,7 @@ deleteSnapshot: function(dotoken, id, callback) {
 			'bearer': dotoken
 		}
 	}, function(err, response, body){
-		callback(body)
+		callback(JSON.parse(body))
 	})
 },
 
