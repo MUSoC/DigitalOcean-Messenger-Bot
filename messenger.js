@@ -788,13 +788,14 @@ module.exports = {
         }
         else if(mod == 'lImage'){
             if(text.toLowerCase() == 'next'){
-                sort.info[sender].count + 10;
+                console.log("next chal rha")
+                sort.info[sender].count = sort.info[sender].count + 10;
             }
             if(stage == 1){
                 sort.states.UserState[sender].stage++;
                 dof.listImage(digitoken, function(body){
                     console.log(body)
-                    for(var i=0; i<body.images.length; i++){
+                    for(var i=0; i<sort.info[sender].count; i++){
                         module.exports.sendTextMessage(sender, "Id: "+body.images[i].id+"\nName: "+body.images[i].name+"\nDistribution: "+body.images[i].distribution+"\nSlug: "+body.images[i].slug+"\nType: "+body.images[i].type+"\nSize "+body.images[i].size_gigabytes+"gb")
                     }
                 })
@@ -805,6 +806,7 @@ module.exports = {
                             sort.info[sender].count = body.images.length
                         }
                         for(var i = (sort.info[sender].count-10); i<sort.info[sender].count; i++){
+                            console.log(i)
                             module.exports.sendTextMessage(sender, "Id: "+body.images[i].id+"\nName: "+body.images[i].name+"\nDistribution: "+body.images[i].distribution+"\nSlug: "+body.images[i].slug+"\nType: "+body.images[i].type+"\nSize "+body.images[i].size_gigabytes+"gb")
                         }
                     })
