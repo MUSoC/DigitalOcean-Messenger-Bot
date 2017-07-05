@@ -805,6 +805,7 @@ module.exports = {
                         if(body.images.length<sort.info[sender].count){
                             sort.info[sender].count = body.images.length
                         }
+                        //TODO fix this
                         if(sort.info[sender].count == 86){
                             module.exports.sendTextMessage(sender, "All images are finished")
                         }
@@ -836,6 +837,39 @@ module.exports = {
                         if(body.images.length<sort.info[sender].count){
                             sort.info[sender].count = body.images.length
                         }
+                        //TODO fix this
+                        if(sort.info[sender].count == 86){
+                            module.exports.sendTextMessage(sender, "All images are finished")
+                        }
+                        else{
+                            for(var i = (sort.info[sender].count-10); i<sort.info[sender].count; i++){
+                                console.log(i)
+                                module.exports.sendTextMessage(sender, "Id: "+body.images[i].id+"\nName: "+body.images[i].name+"\nDistribution: "+body.images[i].distribution+"\nSlug: "+body.images[i].slug+"\nType: "+body.images[i].type+"\nSize "+body.images[i].size_gigabytes+"gb")
+                            }
+                        }
+                    })
+                }
+            }
+        else if(mod == 'lAImage'){
+            if(text.toLowerCase() == 'next'){
+                console.log("next chal rha")
+                sort.info[sender].count = sort.info[sender].count + 10;
+            }
+            if(stage == 1){
+                sort.states.UserState[sender].stage++;
+                dof.listAppImage(digitoken, function(body){
+                    console.log(body)
+                    for(var i=0; i<sort.info[sender].count; i++){
+                        module.exports.sendTextMessage(sender, "Id: "+body.images[i].id+"\nName: "+body.images[i].name+"\nDistribution: "+body.images[i].distribution+"\nSlug: "+body.images[i].slug+"\nType: "+body.images[i].type+"\nSize "+body.images[i].size_gigabytes+"gb")
+                    }
+                })
+            }
+                else if(stage == 2){
+                    dof.listAppImage(digitoken, function(body){
+                        if(body.images.length<sort.info[sender].count){
+                            sort.info[sender].count = body.images.length
+                        }
+                        //TODO fix this
                         if(sort.info[sender].count == 86){
                             module.exports.sendTextMessage(sender, "All images are finished")
                         }
