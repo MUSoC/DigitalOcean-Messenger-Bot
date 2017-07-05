@@ -826,11 +826,13 @@ module.exports = {
                     sort.info[sender].actionType = 'cI';
                     sort.info[sender].actionStage = 1;
                 } else if (text == 3) {
+                    console.log("3 typed")
                     sort.info[sender].actionType = 'rI';
                     sort.info[sender].actionStage = 1;
                 }
                 module.exports.sendTextMessage(sender, "Press any key to continue")
             } else if (stage == 4) {
+                console.log(sort.info[sender].actionType)
                 if (sort.info[sender].actionType == 'tI') {
                     if (sort.info[sender].actionStage == 1) {
                         sort.data[sender] = { type: "transfer" };
@@ -852,14 +854,18 @@ module.exports = {
                     }
 
                 }
-                else if(sort.info[sender].actionType = 'cI'){
+
+                else if(sort.info[sender].actionType == 'cI'){
+                    console.log("working")
                     if(sort.info[sender].actionStage == 1){
                         sort.states.UserState[sender].stage++;
                         sort.data[sender] = { type: "convert"};
+                        callback("Press any key to continue or exit to abort\n"+JSON.stringify(sort.data[sender]))
 
                     }
                 }
                 else if(sort.info[sender].actionType == 'rI'){
+                    console.log("working")
                     if(sort.info[sender].actionStage == 1){
                         sort.info[sender].actionStage++;
                         callback("Enter action ID")
@@ -869,7 +875,8 @@ module.exports = {
                         dof.imageActionR(digitoken, sort.info[sender].imageID, sort.info[sender].actionID, function(body){
                             //TODO messsage to user
                             console.log(body);
-                            exports.module.empty(sender)
+                            callback("Action Id: "+body.action.id+"\nStatus: "+body.action.status+"\nType: "+body.action.type+"\nResource Type: "+body.action.resource_type)
+                            module.exports.empty(sender)
                         })
                     }
                 }
