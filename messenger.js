@@ -773,6 +773,7 @@ module.exports = {
             }
             else if(stage == 2){
                 dof.deleteSnapshot(digitoken, text, function(body){
+                    // console.log(body)
                     if(body.id){
                         module.exports.sendTextMessage(sender, "id: "+body.id+"\nMessage: "+body.message)
                         
@@ -782,6 +783,13 @@ module.exports = {
                         module.exports.sendTextMessage(sender, "Snapshot Deleted Successfully")
                     } 
                     module.exports.empty(sender) 
+                })
+            }
+        }
+        else if(mod == 'lImage'){
+            if(stage == 1){
+                dof.listImage(digitoken, function(body){
+                    console.log(body)
                 })
             }
         }
