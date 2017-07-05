@@ -868,6 +868,7 @@ module.exports = {
                         dof.imageActionR(digitoken, sort.info[sender].imageID, sort.info[sender].actionID, function(body){
                             //TODO messsage to user
                             console.log(body);
+                            exports.module.empty(sender)
                         })
                     }
                 }
