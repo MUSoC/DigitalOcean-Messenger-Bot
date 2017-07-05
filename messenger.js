@@ -809,10 +809,15 @@ module.exports = {
                 })
             }
         } else if (mod == 'aImage') {
-            if (stage == 1) {
+            if(stage == 1){
+                sort.states.UserState[sender].stage++;
+                callback("Enter image ID");
+            }
+            else if (stage == 2) {
+                sort.info[sender].imageID = text;
                 sort.states.UserState[sender].stage++;
                 module.exports.sendTextMessage(sender, "Select an Action for your image.\nTransfer an Image\nConvert image to a snapshot\nRetrieve an existing Image action")
-            } else if (stage == 2) {
+            } else if (stage == 3) {
                 sort.states.UserState[sender].stage++;
                 if (text.toLowerCase() == 'transfer image') {
                     sort.info[sender].actionType = 'tI'
@@ -825,7 +830,7 @@ module.exports = {
                     sort.info[sender].actionStage = 1;
                 }
                 module.exports.sendTextMessage(sender, "Press any key to continue")
-            } else if (stage == 3) {
+            } else if (stage == 4) {
                 if (sort.info[sender].actionType == 'tI') {
                     if (sort.info[sender].actionStage == 1) {
                         sort.data[sender] = { type: "transfer" };
@@ -856,14 +861,9 @@ module.exports = {
                 else if(sort.info[sender].actionType == 'rI'){
                     if(sort.info[sender].actionStage == 1){
                         sort.info[sender].actionStage++;
-                        callback("Enter the image ID")
-                    }
-                    else if(sort.info[sender].actionStage == 2){
-                        sort.info[sender].imageID = text;
-                        sort.info[sender].actionStage++;
                         callback("Enter action ID")
                     }
-                    else if(sort.info[sender].actionStage == 3){
+                    else if(sort.info[sender].actionStage == 2){
                         sort.info[sender].actionID = text;
                         dof.imageActionR(digitoken, sort.info[sender].imageID, sort.info[sender].actionID, function(body){
                             //TODO messsage to user
@@ -873,6 +873,12 @@ module.exports = {
                     }
                 }
 
+            }
+            else if(stage == 5){
+                dof.actionImage(digitoken, sort.info[sender].imageID, sort.data[sender], function(body){
+                    console.log(body)
+                    module.exports.empty(sender)
+                })
             }
         }
 
