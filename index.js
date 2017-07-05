@@ -166,7 +166,7 @@ app.post('/', function(req, res) {
 
                     }
                     else if(text == "List images"){
-                        sort.states.UserState[sender] = {module: "lImage", stage: 1};
+                        sort.states.UserState[sender] = {module: "lImage", stage: 1, count: 10};
                     }
 
                     // console.log("hell");
