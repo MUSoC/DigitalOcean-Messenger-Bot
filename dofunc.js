@@ -87,6 +87,20 @@ listUserImage: function(dotoken, callback) {
 	})
 },
 
+deleteImage: function(dotoken, id, callback) {
+
+	
+	request ({
+		method: "DELETE",
+		uri: "https://api.digitalocean.com/v2/images/"+id,
+		auth: {
+			'bearer': dotoken
+		}
+	}, function(err, response, body){
+		callback(body)
+	})
+},
+
 
 // To create droplet 
 createDroplet: function(dotoken, data, callback) {
