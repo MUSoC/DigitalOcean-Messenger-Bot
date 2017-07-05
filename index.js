@@ -165,6 +165,9 @@ app.post('/', function(req, res) {
                         sort.states.UserState[sender] = { module: "aDroplet", stage: 1 };
 
                     }
+                    else if(text == "List images"){
+                        sort.states.UserState[sender] = {module: "lImage", stage: 1};
+                    }
 
                     // console.log("hell");
 
