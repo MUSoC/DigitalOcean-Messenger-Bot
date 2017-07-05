@@ -45,6 +45,21 @@ listAllImage: function(dotoken, callback) {
 },
 
 
+listDropletImage: function(dotoken, callback) {
+
+	
+	request ({
+		method: "GET",
+		uri: "https://api.digitalocean.com/v2/images?page=1&per_page=87",
+		auth: {
+			'bearer': dotoken
+		}
+	}, function(err, response, body){
+		callback(JSON.parse(body))
+	})
+},
+
+
 // To create droplet 
 createDroplet: function(dotoken, data, callback) {
 	// JSON.parse
