@@ -183,6 +183,9 @@ app.post('/', function(req, res) {
                     else if(text == "Delete image"){
                         sort.states.UserState[sender] = {module: "dImage", stage: 1};
                     }
+                    else if(text == "Image actions"){
+                        sort.states.UserState[sender] = {module: "aImage", stage: 1}
+                    }
                     // console.log("hell");
 
                     if (sort.states.UserState[sender] != undefined) {
