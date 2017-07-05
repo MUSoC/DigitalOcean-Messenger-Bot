@@ -97,7 +97,7 @@ deleteImage: function(dotoken, id, callback) {
 			'bearer': dotoken
 		}
 	}, function(err, response, body){
-		callback(body)
+		callback(JSON.parse(body))
 	})
 },
 
