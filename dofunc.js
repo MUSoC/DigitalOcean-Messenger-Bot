@@ -64,7 +64,7 @@ listAppImage: function(dotoken, callback) {
 	
 	request ({
 		method: "GET",
-		uri: "https://api.digitalocean.com/v2/images?page=1&per_page=87&type=distribution",
+		uri: "https://api.digitalocean.com/v2/images?page=1&per_page=87&type=application",
 		auth: {
 			'bearer': dotoken
 		}
@@ -78,7 +78,7 @@ listUserImage: function(dotoken, callback) {
 	
 	request ({
 		method: "GET",
-		uri: "https://api.digitalocean.com/v2/images?page=1&per_page=87&type=distribution",
+		uri: "https://api.digitalocean.com/v2/images?page=1&per_page=87&private=true",
 		auth: {
 			'bearer': dotoken
 		}
