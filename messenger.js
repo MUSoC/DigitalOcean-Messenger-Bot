@@ -905,6 +905,7 @@ module.exports = {
             }
             else if(stage == 2){
                 dof.deleteImage(digitoken, text, function(body){
+                    console.log(body)
                     if(body.id){
                         module.exports.sendTextMessage(sender, "id: "+body.id+"\nMessage: "+body.message)
                         
@@ -915,6 +916,17 @@ module.exports = {
                     }
                     module.exports.empty(sender);
                 })
+            }
+        }
+
+
+        else if(mod == 'aImage'){
+            if(stage == 1){
+                sort.states.UserState[sender].stage++;
+                module.exports.sendTextMessage(sender, "Select an Action for your image.\nTransfer an Image\nConvert image to a snapshot\nRetrieve an existing Image action")
+            }
+            else if(stage == 2){
+                
             }
         }
 
