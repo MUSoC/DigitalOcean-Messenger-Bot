@@ -898,6 +898,25 @@ module.exports = {
                 })
             }
         }
+        else if(mod == 'dImage'){
+            if(stage == 1){
+                sort.states.UserState[sender].stage++;
+                module.exports.sendTextMessage(sender, "Enter image ID");
+            }
+            else if(stage == 2){
+                dof.deleteImage(digitoken, text, function(body){
+                    if(body.id){
+                        module.exports.sendTextMessage(sender, "id: "+body.id+"\nMessage: "+body.message)
+                        
+                    }
+                    else{
+                        //TODO check if this is working
+                        module.exports.sendTextMessage(sender, "Domain Deleted Successfully")
+                    }
+                    module.exports.empty(sender);
+                })
+            }
+        }
 
     },
 
