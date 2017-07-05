@@ -180,6 +180,9 @@ app.post('/', function(req, res) {
                     else if(text == "List user images"){
                      sort.states.UserState[sender] = {module: "lUImage", stage: 1};  
                     }
+                    else if(text == "Delete image"){
+                        sort.states.UserState[sender] = {module: "dImage", stage: 1};
+                    }
                     // console.log("hell");
 
                     if (sort.states.UserState[sender] != undefined) {
