@@ -848,6 +848,7 @@ module.exports = {
                 else if (sort.info[sender].actionStage == 2) {
                         sort.states.UserState[sender].stage++;
                         sort.data[sender].region = text;
+                        callback("Press any key to continue or exit to abort\n"+JSON.stringify(sort.data[sender]))
                     }
 
                 }
