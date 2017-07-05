@@ -878,7 +878,14 @@ module.exports = {
             else if(stage == 5){
                 dof.actionImage(digitoken, sort.info[sender].imageID, sort.data[sender], function(body){
                     console.log(body)
-                    module.exports.empty(sender)
+                    if(body.message){
+                        callback("ID: "+body.id+"\nMessage: "+body.message)
+                        module.exports.empty(sender)
+                    }
+                    else{
+                        callback("Action ID: "+body.action.id+"\nStatus: "+body.action.status+"\nStarted At: "+body.action.started_at+"\nResource Type: "+body.action.resource_type)
+                        module.exports.empty(sender)
+                    }
                 })
             }
         }
