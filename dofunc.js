@@ -389,12 +389,12 @@ listSizes: function(dotoken, callback) {
 	})
 },
 
-listBlockS: function(dotoken, region, callback) {
+listBlockS: function(dotoken, callback) {
 
 	
 	request ({
 		method: "GET",
-		uri: "https://api.digitalocean.com/v2/volumes?region=",
+		uri: "https://api.digitalocean.com/v2/volumes",
 		auth: {
 			'bearer': dotoken
 		}
