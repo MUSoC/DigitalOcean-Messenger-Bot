@@ -905,6 +905,42 @@ module.exports = {
                 })
             }
         }
+        else if(mod == 'cBlock'){
+            if(stage == 1){
+                sort.states.UserState[sender].stage++;
+                callback("Enter the size in Gigabytes");
+            }
+            else if(stage == 2){
+                sort.states.UserState[sender].stage++;
+                sort.data[sender] = { size_gigabytes: text };
+                callback("Enter the name")
+            }
+            else if(stage == 3){
+                sort.states.UserState[sender].stage++;
+                sort.data[sender].name = text;
+                callback("Enter a description for storage or skip")
+            }
+            else if(stage == 4){
+                sort.states.UserState[sender].stage++;
+                if(text.toLowerCase() != 'skip'){
+                    sort.data[sender].description = text;
+                }
+                callback("Enter a region or skip to create storage same as droplet")
+            }
+            else if(stage == 5){
+                sort.states.UserState[sender].stage++
+                if(text.toLowerCase() != 'skip'){
+                    sort.data[sender].region = text;
+                }
+                callback("Press any key to continue or exit "+JSON.stringify(sort.data[sender]))
+            }
+            else if(stage == 6){
+                dof.createStorage(digitoken, sort.data[info], function(body){
+                    console.log(body)
+                    module.exports.empty(sender);
+                })
+            }
+        }
 
     },
 
