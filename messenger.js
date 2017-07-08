@@ -384,8 +384,10 @@ module.exports = {
                 sort.data[sender].image = text;
                 // console.log(sort.data[sender])
                 sort.states.UserState[sender].stage++;
+
                 dof.createDroplet(digitoken, sort.data[sender], function(body) {
                     console.log(body);
+                    //TODO message after droplet creation
                 })
                 module.exports.empty(sender);
 
@@ -893,6 +895,13 @@ module.exports = {
                         callback("Action ID: "+body.action.id+"\nStatus: "+body.action.status+"\nStarted At: "+body.action.started_at+"\nResource Type: "+body.action.resource_type)
                         module.exports.empty(sender)
                     }
+                })
+            }
+        }
+        else if(mod == 'lBlock'){
+            if(stage == 1){
+                dof.listBlockS(digitoken, function(body){
+                    console.log(body);
                 })
             }
         }
