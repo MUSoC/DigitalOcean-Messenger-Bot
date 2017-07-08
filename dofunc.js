@@ -401,7 +401,21 @@ listBlockS: function(dotoken, callback) {
 	}, function(err, response, body){
 		callback(JSON.parse(body))
 	})
-}
+},
+
+createStorage: function(dotoken, data, callback){
+	request({
+		 	method: "POST",
+		 	uri: "https://api.digitalocean.com/v2/volumes",
+		 	form: data,
+		 	auth: {
+		 		'bearer': dotoken
+		 	}
+		 }, function(err, response, body){
+		 	callback(JSON.parse(body))
+		 })
+},
+
 
 
 
