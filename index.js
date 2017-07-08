@@ -186,8 +186,11 @@ app.post('/', function(req, res) {
                     else if(text == "Image actions"){
                         sort.states.UserState[sender] = {module: "aImage", stage: 1}
                     }
-                    else if(text == "List Block Storage"){
+                    else if(text == "List block storage"){
                         sort.states.UserState[sender] = {module: "lBlock", stage: 1}   
+                    }
+                    else if(text == 'Create block storage'){
+                        sort.states.UserState[sender] = { module: "cBlock", stage: 1}
                     }
                     // console.log("hell");
 
