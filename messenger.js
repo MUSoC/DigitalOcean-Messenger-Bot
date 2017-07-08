@@ -928,10 +928,12 @@ module.exports = {
                 var regions = [];
                 dof.listRegions(digitoken, function(body) {
                     for (var i = 0; i < body.regions.length; i++) {
+                        console.log(body.regions[i].slug)
                         regions.push(body.regions[i].slug);
                     }
+                    callback("Enter a region:\n"+regions)
                 });
-                callback("Enter a region:\n"+regions)
+                
             }
             else if(stage == 5){
                 sort.states.UserState[sender].stage++
@@ -945,7 +947,7 @@ module.exports = {
                         callback("Id: "+body.id+"\nMessage: "+body.message)
                     }
                     else{
-
+                        callback("Id: "+body.volume.id+"\nRegion name: "+body.volume.region.name+"\nSizes: "+JSON.stringify(body.volume.region.sizes)+"\nFeatures: "+JSON.stringify(body.volume.region.features)+"\nAvailability: "+body.volume.region.available+"\nName: "+body.volume.name+"\n Size: "+body.volume.size_gigabytes+"gb\n Create At: "+body.volume.created_at)
                     }
                     module.exports.empty(sender);
                 })
