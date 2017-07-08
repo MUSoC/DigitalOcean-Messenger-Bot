@@ -925,13 +925,17 @@ module.exports = {
                 if(text.toLowerCase() != 'skip'){
                     sort.data[sender].description = text;
                 }
-                callback("Enter a region or skip to create storage same as droplet")
+                var regions = [];
+                dof.listRegions(digitoken, function(body) {
+                    for (var i = 0; i < body.regions.length; i++) {
+                        regions.push(body.regions[i].slug);
+                    }
+                });
+                callback("Enter a region:\n"+regions)
             }
             else if(stage == 5){
                 sort.states.UserState[sender].stage++
-                if(text.toLowerCase() != 'skip'){
                     sort.data[sender].region = text;
-                }
                 callback("Press any key to continue or exit "+JSON.stringify(sort.data[sender]))
             }
             else if(stage == 6){
@@ -939,6 +943,9 @@ module.exports = {
                     console.log(body)
                     if(body.id){
                         callback("Id: "+body.id+"\nMessage: "+body.message)
+                    }
+                    else{
+
                     }
                     module.exports.empty(sender);
                 })
