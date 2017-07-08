@@ -898,13 +898,20 @@ module.exports = {
                 })
             }
         }
+
+
+        //LIST BLOCK STORAGE
         else if(mod == 'lBlock'){
             if(stage == 1){
                 dof.listBlockS(digitoken, function(body){
                     console.log(body);
+                    for(var i = 0; i<body.volumes.length; i++){
+                        callback("ID: "+body.volumes[i].id+"\nRegion: "+JSON.stringify(body.volumes[i].region)+"\nDroplet Ids Associated: "+JSON.stringify(body.volumes[i].droplet_ids)+"\nSize: "+body.volumes[i].size_gigabytes+"gb\nCreate At: "+body.volumes[i].created_at)
+                    }
                 })
             }
         }
+        //CREATE BLOCK STORAGE
         else if(mod == 'cBlock'){
             if(stage == 1){
                 sort.states.UserState[sender].stage++;
