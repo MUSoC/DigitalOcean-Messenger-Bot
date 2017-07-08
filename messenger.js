@@ -368,7 +368,7 @@ module.exports = {
                 sort.data[sender].size = text;
                 var image = [];
                 sort.states.UserState[sender].stage++;
-                dof.listImage(digitoken, function(body) {
+                dof.listDistImage(digitoken, function(body) {
                     // console.log(body);
                     for (var i = 0; i < body.images.length; i++) {
                         if (body.images[i].slug != null) {
