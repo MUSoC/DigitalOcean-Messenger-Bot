@@ -935,8 +935,11 @@ module.exports = {
                 callback("Press any key to continue or exit "+JSON.stringify(sort.data[sender]))
             }
             else if(stage == 6){
-                dof.createStorage(digitoken, sort.data[info], function(body){
+                dof.createStorage(digitoken, sort.data[sender], function(body){
                     console.log(body)
+                    if(body.id){
+                        callback("Id: "+body.id+"\nMessage: "+body.message)
+                    }
                     module.exports.empty(sender);
                 })
             }
