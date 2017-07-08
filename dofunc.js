@@ -387,7 +387,22 @@ listSizes: function(dotoken, callback) {
 	}, function(err, response, body){
 		callback(JSON.parse(body))
 	})
+},
+
+listBlockS: function(dotoken, region, callback) {
+
+	
+	request ({
+		method: "GET",
+		uri: "https://api.digitalocean.com/v2/volumes?region=",
+		auth: {
+			'bearer': dotoken
+		}
+	}, function(err, response, body){
+		callback(JSON.parse(body))
+	})
 }
+
 
 
 
