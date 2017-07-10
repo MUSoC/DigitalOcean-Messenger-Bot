@@ -1059,8 +1059,13 @@ module.exports = {
                     else if(sort.info[sender].actionStage == 3){
                         sort.info[sender].actionStage++;
                         sort.data[sender].region = text;
-                        sort.states.UserState[sender].stage++;
+                        
                         callback("Enter the droplet ID to attach volume")
+                    }
+                    else if(sort.info[sender].actionStage == 4){
+                        sort.data[sender].droplet_id = text;
+                        sort.states.UserState[sender].stage++;
+                        callback("Press any key to continue\n"+JSON.stringify(sort.data[sender]))
                     }
 
                 }
