@@ -1007,7 +1007,7 @@ module.exports = {
             }
             else if(stage == 4){
                 dof.deleteVolume(digitoken, sort.info[sender].name, sort.info[sender].region, function(body){
-                    console.log(body)
+                    // console.log(body)
                     if(body.id){
                         callback("Id: "+body.id+"\nMessage: "+body.message)
                     }
