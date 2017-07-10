@@ -960,6 +960,28 @@ module.exports = {
                 })
             }
         }
+        //Create Snapshot from volume
+        else if(mod == 'cBlockSnap'){
+            if(stage == 1){
+                sort.states.UserState[sender].stage++;
+                callback("Enter the id of your storage")
+            }
+            else if(stage == 2){
+                sort.states.UserState[sender].stage++;
+                sort.info[sender].vID = text;
+                callback("Enter the name of your snapshot")
+            }
+            else if(stage == 3){
+                sort.states.UserState[sender].stage++;
+                sort.data[sender] = {name: text};
+                callback("press any key to continue\n"+JSON.stringify(sort.data[sender]))
+            }
+            else if(stage == 4){
+                dof.createSnapshotStorage(digitoken, sort.info[sender].vID, sort.data[sender], function(body){
+                    console.log(body)
+                })
+            }
+        }
 
     },
 
