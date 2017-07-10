@@ -415,6 +415,8 @@ createStorage: function(dotoken, data, callback){
 		 	callback(JSON.parse(body))
 		 })
 },
+
+
 createSnapshotStorage: function(dotoken, id, data, callback){
 
 		request({
@@ -427,7 +429,22 @@ createSnapshotStorage: function(dotoken, id, data, callback){
 		 }, function(err, response, body){
 		 	callback(JSON.parse(body))
 		 })
-}
+},
+
+
+deleteVolume: function(dotoken, id, callback) {
+
+	
+	request ({
+		method: "DELETE",
+		uri: "https://api.digitalocean.com/v2/volumes/"+id,
+		auth: {
+			'bearer': dotoken
+		}
+	}, function(err, response, body){
+		callback(JSON.parse(body))
+	})
+},
 
 
 
