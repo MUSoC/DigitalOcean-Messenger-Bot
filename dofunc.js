@@ -415,6 +415,19 @@ createStorage: function(dotoken, data, callback){
 		 	callback(JSON.parse(body))
 		 })
 },
+createSnapshotStorage: function(dotoken, id, data, callback){
+
+		request({
+		 	method: "POST",
+		 	uri: "https://api.digitalocean.com/v2/volumes/"+id+"/snapshots",
+		 	form: data,
+		 	auth: {
+		 		'bearer': dotoken
+		 	}
+		 }, function(err, response, body){
+		 	callback(JSON.parse(body))
+		 })
+}
 
 
 
