@@ -437,7 +437,7 @@ deleteVolume: function(dotoken, name, reg, callback) {
 	
 	request ({
 		method: "DELETE",
-		uri: "https://api.digitalocean.com/v2/volumes?name="+name"&region="+reg,
+		uri: "https://api.digitalocean.com/v2/volumes?name="+name+"&region="+reg,
 		auth: {
 			'bearer': dotoken
 		}
