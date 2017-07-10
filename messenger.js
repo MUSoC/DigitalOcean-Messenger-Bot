@@ -979,6 +979,12 @@ module.exports = {
             else if(stage == 4){
                 dof.createSnapshotStorage(digitoken, sort.info[sender].vID, sort.data[sender], function(body){
                     console.log(body)
+                    if(body.id){
+                        callback("Id: "+body.id+"\nMessage: "+body.message)
+                    }
+                    else{
+                        callback("Snaphot is being create.\nID: "+body.snapshot.id+"\nName: "+body.snapshot.name+"\nRegions: "+JSON.stringify(body.snapshot.regions)+"\nCreate At: "+body.snapshot.created_at+"\nResource Type: "+body.snapshot.resource_type)
+                    }
                 })
             }
         }
