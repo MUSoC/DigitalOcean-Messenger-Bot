@@ -1016,6 +1016,56 @@ module.exports = {
                     }
                 })
             }
+        },
+
+        //Volume actions
+        else if(mod == 'aStorage'){
+            if(stage == 1){
+                sort.states.UserState[sender].stage++;
+                callback("Select a action\n1. Attach a volume to a droplet\n2. Remove a volume from droplet\n 3. Resize a volume\n4. Retrieve action for volume")
+            }
+            else if(stage == 2){
+                sort.states.UserState[sender].stage++;
+                if(text == 1){
+                    sort.info[sender].actionType = 'aVD';
+                    sort.info[sender].actionStage = 1;
+                }
+                else if(text == 2){
+                    sort.info[sender].actionType = 'rVD';
+                    sort.info[sender].actionStage = 1;
+                }
+                else if(text == 3){
+                    sort.info[sender].actionType = 'rV';
+                    sort.info[sender].actionStage = 1;
+                }
+                else if(text == 4){
+                    sort.info[sender].actionType = 'rVA';
+                    sort.info[sender].actionStage = 1;
+                }
+                callback("Press any key to continue")
+            }
+            else if(stage == 3){
+                if(sort.info[sender] == 'aVD'){
+                    if(sort.info[sender].actionStage == 1){
+                        sort.info[sender].actionStage++;
+                        sort.data[sender] = {type: 'attach'};
+                        callback("Enter the name of the volume")
+                    }
+                    else if(sort.info[sender].actionStage == 2){
+                        sort.info[sender].actionStage++;
+                        sort.data[sender].volume_name = text;
+                        callback("Enter the name of the region")
+                    }
+                    else if(sort.info[sender].actionStage == 3){
+                        sort.info[sender].actionStage++;
+                        sort.data[sender].region = text;
+                        sort.states.UserState[sender].stage++;
+                        callback("Enter the droplet ID to attach volume")
+                    }
+
+                }
+            }
+
         }
 
     },
