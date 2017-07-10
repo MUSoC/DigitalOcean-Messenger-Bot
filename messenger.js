@@ -1045,7 +1045,7 @@ module.exports = {
                 callback("Press any key to continue")
             }
             else if(stage == 3){
-                if(sort.info[sender] == 'aVD'){
+                if(sort.info[sender].actionType == 'aVD'){
                     if(sort.info[sender].actionStage == 1){
                         sort.info[sender].actionStage++;
                         sort.data[sender] = {type: 'attach'};
@@ -1068,6 +1068,28 @@ module.exports = {
                         callback("Press any key to continue\n"+JSON.stringify(sort.data[sender]))
                     }
 
+                }
+                else if(sort.info[sender].actionType == 'rVD'){
+                    if(sort.info[sender].actionStage == 1){
+                        sort.info[sender].actionStage++;
+                        sort.data[sender] = {type: 'detach'};
+                        callback("Enter name of volume")
+                    }
+                    else if(sort.info[sender].actionStage == 2){
+                        sort.info[sender].actionStage++;
+                        sort.data[sender].volume_name = text;
+                        callback("Enter the name of region")
+                    }
+                    else if(sort.info[sender].actionStage == 3){
+                        sort.info[sender].actionStage++;
+                        sort.data[sender].region = text;
+                        callback("Enter the droplet id to detach from")
+                    }
+                    else if(sort.info[sender].actionStage == 4){
+                        sort.states.UserState[sender].stage++;
+                        sort.data[sender].droplet_id = text;
+                        callback("Press any key to continue \n"+JSON.stringify(sort.data[sender]))
+                    }
                 }
             }
             else if(stage == 4){
