@@ -198,6 +198,9 @@ app.post('/', function(req, res) {
                     else if(text == "Delete storage"){
                         sort.states.UserState[sender] = { module: "dBlock", stage: 1}
                     }
+                    else if(text == "Storage action"){
+                        sort.states.UserState[sender] = { module: "aStorage", stage: 1}   
+                    }
                     // console.log("hell");
 
                     if (sort.states.UserState[sender] != undefined) {
