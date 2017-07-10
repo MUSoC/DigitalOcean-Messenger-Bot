@@ -989,6 +989,35 @@ module.exports = {
             }
         }
 
+        //Delete volume
+        else if(mod == 'dBlock'){
+            if(stage == 1){
+                sort.states.UserState[sender].stage++
+                callback("enter the name of volume")
+            }
+            else if(stage == 2){
+                sort.states.UserState[sender].stage++;
+                sort.info[sender].name = text;
+                callback("enter the region of volume")
+            }
+            else if(stage == 3){
+                sort.states.UserState[sender].stage++
+                sort.info[sender].region = text;
+                callback("press any key to continue\n"+JSON.stringify(sort.info[sender]))
+            }
+            else if(stage == 4){
+                dof.deleteVolume(digitoken, sort.info[sender].name, sort.info[sender].region, function(body){
+                    console.log(body)
+                    if(body.id){
+                        callback("Id: "+body.id+"\nMessage: "+body.message)
+                    }
+                    else{
+                        callback("deleted Successfully")
+                    }
+                })
+            }
+        }
+
     },
 
     listDrop: function(sender, text, callback) {
