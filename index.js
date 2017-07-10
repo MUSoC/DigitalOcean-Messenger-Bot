@@ -192,6 +192,9 @@ app.post('/', function(req, res) {
                     else if(text == 'Create block storage'){
                         sort.states.UserState[sender] = { module: "cBlock", stage: 1}
                     }
+                    else if(text == 'Create storage snapshot'){
+                        sort.states.UserState[sender] = { module: "cBlockSnap", stage: 1}
+                    }
                     // console.log("hell");
 
                     if (sort.states.UserState[sender] != undefined) {
