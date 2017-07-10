@@ -432,12 +432,12 @@ createSnapshotStorage: function(dotoken, id, data, callback){
 },
 
 
-deleteVolume: function(dotoken, id, callback) {
+deleteVolume: function(dotoken, name, reg, callback) {
 
 	
 	request ({
 		method: "DELETE",
-		uri: "https://api.digitalocean.com/v2/volumes/"+id,
+		uri: "https://api.digitalocean.com/v2/volumes?name="+name"&region="+reg,
 		auth: {
 			'bearer': dotoken
 		}
