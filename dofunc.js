@@ -446,6 +446,19 @@ deleteVolume: function(dotoken, name, reg, callback) {
 	})
 },
 
+volumeAction: function(dotoken, data, callback){
+	request({
+	 	method: "POST",
+	 	uri: "https://api.digitalocean.com/v2/volumes/actions",
+	 	form: data,
+	 	auth: {
+	 		'bearer': dotoken
+	 	}
+	 }, function(err, response, body){
+	 	callback(JSON.parse(body))
+	 })
+}
+
 
 
 
