@@ -1065,6 +1065,11 @@ module.exports = {
 
                 }
             }
+            else if(stage == 4){
+                dof.volumeAction(digitoken, sort.data[sender], function(body){
+                    console.log(body)
+                })
+            }
 
         }
 
