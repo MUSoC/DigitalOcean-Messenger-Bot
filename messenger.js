@@ -906,7 +906,7 @@ module.exports = {
                 dof.listBlockS(digitoken, function(body){
                     console.log(body);
                     for(var i = 0; i<body.volumes.length; i++){
-                        callback("ID: "+body.volumes[i].id+"\nRegion: "+JSON.stringify(body.volumes[i].region)+"\nDroplet Ids Associated: "+JSON.stringify(body.volumes[i].droplet_ids)+"\nSize: "+body.volumes[i].size_gigabytes+"gb\nCreate At: "+body.volumes[i].created_at)
+                        callback("ID: "+body.volumes[i].id+"\nName: "+body.volumes[i].name+"\nRegion: "+JSON.stringify(body.volumes[i].region)+"\nDroplet Ids Associated: "+JSON.stringify(body.volumes[i].droplet_ids)+"\nSize: "+body.volumes[i].size_gigabytes+"gb\nCreate At: "+body.volumes[i].created_at)
                     }
                 })
             }
