@@ -1098,14 +1098,19 @@ module.exports = {
                     if(sort.info[sender].actionStage == 1){
                         sort.info[sender].actionStage++;
                         sort.data[sender] = {type: 'resize'};
-                        callback("Enter the size to resize")
+                        callback("enter the name of the volume")
                     }
                     else if(sort.info[sender].actionStage == 2){
+                        sort.info[sender].actionStage++;
+                        sort.data[sender].volume_name = text;
+                        callback("Enter the size to resize")
+                    }
+                    else if(sort.info[sender].actionStage == 3){
                         sort.info[sender].actionStage++;
                         sort.data[sender].size_gigabytes = text;
                         callback("Enter the region")
                     }
-                    else if(sort.info[sender].actionStage == 3){
+                    else if(sort.info[sender].actionStage == 4){
                         sort.states.UserState[sender].stage++;
                         sort.data[sender].region = text;
                         callback("Press any key to continue\n"+JSON.stringify(sort.data[sender]))
