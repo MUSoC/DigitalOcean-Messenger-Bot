@@ -1016,7 +1016,7 @@ module.exports = {
                     }
                 })
             }
-        },
+        }
 
         //Volume actions
         else if(mod == 'aStorage'){
@@ -1115,6 +1115,12 @@ module.exports = {
             else if(stage == 4){
                 dof.volumeAction(digitoken, sort.data[sender], function(body){
                     console.log(body)
+                    if(body.id){
+                        callback("ID: "+body.id+"\nMessage: "+body.message);
+                    }
+                    else{
+                        callback("Action Id: "+body.action.id+"\nStatus: "+body.action.status+"\nType Of Action: "+body.action.type+"\nStarted At: "+body.action.started_at);
+                    }
                 })
             }
 
