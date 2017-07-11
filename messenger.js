@@ -1003,11 +1003,12 @@ module.exports = {
             else if(stage == 3){
                 sort.states.UserState[sender].stage++
                 sort.info[sender].region = text;
-                callback("press any key to continue\n"+JSON.stringify(sort.info[sender]))
+                callback("press any key to continue\n")
             }
             else if(stage == 4){
                 dof.deleteVolume(digitoken, sort.info[sender].name, sort.info[sender].region, function(body){
                     // console.log(body)
+                    //TODO delete error handling
                     if(body.id){
                         callback("Id: "+body.id+"\nMessage: "+body.message)
                     }
