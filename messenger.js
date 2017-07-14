@@ -88,37 +88,6 @@ module.exports = {
 
         } 
 
-        //Refresh Droplet
-        else if (mod == 'rDroplets') {
-            if (stage == 1) {
-                database.User.findOne({ id: sender }, function(err, user) {
-                    if (err) throw err;
-                    dof.listDroplets(digitoken, function(body) {
-                        //FIX Duplicate ISSUE
-                        for (var i = 0; i < body.droplets.length; i++) {
-                            var newDroplet = new database.Droplets({
-                                dropletId: body.droplets[i].id,
-                                dropletName: body.droplets[i].name,
-                                memory: body.droplets[i].memory,
-                                disk: body.droplets[i].disk,
-                                region: body.droplets[i].region.name,
-                                id: sender
-
-                            })
-                            newDroplet.save(function(err) {
-                                if (err) throw err;
-                                // sendTextMessage(sender)
-                            })
-
-                        }
-
-                        module.exports.sendTextMessage(sender, "List saved");
-                    })
-                })
-                module.exports.empty(sender);
-            }
-
-        }
 
         //List Action
          else if (mod == 'lActions') {
