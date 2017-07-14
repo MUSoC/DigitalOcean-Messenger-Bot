@@ -45,46 +45,42 @@ module.exports = {
             console.log("exit pressed");
             module.exports.empty(sender);
             module.exports.sendTextMessage(sender, "OPeration aborted")
-        } else if (mod == 'eToken') {
+        } 
+
+        //Enter token for first time user
+        else if (mod == 'eToken') {
 
             if (stage == 1) {
                 console.log("working");
                 console.log(sort.states.UserState[sender]);
-                // var a = {message:"Hello"};
-                // sort.MessageQueue[sender].message.push("hello");
-                // sort.MessageQueue.UserMessage[sender].push("Enter Token");
                 sort.states.UserState[sender].stage++;
                 console.log("chal rha hai");
-                // callback("Enter Token and press exit to abort operation");
                 module.exports.sendTextMessage(sender, "Enter token or press exir to abort the operation");
-                // module.exports.mess(sender, );
             } else if (stage == 2) {
 
                 saveToken(sender, text);
-
-                // sort.states.UserState[sender].stage=null;
-                // delete sort.states.UserState[sender];
-
                 module.exports.sendTextMessage(sender, "Token Saved");
                 module.exports.empty(sender);
-                // callback("Token Saved");
             }
 
 
-        } else if (mod == 'uToken') {
+        } 
+
+        //Update token
+        else if (mod == 'uToken') {
             if (stage == 1) {
-                // sort.MessageQueue.UserMessage[sender].push("");
                 sort.states.UserState[sender].stage++;
                 callback("You are about to enter token. Type exit to cancel this event")
             } else if (stage == 2) {
                 updateToken(sender, text);
-                // sort.MessageQueue.UserMessage[sender].push("Token updated");
                 module.exports.empty(sender);
                 callback("Token Updated");
             }
 
-            // status = 0;
-        } else if (mod == 'lDroplet') {
+        }
+
+        //List Droplet
+         else if (mod == 'lDroplet') {
             // console.log("working")
             // status=0;
             if (stage == 1) {
@@ -97,7 +93,10 @@ module.exports = {
                 module.exports.empty(sender);
             }
 
-        } else if (mod == 'rDroplets') {
+        } 
+
+        //Refresh Droplet
+        else if (mod == 'rDroplets') {
             if (stage == 1) {
                 database.User.findOne({ id: sender }, function(err, user) {
                     if (err) throw err;
@@ -126,7 +125,10 @@ module.exports = {
                 module.exports.empty(sender);
             }
 
-        } else if (mod == 'lActions') {
+        }
+
+        //List Action
+         else if (mod == 'lActions') {
             if (stage == 1) {
                 console.log("hello")
                 dof.lastActions(digitoken, function(body) {
@@ -163,6 +165,7 @@ module.exports = {
             if (stage == 1) {
                 dof.listDomains(digitoken, function(body) {
                     console.log(typeof(body.domains[0].ttl));
+                    //Remove this
                     module.exports.saveDomain(sender, body);
 
                 })
@@ -233,6 +236,7 @@ module.exports = {
             }
 
         }
+
         //List domain records
         else if (mod == 'lDomainRecords') {
             if (stage == 1) {
@@ -249,6 +253,7 @@ module.exports = {
                 })
             }
         }
+
         //Delete domain records module
         else if (mod == 'dDomainRecord') {
             if (stage == 1) {
@@ -273,7 +278,10 @@ module.exports = {
                     module.exports.empty(sender)
                 })
             }
-        } else if (mod == 'rDomainsRecords') {
+        } 
+
+        //Refresh Domain module
+        else if (mod == 'rDomainsRecords') {
             //On delete remove domain
             if (stage == 1) {
                 dof.listDomainRecords(digitoken, text, function(body) {
@@ -284,7 +292,10 @@ module.exports = {
                 })
                 module.exports.empty(sender);
             }
-        } else if (mod == 'lRegions') {
+        } 
+
+        //List regions
+        else if (mod == 'lRegions') {
             if (stage == 1) {
                 dof.listRegions(digitoken, function(body) {
                     console.log(body);
@@ -295,7 +306,10 @@ module.exports = {
                 })
                 module.exports.empty(sender);
             }
-        } else if (mod == 'lSizes') {
+        } 
+
+        //List Sizes
+        else if (mod == 'lSizes') {
             if (stage == 1) {
                 dof.listSizes(digitoken, function(body) {
                     console.log(body);
@@ -305,7 +319,10 @@ module.exports = {
                 })
                 module.exports.empty(sender);
             }
-        } else if (mod == 'dDroplet') {
+        } 
+
+        //Delete a Droplet
+        else if (mod == 'dDroplet') {
             //TODO remove droplet from database
             if (stage == 1) {
                 module.exports.sendTextMessage(sender, "Type \"current droplet\" from the following to delete a droplet");
@@ -394,6 +411,8 @@ module.exports = {
             }
 
         }
+
+
         //Addig domain Module
         else if (mod == 'aDomain') {
             if (stage == 1) {
@@ -420,6 +439,8 @@ module.exports = {
             }
 
         }
+
+
         //Delete Domain Module
         else if (mod == 'dDomain') {
             if (stage == 1) {
@@ -446,6 +467,9 @@ module.exports = {
             }
 
         }
+
+
+
         //Action Droplet Module
         else if (mod == 'aDroplet') {
 
@@ -516,6 +540,8 @@ module.exports = {
                 console.log("Stage 4")
                 var action = sort.info[sender].actionType;
                 var aStage = sort.info[sender].actionStage;
+
+                //Enable Backup
                 if (action == 'eb') {
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = { type: "enable_backups" };
@@ -523,28 +549,46 @@ module.exports = {
                     module.exports.sendTextMessage(sender, "Press any key to continue\n" + JSON.stringify(sort.data[sender]));
 
 
-                } else if (action == 'db') {
+                } 
+
+                //Disable Backup
+                else if (action == 'db') {
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = { type: "disable_backups" };
                     module.exports.sendTextMessage(sender, "Press any Key to Continue \n" + JSON.stringify(sort.data[sender]))
-                } else if (action == 'reb') {
+                } 
+
+                //Reboot Droplet
+                else if (action == 'reb') {
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = { type: "reboot" };
                     module.exports.sendTextMessage(sender, "Press any Key to Continue \n" + JSON.stringify(sort.data[sender]))
 
-                } else if (action == 'pcd') {
+                } 
+
+                // Power cycle of a droplet
+                else if (action == 'pcd') {
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = { type: "power_cycle" };
                     module.exports.sendTextMessage(sender, "Press any Key to Continue \n" + JSON.stringify(sort.data[sender]))
-                } else if (action == 'shutdd') {
+                } 
+
+                // Shut Down a droplet
+                else if (action == 'shutdd') {
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = { type: "shutdown" };
                     module.exports.sendTextMessage(sender, "Press any Key to Continue \n" + JSON.stringify(sort.data[sender]))
-                } else if (action == 'poff') {
+                } 
+
+                // Power off a droplet
+                else if (action == 'poff') {
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = { type: "power_off" };
                     module.exports.sendTextMessage(sender, "Press any Key to Continue \n" + JSON.stringify(sort.data[sender]))
-                } else if (action == 'pon') {
+                } 
+
+                // Power On a droplet
+                else if (action == 'pon') {
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = { type: "power_on" };
                     module.exports.sendTextMessage(sender, "Press any Key to Continue \n" + JSON.stringify(sort.data[sender]))
@@ -557,12 +601,16 @@ module.exports = {
                     //TODO
                     // sort.data[sender].image = imageID;
                     module.exports.sendTextMessage(sender, "Press any Key to Continue \n" + JSON.stringify(sort.data[sender]))
-                } else if (action == 'pr') {
+                } 
+
+                //Password reset a droplet
+                else if (action == 'pr') {
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = { type: "password_reset" };
                     module.exports.sendTextMessage(sender, "Press any Key to Continue \n" + JSON.stringify(sort.data[sender]))
                 }
-                //RESIZE
+
+                //RESIZE a droplet
                 else if (action == 'red') {
                     // sort.states.UserState[sender].stage++;
                     var size = [];
@@ -595,7 +643,10 @@ module.exports = {
                         sort.states.UserState[sender].stage++;
                     }
 
-                } else if (action == 'rbd') {
+                } 
+
+                //Rebuild a droplet
+                else if (action == 'rbd') {
                     if (aStage == 1) {
                         sort.data[sender] = { type: 'rebuild' };
                         sort.info[sender].actionStage++;
@@ -607,7 +658,10 @@ module.exports = {
                     }
 
 
-                } else if (action == 'rd') {
+                } 
+
+                // Rename a droplet
+                else if (action == 'rd') {
                     if (aStage == 1) {
                         sort.data[sender] = { type: 'rename' };
                         sort.info[sender].actionStage++;
@@ -617,15 +671,24 @@ module.exports = {
                         sort.states.UserState[sender].stage++;
                         module.exports.sendTextMessage(sender, "Press any key to conitnue or exit to abort\n" + JSON.stringify(sort.data[sender]))
                     }
-                } else if (action == 'eip6') {
+                } 
+
+                // Enable ipv6
+                else if (action == 'eip6') {
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = { type: "enable_ipv6" };
                     module.exports.sendTextMessage(sender, "Press any Key to Continue \n" + JSON.stringify(sort.data[sender]))
-                } else if (action == 'epn') {
+                } 
+
+                // Enable Private Networking
+                else if (action == 'epn') {
                     sort.states.UserState[sender].stage++;
                     sort.data[sender] = { type: "enable_private_networking" };
                     module.exports.sendTextMessage(sender, "Press any Key to Continue \n" + JSON.stringify(sort.data[sender]))
-                } else if (action == 'sd') {
+                } 
+
+                // Take a snapshot of a droplet
+                else if (action == 'sd') {
                     if (aStage == 1) {
                         sort.data[sender] = { type: 'snapshot' };
                         sort.info[sender].actionStage++;
@@ -636,7 +699,10 @@ module.exports = {
                         module.exports.sendTextMessage(sender, "Press any key to conitnue or exit to abort\n" + JSON.stringify(sort.data[sender]))
                     }
 
-                } else if (action == 'da') {
+                } 
+
+
+                else if (action == 'da') {
                     if (aStage == 1) {
                         sort.info[sender].actionStage++;
                         module.exports.sendTextMessage(sender, "Enter Action Id");
@@ -692,7 +758,10 @@ module.exports = {
                     module.exports.empty(sender)
                 })
             }
-        } else if (mod == 'lImage') {
+        } 
+
+        // List Image
+        else if (mod == 'lImage') {
             if (text.toLowerCase() == 'next') {
                 console.log("next chal rha")
                 sort.info[sender].count = sort.info[sender].count + 10;
@@ -721,7 +790,10 @@ module.exports = {
                     }
                 })
             }
-        } else if (mod == 'lDImage') {
+        }
+
+        // List Distribution Images
+         else if (mod == 'lDImage') {
             if (text.toLowerCase() == 'next') {
                 console.log("next chal rha")
                 sort.info[sender].count = sort.info[sender].count + 10;
@@ -750,7 +822,10 @@ module.exports = {
                     }
                 })
             }
-        } else if (mod == 'lAImage') {
+        } 
+
+        // List Application Images
+        else if (mod == 'lAImage') {
             if (text.toLowerCase() == 'next') {
                 console.log("next chal rha")
                 sort.info[sender].count = sort.info[sender].count + 10;
@@ -779,7 +854,10 @@ module.exports = {
                     }
                 })
             }
-        } else if (mod == 'lUImage') {
+        }
+
+        // List User Images
+         else if (mod == 'lUImage') {
             if (stage == 1) {
                 sort.states.UserState[sender].stage++;
                 dof.listUserImage(digitoken, function(body) {
@@ -793,7 +871,10 @@ module.exports = {
                     }
                 })
             }
-        } else if (mod == 'dImage') {
+        } 
+
+        // Delete image
+        else if (mod == 'dImage') {
             if (stage == 1) {
                 sort.states.UserState[sender].stage++;
                 module.exports.sendTextMessage(sender, "Enter image ID");
@@ -810,7 +891,10 @@ module.exports = {
                     module.exports.empty(sender);
                 })
             }
-        } else if (mod == 'aImage') {
+        } 
+
+        //Action for User image
+        else if (mod == 'aImage') {
             if(stage == 1){
                 sort.states.UserState[sender].stage++;
                 callback("Enter image ID");
@@ -835,6 +919,8 @@ module.exports = {
                 module.exports.sendTextMessage(sender, "Press any key to continue")
             } else if (stage == 4) {
                 console.log(sort.info[sender].actionType)
+
+                // Transfer Image
                 if (sort.info[sender].actionType == 'tI') {
                     if (sort.info[sender].actionStage == 1) {
                         sort.data[sender] = { type: "transfer" };
@@ -857,6 +943,8 @@ module.exports = {
 
                 }
 
+
+                // Convert Image to snapshot
                 else if(sort.info[sender].actionType == 'cI'){
                     console.log("working")
                     if(sort.info[sender].actionStage == 1){
@@ -866,6 +954,9 @@ module.exports = {
 
                     }
                 }
+
+
+                // Retrieve Image action
                 else if(sort.info[sender].actionType == 'rI'){
                     console.log("working")
                     if(sort.info[sender].actionStage == 1){
@@ -911,6 +1002,7 @@ module.exports = {
                 })
             }
         }
+
         //CREATE BLOCK STORAGE
         else if(mod == 'cBlock'){
             if(stage == 1){
@@ -960,6 +1052,8 @@ module.exports = {
                 })
             }
         }
+
+
         //Create Snapshot from volume
         else if(mod == 'cBlockSnap'){
             if(stage == 1){
@@ -1046,6 +1140,8 @@ module.exports = {
                 callback("Press any key to continue")
             }
             else if(stage == 3){
+
+                // Attach volume to droplet
                 if(sort.info[sender].actionType == 'aVD'){
                     if(sort.info[sender].actionStage == 1){
                         sort.info[sender].actionStage++;
