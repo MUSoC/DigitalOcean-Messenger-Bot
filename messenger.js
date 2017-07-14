@@ -1238,7 +1238,7 @@ module.exports = {
     listDrop: function(digitoken, callback) {
         dof.listDroplets(digitoken, function(body){
             for(var i = 0; i<body.droplets.length; i++){
-                callback("Droplet ID: "+body.droplets[i].id+"\nDroplet Name: "+body.droplets[i].name+"\nDroplet Memory: "+body.droplets[i].memory+"\nDisk: "+body.droplets[i].disk+"\n");
+                callback("Droplet ID: "+body.droplets[i].id+"\nDroplet Name: "+body.droplets[i].name+"\nDroplet Memory: "+body.droplets[i].memory+" mb\nDisk: "+body.droplets[i].disk+" gb\n");
             }
         })
     },
