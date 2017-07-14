@@ -20,7 +20,7 @@ listDroplets: function(dotoken, callback) {
 	
 	request ({
 		method: "GET",
-		uri: "https://api.digitalocean.com/v2/droplets?page=1&per_page=5",
+		uri: "https://api.digitalocean.com/v2/droplets?page=1&per_page=100",
 		auth: {
 			'bearer': dotoken
 		}
