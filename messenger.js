@@ -223,7 +223,7 @@ module.exports = {
 
                     } else {
                         //TODO check if this is working
-                        module.exports.sendTextMessage(sender, "Record Deleted Successfully")
+                        module.exports.sendTextMessage(sender, "Domain Record Deleted Successfully")
                     }
 
                     module.exports.empty(sender)
