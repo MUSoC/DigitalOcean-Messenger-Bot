@@ -1209,22 +1209,6 @@ module.exports = {
     },
 
 
-    saveDomainRecords: function(sender, body) {
-        for (var i = 0; i < body.domain_records.length; i++) {
-            var newRecord = new domainrecords({
-                id: sender,
-                domainRecordId: body.domain_records[i].id,
-                typeR: body.domain_records[i].type,
-                name: body.domain_records[i].name,
-                data: body.domain_records[i].data
-            })
-            newRecord.save(function(err) {
-                if (err) throw err;
-                module.exports.sendTextMessage(sender, "Domain Records Saved");
-            })
-        }
-    },
-
 
 
 
