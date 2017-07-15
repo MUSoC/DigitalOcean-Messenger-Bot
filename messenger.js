@@ -280,6 +280,12 @@ module.exports = {
                 dof.deleteDroplet(digitoken, text, function(body) {
                     //TODO droplet delete success or fail
                     // console.log(body);
+                    if(body.id){
+                        callback("ID: "+body.id+"\nMessage: "+body.message)
+                    }
+                    else{
+                        callback("Droplet is getting deleted")
+                    }
                 })
                 module.exports.empty(sender)
             }
