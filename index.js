@@ -113,10 +113,6 @@ app.post('/', function(req, res) {
                     else if(text == 'Delete domain'){
                         sort.states.UserState[sender] = {module: "dDomain", stage: 1};
                     } 
-                    else if (text == "Refresh domains") {
-    
-                        sort.states.UserState[sender] = { module: "rDomains", stage: 1 };
-                    } 
                     else if(text == "Add domain records"){
                         sort.states.UserState[sender] = {module: "aDomainRecord", stage: 1};
                     }
