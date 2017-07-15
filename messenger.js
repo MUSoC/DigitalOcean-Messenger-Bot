@@ -242,8 +242,9 @@ module.exports = {
                     for (var i = 0; i < body.regions.length; i++) {
                         module.exports.sendTextMessage(sender, "Name: " + body.regions[i].name + "\nSlug: " + body.regions[i].slug + "\nSizes: " + body.regions[i].sizes + "\nFeatures: " + body.regions[i].features + "\nAvailability: " + body.regions[i].available);
                     }
+                    module.exports.empty(sender);
                 })
-                module.exports.empty(sender);
+                
             }
         } 
 
