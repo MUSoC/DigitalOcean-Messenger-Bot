@@ -92,14 +92,15 @@ module.exports = {
         //List Action
          else if (mod == 'lActions') {
             if (stage == 1) {
-                console.log("hello")
+                // console.log("hello")
                 dof.lastActions(digitoken, function(body) {
                     // console.log(body.actions.length)
                     for (var i = 0; i < body.actions.length; i++) {
                         module.exports.sendTextMessage(sender, "Action: " + body.actions[i].type + "\nStatus: " + body.actions[i].status + "\nStarted At: " + body.actions[i].started_at + "\nCompleted At: " + body.actions[i].completed_at + "\nResource Type: " + body.actions[i].resource_type)
                     }
+                    module.exports.empty(sender);
                 });
-                module.exports.empty(sender);
+                
             }
 
         }
