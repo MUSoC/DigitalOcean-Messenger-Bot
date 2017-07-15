@@ -345,12 +345,17 @@ module.exports = {
 
             } else if (stage == 5) {
                 sort.data[sender].image = text;
-                // console.log(sort.data[sender])
                 sort.states.UserState[sender].stage++;
 
                 dof.createDroplet(digitoken, sort.data[sender], function(body) {
                     console.log(body);
-                    //TODO message after droplet creation
+                    if(body.id){
+                        //TODO TEST THIS
+                        callback("ID: "+body.id+"\nMessage: "+body.message)
+                    }
+                    else{
+                        callback("Droplet Id: "+body.droplet.id+"\nName: "+body.droplet.name+"\nMemory: "+body.droplet.memory+"\nCreated At: "+body.droplet.created_at)
+                    }
                 })
                 module.exports.empty(sender);
 
