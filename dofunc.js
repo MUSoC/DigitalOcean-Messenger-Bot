@@ -163,8 +163,13 @@ deleteDroplet: function(dotoken, id, callback){
 			'bearer': dotoken
 		}
 	}, function(err, response, body){
-		console.log(response);
-		callback("nothing");
+		
+		if(body.length == 0){
+			callback(body)
+		}
+		else{
+			callback(JSON.parse(body))
+		}
 	})
 },
 
