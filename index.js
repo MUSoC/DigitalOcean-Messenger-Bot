@@ -38,11 +38,6 @@ app.get('/', function(req, res) {
 })
 
 
-app.post('/status', function(req,res){
-    console.log(req.body);
-});
-
-
 const user_token = c['do'].auth_token;
 
 var status = 0;
@@ -102,10 +97,7 @@ app.post('/', function(req, res) {
                         sort.states.UserState[sender] = { module: "lDroplet", stage: 1 };
  
 
-                    } else if (text == "Refresh droplets") {
-               
-                        sort.states.UserState[sender] = { module: "rDroplets", stage: 1 };
-                    } else if (text == "Last actions") {
+                    }else if (text == "Last actions") {
   
                         sort.states.UserState[sender] = { module: "lActions", stage: 1 };
                         
