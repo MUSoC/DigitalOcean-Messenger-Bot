@@ -111,13 +111,13 @@ module.exports = {
         //List domain Module
         else if (mod == 'lDomains') {
             if (stage == 1) {
-                database.Domains.find({ id: sender }, function(err, domain) {
-                    if (err) throw err;
-                    // console.log(domain.length);
-                    for (var i = 0; i < domain.length; i++) {
-                        module.exports.sendTextMessage(sender, "Domain Name: " + domain[i].domainName + "\nttl: " + domain[i].ttl);
-                    }
-                })
+                // database.Domains.find({ id: sender }, function(err, domain) {
+                //     if (err) throw err;
+                //     // console.log(domain.length);
+                //     for (var i = 0; i < domain.length; i++) {
+                //         module.exports.sendTextMessage(sender, "Domain Name: " + domain[i].domainName + "\nttl: " + domain[i].ttl);
+                //     }
+                // })
                 module.exports.empty(sender);
             }
         }
@@ -1232,21 +1232,6 @@ module.exports = {
 
     },
 
-    saveDomain: function(sender, body) {
-
-        for (var i = 0; i < body.domains.length; i++) {
-            var newDomain = new database.Domains({
-                // console.log(typeof(body.domains[i].name)+"\n"+body.domains[i].ttl+"\n"+sender)
-                id: sender,
-                domainName: body.domains[i].name,
-                ttl: body.domains[i].ttl
-            })
-            newDomain.save(function(err) {
-                if (err) throw err;
-                module.exports.sendTextMessage(sender, "Domain Saved");
-            })
-        }
-    },
 
     saveDomainRecords: function(sender, body) {
         for (var i = 0; i < body.domain_records.length; i++) {
