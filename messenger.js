@@ -679,6 +679,7 @@ module.exports = {
                 module.exports.empty(sender);
             }
         }
+        
         //List Snapshot module
         else if (mod == 'lSnapshots') {
             if (stage == 1) {
