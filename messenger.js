@@ -266,18 +266,16 @@ module.exports = {
         else if (mod == 'dDroplet') {
             //TODO remove droplet from database
             if (stage == 1) {
-                module.exports.sendTextMessage(sender, "Type \"current droplet\" from the following to delete a droplet");
+                module.exports.sendTextMessage(sender, "Type \"current droplets\" to list droplets for deleting a droplet");
                 sort.states.UserState[sender].stage++;
 
 
             } else if (stage == 2) {
                 //TODO if user types other than current droplet
-                module.exports.listDrop(sender, text, function(user) {
-                    for (var i = 0; i < user.length; i++) {
-                        module.exports.sendTextMessage(sender, (i + 1) + ". Droplet Id: " + user[i].dropletId + "\nDroplet Name: " + user[i].dropletName + "\nDroplet memory: " + user[i].memory + "mb\nDroplet Disk: " + user[i].disk + "gb\nRegion: " + user[i].region)
-                    }
-                });
-                sort.states.UserState[sender].stage++;
+                if(text.toLowerCase() == 'current droplets'){
+                    module.exports.listDrop(digitoken, callback)
+                    sort.states.UserState[sender].stage++;
+                }
             } else if (stage == 3) {
                 dof.deleteDroplet(digitoken, text, function(body) {
                     //TODO droplet delete success or fail
