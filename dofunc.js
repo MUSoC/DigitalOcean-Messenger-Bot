@@ -126,7 +126,13 @@ deleteImage: function(dotoken, id, callback) {
 			'bearer': dotoken
 		}
 	}, function(err, response, body){
-		callback(JSON.parse(body))
+
+		if(body.length == 0){
+			callback(body)
+		}
+		else{
+			callback(JSON.parse(body))
+		}
 	})
 },
 
