@@ -206,11 +206,9 @@ deleteDomain: function(dotoken, domain, callback) {
 	}, function(err, response, body){
 		// console.log(body.length)
 		if(body.length == 0){
-			// console.log("null")
 			callback(body)
 		}
 		else{
-			// console.log("not null")
 			callback(JSON.parse(body))
 		}
 	})
@@ -278,9 +276,13 @@ deleteDomainRecords: function(dotoken, Udomain, record, callback) {
 			'bearer': dotoken
 		}
 	}, function(err, response, body){
-		// if(body){
-		callback(JSON.parse(body))
-		// }
+
+		if(body.length == 0){
+			callback(body)
+		}
+		else{
+			callback(JSON.parse(body))
+		}
 	})
 },
 
