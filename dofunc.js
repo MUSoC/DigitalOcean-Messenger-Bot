@@ -204,7 +204,15 @@ deleteDomain: function(dotoken, domain, callback) {
 			'bearer': dotoken
 		}
 	}, function(err, response, body){
-		callback(body)
+		// console.log(body.length)
+		if(body.length == 0){
+			// console.log("null")
+			callback(body)
+		}
+		else{
+			// console.log("not null")
+			callback(JSON.parse(body))
+		}
 	})
 },
 
