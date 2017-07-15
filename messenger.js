@@ -231,19 +231,7 @@ module.exports = {
             }
         } 
 
-        //Refresh Domain module
-        else if (mod == 'rDomainsRecords') {
-            //On delete remove domain
-            if (stage == 1) {
-                dof.listDomainRecords(digitoken, text, function(body) {
-                    console.log(body);
-                    if (text == "Refresh domain records")
-                        return;
-                    module.exports.saveDomainRecords(sender, body);
-                })
-                module.exports.empty(sender);
-            }
-        } 
+
 
         //List regions
         else if (mod == 'lRegions') {
