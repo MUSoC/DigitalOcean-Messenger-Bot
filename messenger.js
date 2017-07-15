@@ -115,8 +115,9 @@ module.exports = {
                     for(var i = 0; i<body.domains.length; i++ ){
                         callback("Name: "+body.domains[i].name+"\nTTL: "+body.domains[i].ttl+"\nZone File: "+body.domains[i].zone_file)
                     }
+                    module.exports.empty(sender);
                 })
-                module.exports.empty(sender);
+                
             }
         }
 
