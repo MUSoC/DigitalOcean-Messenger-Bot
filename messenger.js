@@ -286,8 +286,9 @@ module.exports = {
                     else{
                         callback("Droplet is getting deleted")
                     }
+                    module.exports.empty(sender)
                 })
-                module.exports.empty(sender)
+                
             }
 
         }
