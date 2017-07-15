@@ -111,13 +111,11 @@ module.exports = {
         //List domain Module
         else if (mod == 'lDomains') {
             if (stage == 1) {
-                // database.Domains.find({ id: sender }, function(err, domain) {
-                //     if (err) throw err;
-                //     // console.log(domain.length);
-                //     for (var i = 0; i < domain.length; i++) {
-                //         module.exports.sendTextMessage(sender, "Domain Name: " + domain[i].domainName + "\nttl: " + domain[i].ttl);
-                //     }
-                // })
+                dof.listDomains(digitoken, function(body){
+                    for(var i = 0; i<body.domains.length; i++ ){
+                        callback("Name: "+body.domains[i].name+"\nTTL: "+body.domains[i].ttl+"\nZone File: "+body.domains[i].zone_file)
+                    }
+                })
                 module.exports.empty(sender);
             }
         }
