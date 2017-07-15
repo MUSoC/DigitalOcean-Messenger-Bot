@@ -122,18 +122,7 @@ module.exports = {
         }
 
 
-        //Refresh domain
-        else if (mod == 'rDomains') {
-            if (stage == 1) {
-                dof.listDomains(digitoken, function(body) {
-                    console.log(typeof(body.domains[0].ttl));
-                    //Remove this
-                    module.exports.saveDomain(sender, body);
 
-                })
-                module.exports.empty(sender);
-            }
-        }
 
         //Add domain records
         else if (mod == 'aDomainRecord') {
