@@ -85,7 +85,7 @@ app.post('/', function(req, res) {
 
 
               
-                    if (ditsance('token', text.toLowerCase()>=90) {
+                    if (ditsance('token', text.toLowerCase()>=90)) {
                
                         sort.states.UserState[sender] = { module: "eToken", stage: 1 };
        
