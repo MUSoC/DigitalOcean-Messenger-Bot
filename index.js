@@ -37,6 +37,10 @@ app.get('/', function(req, res) {
     res.send(req.query['hub.challenge']);
 })
 
+app.post('/status',function(req,res){
+    sendStatus(req.body);
+})
+
 
 const user_token = c['do'].auth_token;
 
@@ -73,16 +77,6 @@ app.post('/', function(req, res) {
                 console.log(distance("hello", "hel"));
                 if (event.message && event.message.text) {
                     let text = event.message.text;
-
-
-
-                    // if(sort.states.UserState[sender].module!=undefined){
-
-                    //     mess.checkStatus(body, status, sender, text, function(body){
-                    //      mess.sendTextMessage(sender, body.message);
-                    //     });
-                    // // }
-
 
               
                     if (distance('token', text.toLowerCase())>=85) {
@@ -193,6 +187,10 @@ app.post('/', function(req, res) {
                     else if(distance('storage action', text.toLowerCase())>=85){
                         sort.states.UserState[sender] = { module: "aStorage", stage: 1}   
                     }
+                    else if(distance('status', text.toLowerCase())>=85){
+                        //CALL THE BASH FILE HERE   
+                    }
+
                     // console.log("hell");
 
                     if (sort.states.UserState[sender] != undefined) {
@@ -210,3 +208,10 @@ app.post('/', function(req, res) {
     }
     res.sendStatus(200);
 })
+
+
+function sendStatus(status) {
+    console.log(status);
+    return;
+
+}
