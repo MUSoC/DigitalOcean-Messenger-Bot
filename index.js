@@ -85,110 +85,110 @@ app.post('/', function(req, res) {
 
 
               
-                    if (ditsance('token', text.toLowerCase()>=90)) {
-               
+                    if (distance('token', text.toLowerCase())>=90) {
+                        console.log(distance('token', text.toLowerCase()))
                         sort.states.UserState[sender] = { module: "eToken", stage: 1 };
        
-                    } else if (text == "Update token") {
+                    } else if (distance('update token', text.toLowerCase())>=90) {
                        
                         sort.states.UserState[sender] = { module: "uToken", stage: 1 };
                         
-                    } else if (text == "List droplet") {
+                    } else if (distance('list droplet', text.toLowerCase())>=90) {
                  
                         sort.states.UserState[sender] = { module: "lDroplet", stage: 1 };
  
 
-                    }else if (text == "Last actions") {
+                    }else if (distance('list actions', text.toLowerCase())>=90) {
   
                         sort.states.UserState[sender] = { module: "lActions", stage: 1 };
                         
-                    } else if (text == "List domains") {
+                    } else if (distance('list domains', text.toLowerCase())>=90) {
                       
                         sort.states.UserState[sender] = { module: "lDomains", stage: 1 };
                         
                     }
-                    else if(text == 'Add domain'){
+                    else if(distance('add domain', text.toLowerCase())>=90){
                         sort.states.UserState[sender] = {module: "aDomain", stage: 1};
 
                     }
-                    else if(text == 'Delete domain'){
+                    else if(distance('delete domain', text.toLowerCase())>=90){
                         sort.states.UserState[sender] = {module: "dDomain", stage: 1};
                     } 
-                    else if(text == "Add domain records"){
+                    else if(distance('add domain record', text.toLowerCase())>=90){
                         sort.states.UserState[sender] = {module: "aDomainRecord", stage: 1};
                     }
-                    else if (text == "List domain records") {
+                    else if (distance('list domain records', text.toLowerCase())>=90) {
               
                         sort.states.UserState[sender] = { module: "lDomainRecords", stage: 1 };
                         
                     } 
-                    else if(text == "Delete domain record"){
+                    else if(distance('delete domain record', text.toLowerCase())>=90){
                         sort.states.UserState[sender] = { module: "dDomainRecord", stage: 1}
                     }
-                     else if (text == "List snapshots") {
+                     else if (distance('list snapshots', text.toLowerCase())>=90) {
                         
                         sort.states.UserState[sender] = { module: "lSnapshots", stage: 1 };
                         
                     } 
-                    else if(text == "Delete snapshot"){
+                    else if(distance('delete snapshot', text.toLowerCase())>=90){
                         sort.states.UserState[sender] = { module: "dSnapshot", stage: 1};
                     }
-                    else if (text == "List regions") {
+                    else if (distance('list regions', text.toLowerCase())>=90) {
                        
                         sort.states.UserState[sender] = { module: "lRegions", stage: 1 };
                        
-                    } else if (text == "List sizes") {
+                    } else if (distance('list sizes', text.toLowerCase())>=90) {
                         
                         sort.states.UserState[sender] = { module: "lSizes", stage: 1 };
                         
                     }
-                    else if (text == "Delete droplet") {
+                    else if (distance('delete droplet', text.toLowerCase())>=90) {
                        
                         sort.states.UserState[sender] = { module: "dDroplet", stage: 1 };
                       
                     } 
-                    else if (text == "Create droplet") {
+                    else if (distance('create droplet', text.toLowerCase())>=90) {
                         sort.states.UserState[sender] = { module: "cDroplet", stage: 1 };
                     }
                     //TODO list backups for droplet 
-                    else if (text == "Droplet action") {
+                    else if (distance('droplet action', text.toLowerCase())>=90) {
                         sort.states.UserState[sender] = { module: "aDroplet", stage: 1 };
 
                     }
-                    else if(text == "List images"){
+                    else if(distance('list images', text.toLowerCase())>=90){
                         sort.states.UserState[sender] = {module: "lImage", stage: 1};
                         sort.info[sender].count = 10;
                     }
-                    else if(text == "List distribution images"){
+                    else if(distance('list distribution images', text.toLowerCase())>=90){
                         sort.states.UserState[sender] = {module: "lDImage", stage: 1};
                         sort.info[sender].count = 10;
                     }
-                    else if(text == "List application images"){
+                    else if(distance('list application images', text.toLowerCase())>=90){
                         sort.states.UserState[sender] = {module: "lAImage", stage: 1};
                         sort.info[sender].count = 10;   
                     }
-                    else if(text == "List user images"){
+                    else if(distance('list user images', text.toLowerCase())>=90){
                      sort.states.UserState[sender] = {module: "lUImage", stage: 1};  
                     }
-                    else if(text == "Delete image"){
+                    else if(distance('delete image', text.toLowerCase())>=90){
                         sort.states.UserState[sender] = {module: "dImage", stage: 1};
                     }
-                    else if(text == "Image actions"){
+                    else if(distance('image actions', text.toLowerCase())>=90){
                         sort.states.UserState[sender] = {module: "aImage", stage: 1}
                     }
-                    else if(text == "List block storage"){
+                    else if(distance('list block storage', text.toLowerCase())>=90){
                         sort.states.UserState[sender] = {module: "lBlock", stage: 1}   
                     }
-                    else if(text == 'Create block storage'){
+                    else if(distance('create block storage', text.toLowerCase())>=90){
                         sort.states.UserState[sender] = { module: "cBlock", stage: 1}
                     }
-                    else if(text == 'Create storage snapshot'){
+                    else if(distance('create storage snapshot', text.toLowerCase())>=90){
                         sort.states.UserState[sender] = { module: "cBlockSnap", stage: 1}
                     }
-                    else if(text == "Delete storage"){
+                    else if(distance('delete storage', text.toLowerCase())>=90){
                         sort.states.UserState[sender] = { module: "dBlock", stage: 1}
                     }
-                    else if(text == "Storage action"){
+                    else if(distance('storage action', text.toLowerCase())>=90){
                         sort.states.UserState[sender] = { module: "aStorage", stage: 1}   
                     }
                     // console.log("hell");
