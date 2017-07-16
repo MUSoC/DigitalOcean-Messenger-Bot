@@ -38,7 +38,12 @@ app.get('/', function(req, res) {
 })
 
 app.post('/status',function(req,res){
+    console.log(req.body)
     sendStatus(req.body);
+})
+
+app.get('/status', function(req, res){
+    
 })
 
 
