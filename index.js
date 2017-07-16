@@ -64,6 +64,7 @@ app.post('/', function(req, res) {
 
                 // console.log("hello");
 
+                //similarity between two strings
                 var distance = function(str1, str2) {
                     var l = new leve(str1, str2);
                     return (1 - (l.distance / Math.max(str1.length, str2.length))) * 100;
@@ -84,7 +85,7 @@ app.post('/', function(req, res) {
 
 
               
-                    if (text == 'Token') {
+                    if (ditsance('token', text.toLowerCase()>=90) {
                
                         sort.states.UserState[sender] = { module: "eToken", stage: 1 };
        
